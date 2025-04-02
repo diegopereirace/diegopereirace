@@ -27,10 +27,10 @@ class ComposerStaticInite4968d7ceb4379bbaed25473a0594aa5
         '2f69d3914119f042cca9e44442d5ce95' => __DIR__ . '/../..' . '/web/core/includes/bootstrap.inc',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
+        '61ba3e92ef91a7a0f1cc260ebd9290e4' => __DIR__ . '/..' . '/openai-php/client/src/OpenAI.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         '23f09fe3194f8c2f70923f90d6702129' => __DIR__ . '/..' . '/illuminate/collections/functions.php',
         '60799491728b879e74601d83e38b2cad' => __DIR__ . '/..' . '/illuminate/collections/helpers.php',
-        '61ba3e92ef91a7a0f1cc260ebd9290e4' => __DIR__ . '/..' . '/openai-php/client/src/OpenAI.php',
         '3917c79c5052b270641b5a200963dbc2' => __DIR__ . '/..' . '/kint-php/kint/init.php',
         '47e1160838b5e5a10346ac4084b58c23' => __DIR__ . '/..' . '/laravel/prompts/src/helpers.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
@@ -42,6 +42,10 @@ class ComposerStaticInite4968d7ceb4379bbaed25473a0594aa5
             'phpowermove\\docblock\\' => 21,
             'phootwork\\lang\\' => 15,
             'phootwork\\collection\\' => 21,
+        ),
+        'Y' => 
+        array (
+            'Yethee\\Tiktoken\\' => 16,
         ),
         'T' => 
         array (
@@ -109,6 +113,7 @@ class ComposerStaticInite4968d7ceb4379bbaed25473a0594aa5
         ),
         'L' => 
         array (
+            'League\\HTMLToMarkdown\\' => 22,
             'League\\Container\\' => 17,
             'Laravel\\Prompts\\' => 16,
         ),
@@ -192,6 +197,10 @@ class ComposerStaticInite4968d7ceb4379bbaed25473a0594aa5
         'phootwork\\collection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phootwork/collection',
+        ),
+        'Yethee\\Tiktoken\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yethee/tiktoken/src',
         ),
         'Twig\\' => 
         array (
@@ -377,6 +386,10 @@ class ComposerStaticInite4968d7ceb4379bbaed25473a0594aa5
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+        'League\\HTMLToMarkdown\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/html-to-markdown/src',
         ),
         'League\\Container\\' => 
         array (
