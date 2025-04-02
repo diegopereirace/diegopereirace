@@ -1,15 +1,10 @@
-/**
- * @file
- * Global utilities.
- *
- */
 (function (Drupal) {
 
   'use strict';
 
-  Drupal.behaviors.bootstrap_barrio_subtheme = {
+  Drupal.behaviors.default = {
     attach: function (context, settings) {
-
+      console.log('Drupal behaviors are working!');
     }
   };
 

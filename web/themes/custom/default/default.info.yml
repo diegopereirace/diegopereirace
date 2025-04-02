@@ -1,4 +1,4 @@
-name: Custom Theme
+name: Default Theme
 type: theme
 description: 'Basic structure for a Bootstrap Barrio SubTheme.'
 core_version_requirement: ^10.3 || ^11
