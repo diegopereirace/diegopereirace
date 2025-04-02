@@ -15,10 +15,15 @@
         }
     ],
     "require": {
-        "composer/installers": "^2.0",
-        "drupal/core-composer-scaffold": "^11.0",
-        "drupal/core-project-message": "^11.0",
-        "drupal/core-recommended": "^11.0"
+        "composer/installers": "^2.3",
+        "drupal/admin_toolbar": "3.5.3",
+        "drupal/ckeditor5_plugin_pack": "1.3.1",
+        "drupal/core-composer-scaffold": "11.1.5",
+        "drupal/core-project-message": "11.1.5",
+        "drupal/core-recommended": "11.1.5",
+        "drupal/devel": "^5.3",
+        "drupal/devel_kint_extras": "1.1.4",
+        "drush/drush": "^13.4"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -39,36 +44,39 @@
     "extra": {
         "drupal-scaffold": {
             "locations": {
-                "web-root": "/"
+                "web-root": "web/"
             }
         },
         "installer-paths": {
-            "core": [
+            "web/core": [
                 "type:drupal-core"
             ],
-            "libraries/{$name}": [
+            "web/libraries/{$name}": [
                 "type:drupal-library"
             ],
-            "modules/contrib/{$name}": [
+            "web/modules/contrib/{$name}": [
                 "type:drupal-module"
             ],
-            "profiles/contrib/{$name}": [
+            "web/profiles/contrib/{$name}": [
                 "type:drupal-profile"
             ],
-            "themes/contrib/{$name}": [
+            "web/themes/contrib/{$name}": [
                 "type:drupal-theme"
             ],
             "drush/Commands/contrib/{$name}": [
                 "type:drupal-drush"
             ],
-            "modules/custom/{$name}": [
+            "web/modules/custom/{$name}": [
                 "type:drupal-custom-module"
             ],
-            "profiles/custom/{$name}": [
+            "web/profiles/custom/{$name}": [
                 "type:drupal-custom-profile"
             ],
-            "themes/custom/{$name}": [
+            "web/themes/custom/{$name}": [
                 "type:drupal-custom-theme"
+            ],
+            "recipes/{$name}": [
+                "type:drupal-recipe"
             ]
         },
         "drupal-core-project-message": {
