@@ -22,6 +22,8 @@
 </head>
 <body>
     <header class="bg-light py-4 py-md-5" style="
+/* This CSS code block is styling the header section of the webpage. Here's a breakdown of what each
+property is doing: */
         width: 100%;
         height: auto;
         min-height: 600px;
