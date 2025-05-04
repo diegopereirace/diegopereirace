@@ -78,11 +78,9 @@
 
                 {% if page.header %}
                     <nav{{ navbar_attributes }}>
-                        {% if container_navbar %}<div class="container">{% endif %}
-
-                        {{ page.header }}
-
-                        {% if container_navbar %}</div>{% endif %}
+                        <div class="container">
+                            {{ page.header }}
+                        </div>
                     </nav>
                 {% endif %}
             {% endblock %}
@@ -145,7 +143,7 @@
             </div>
         {% endif %}
 
-        <footer class="site-footer">
+        <footer class="site-footer-custom">
             {% block footer %}
                 <div class="{{ container }}">
                     {% if page.footer %}
