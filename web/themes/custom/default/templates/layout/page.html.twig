@@ -37,7 +37,6 @@
  * - page.header: Items for the header region.
  * - page.header_form: Items for the header form region.
  * - page.highlighted: Items for the highlighted region.
- * - page.primary_menu: Items for the primary menu region.
  * - page.featured_top: Items for the featured top region.
  * - page.content: The main content of the current page.
  * - page.sidebar_first: Items for the first sidebar.
@@ -72,128 +71,88 @@
 <div id="page-wrapper">
     <div id="page">
         <header id="header" class="header" role="banner" aria-label="{{ 'Site header'|t }}">
-            {% block head %}%}
+            {% block head %}
                 {% if page.top_header %}
-                    <nav{{ navbar_top_attributes }}>}>
-                        {% if container_navbar %}%}
-                            <div class="container">">
-                        {% endif %}%}
-                            {{ page.top_header }}}}
-                        {% if container_navbar %}%}
-                            </div>v>
-                        {% endif %}%}
-                    </nav>v>
+                    <nav class="navbar d-block py-0">{{ page.top_header }}</nav>
                 {% endif %}
-                {% if page.header or page.primary_menu or page.header_form %}
-                    <nav{{ navbar_attributes }}>}>
-                        {% if container_navbar %}
-                            <div class="container">
-                        {% endif %}
-                            {{ page.header }}}}
-                            {% if page.primary_menu or page.header_form %}%}
-                                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="{{ navbar_collapse_btn_data }}" data-bs-target="#CollapsingNavbar" aria-controls="CollapsingNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>%}
-                                <div class="{{ navbar_collapse_class }}" id="CollapsingNavbar">
-                                    {% if navbar_offcanvas %}n>
-                                        <div class="offcanvas-header">
-                                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                        </div>%}
-                                        <div class="offcanvas-body">}}
-                                    {% endif %}%}
-                                    {{ page.primary_menu }}
-                                    {% if page.header_form %}}}
-                                        <div class="form-inline navbar-form justify-content-end">
-                                            {{ page.header_form }}%}
-                                        </div>%}
-                                    {% endif %}
-                                    {% if navbar_offcanvas %}%}
-                                        </div>
-                                    {% endif %}%}
-                                </div>%}
-                            {% endif %}
-                            {% if sidebar_collapse %}%}
-                                <button class="navbar-toggler navbar-toggler-left collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#CollapsingLeft" aria-controls="CollapsingLeft" aria-expanded="false" aria-label="Toggle navigation"></button>
-                            {% endif %}
-                        {% if container_navbar %}
-                            </div>v>
-                        {% endif %}
-                    </nav>%}
+
+                {% if page.header %}
+                    <nav{{ navbar_attributes }}>
+                        {% if container_navbar %}<div class="container">{% endif %}
+
+                        {{ page.header }}
+
+                        {% if container_navbar %}</div>{% endif %}
+                    </nav>
                 {% endif %}
             {% endblock %}
-        </header>">
+        </header>
+
         {% if page.highlighted %}
-            <div class="highlighted">}}
+            <div class="highlighted">
                 <aside class="{{ container }} section clearfix" role="complementary">
-                    {{ page.highlighted }}v>
+                    {{ page.highlighted }}
                 </aside>
             </div>
-        {% endif %}%}
+        {% endif %}
+
         {% if page.featured_top %}
-            {% block featured %}">
+            {% block featured %}
                 <div class="featured-top">
-                    <aside class="featured-top__inner section {{ container }} clearfix" role="complementary">e>
+                    <aside class="featured-top__inner section {{ container }} clearfix" role="complementary">
                         {{ page.featured_top }}
-                    </aside>%}
+                    </aside>
                 </div>
             {% endblock %}
-        {% endif %}%}
+        {% endif %}
         <div id="main-wrapper" class="layout-main-wrapper clearfix">
-            {% block content %}}}
-                <div id="main" class="{{ container }}">">
-                    {{ page.breadcrumb }}}>
+            {% block content %}
+                <div id="main" class="{{ container }}">
+                    {{ page.breadcrumb }}
                     <div class="row row-offcanvas row-offcanvas-left clearfix">
-                        <main{{ content_attributes }}>a>
-                            <section class="section">}}
+                        <main{{ content_attributes }}>
+                            <section class="section">
                                 <a href="#main-content" id="main-content" tabindex="-1"></a>
-                                {{ page.content }}n>
+                                {{ page.content }}
                             </section>
-                        </main>}>
+                        </main>
                         {% if sidebar_first_exists %}
-                            <div{{ sidebar_first_attributes }}>}}
+                            <div{{ sidebar_first_attributes }}>
                                 <aside class="section" role="complementary">
-                                    {{ page.sidebar_first }}v>
+                                    {{ page.sidebar_first }}
                                 </aside>
                             </div>
-                        {% endif %}}>
-                        {% if sidebar_second_exists %}
-                            <div{{ sidebar_second_attributes }}>}}
-                                <aside class="section" role="complementary">
-                                    {{ page.sidebar_second }}v>
-                                </aside>
-                            </div>v>
                         {% endif %}
-                    </div>%}
+                        {% if sidebar_second_exists %}
+                            <div{{ sidebar_second_attributes }}>
+                                <aside class="section" role="complementary">
+                                    {{ page.sidebar_second }}
+                                </aside>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
             {% endblock %}
-        </div>">
+        </div>
+
         {% if page.featured_bottom_first or page.featured_bottom_second or page.featured_bottom_third %}
-            <div class="featured-bottom">}}
-                <aside class="{{ container }} clearfix" role="complementary">}}
+            <div class="featured-bottom">
+                <aside class="{{ container }} clearfix" role="complementary">
                     {{ page.featured_bottom_first }}}}
                     {{ page.featured_bottom_second }}
-                    {{ page.featured_bottom_third }}v>
+                    {{ page.featured_bottom_third }}
                 </aside>
             </div>
-        {% endif %}%}
+        {% endif %}
+
         <footer class="site-footer">
-            {% block footer %}%}
+            {% block footer %}
                 <div class="{{ container }}">
-                    {% if page.footer_first or page.footer_second or page.footer_third or page.footer_fourth %}}}
-                        <div class="site-footer__top clearfix">}}
-                            {{ page.footer_first }}}}
-                            {{ page.footer_second }}}}
-                            {{ page.footer_third }}
-                            {{ page.footer_fourth }}%}
-                        </div>%}
+                    {% if page.footer %}
+                        <div class="site-footer__top clearfix">{{ page.footer }}</div>
                     {% endif %}
-                    {% if page.footer_fifth %}}}
-                        <div class="site-footer__bottom">
-                            {{ page.footer_fifth }}%}
-                        </div>
-                    {% endif %}%}
                 </div>
-            {% endblock %}v>
+            {% endblock %}
         </footer>
     </div>
 </div>
