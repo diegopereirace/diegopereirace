@@ -21,7 +21,10 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
  */
 class UniqueValidator extends ConstraintValidator
 {
-    public function validate(mixed $value, Constraint $constraint): void
+    /**
+     * @return void
+     */
+    public function validate(mixed $value, Constraint $constraint)
     {
         if (!$constraint instanceof Unique) {
             throw new UnexpectedTypeException($constraint, Unique::class);
@@ -39,7 +42,7 @@ class UniqueValidator extends ConstraintValidator
 
         $collectionElements = [];
         $normalizer = $this->getNormalizer($constraint);
-        foreach ($value as $index => $element) {
+        foreach ($value as $element) {
             $element = $normalizer($element);
 
             if ($fields && !$element = $this->reduceElementKeys($fields, $element)) {
@@ -47,15 +50,10 @@ class UniqueValidator extends ConstraintValidator
             }
 
             if (\in_array($element, $collectionElements, true)) {
-                $violationBuilder = $this->context->buildViolation($constraint->message)
+                $this->context->buildViolation($constraint->message)
                     ->setParameter('{{ value }}', $this->formatValue($element))
-                    ->setCode(Unique::IS_NOT_UNIQUE);
-
-                if (null !== $constraint->errorPath) {
-                    $violationBuilder->atPath("[$index].{$constraint->errorPath}");
-                }
-
-                $violationBuilder->addViolation();
+                    ->setCode(Unique::IS_NOT_UNIQUE)
+                    ->addViolation();
 
                 return;
             }
@@ -65,7 +63,11 @@ class UniqueValidator extends ConstraintValidator
 
     private function getNormalizer(Unique $unique): callable
     {
-        return $unique->normalizer ?? static fn ($value) => $value;
+        if (null === $unique->normalizer) {
+            return static fn ($value) => $value;
+        }
+
+        return $unique->normalizer;
     }
 
     private function reduceElementKeys(array $fields, array $element): array

@@ -48,7 +48,7 @@ regions:
   footer_fifth: 'Footer fifth'
   none: None
 
-# Information added by Drupal.org packaging script on 2024-12-06
-version: '5.5.19'
+# Information added by Drupal.org packaging script on 2024-12-05
+version: '5.5.18'
 project: 'bootstrap_barrio'
-datestamp: 1733499141
+datestamp: 1733427496

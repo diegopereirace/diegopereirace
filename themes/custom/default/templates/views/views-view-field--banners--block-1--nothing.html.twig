@@ -1,11 +1,8 @@
-{% set image_uri = row._entity.field_media_image.entity.uri.value %}
+{% set image_uri = row._entity.field_image.entity.uri.value %}
+{% set image_mobile_uri = row._entity.field_image_mobile.entity.uri.value %}
 {% set image_url = file_url(image_uri) %}
+{% set image_mobile_url = file_url(image_mobile_uri) %}
 
-<div id="banner-image-home" style="
-    background-image: url('{{ image_url }}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 600px;
-    width: 100%;"
-></div>
+
+<img class="banner-desktop d-none d-md-block" src="{{ image_url }}" style="width:100%" />
+<img class="banner-mobile d-block d-md-none" src="{{ image_mobile_url }}" style="width:100%" />
