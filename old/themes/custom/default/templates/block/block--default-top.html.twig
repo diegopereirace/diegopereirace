@@ -1,0 +1,35 @@
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+  ]
+%}
+
+<div{{attributes.addClass(classes)}}>
+	{{ title_prefix }}
+	{% if label %}
+		<h2{{title_attributes}}>{{ label }}</h2>
+	{% endif %}
+	{{ title_suffix }}
+	{% block content %}
+		<div{{content_attributes.addClass('content')}}>
+			<div id="menu-desktop" class="position-relative z-3 py-2">
+        <div class="container container-top">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="wrap-logo">
+                <a href="{{ path('<front>') }}" title="Início">
+                  <img src="{{ logo_path }}" class="img-fluid" width="120px" draggable="false" alt="Logo"/>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-8 d-flex align-items-center justify-content-end">
+              <div class="wrap-main-menu">{{ drupal_menu('main') }}</div>
+            </div>
+          </div>
+        </div>
+			</div>
+		</div>
+  {% endblock content %}
+</div>

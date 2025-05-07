@@ -2,8 +2,8 @@
 
 namespace Drupal\admin_toolbar_search\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
 use Drupal\admin_toolbar_search\SearchLinks;
+use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

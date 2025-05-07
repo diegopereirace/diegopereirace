@@ -32,8 +32,8 @@ class AdminToolbarSettingsForm extends ConfigFormBase {
    */
   public static function create(ContainerInterface $container) {
     $instance = parent::create($container);
-    $instance->cacheMenu = $container->get('cache.menu');
-    $instance->menuLinkManager = $container->get('plugin.manager.menu.link');
+    $instance->cacheMenu = $container->get('plugin.manager.menu.link');
+    $instance->menuLinkManager = $container->get('cache.menu');
     return $instance;
   }
 

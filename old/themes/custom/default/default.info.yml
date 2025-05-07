@@ -1,0 +1,28 @@
+name: Default Theme
+type: theme
+description: 'Basic structure for a Bootstrap Barrio SubTheme.'
+core_version_requirement: ^10.3 || ^11
+base theme: bootstrap_barrio
+
+libraries:
+  - default/bootstrap
+  - default/global-styling
+
+regions:
+  top_header: 'Top header'
+  header: Header
+  page_top: 'Page top'
+  highlighted: Highlighted
+  featured_top: 'Featured top'
+  content: Content
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  featured_bottom_first: 'Featured bottom first'
+  featured_bottom_second: 'Featured bottom second'
+  featured_bottom_third: 'Featured bottom third'
+  footer: 'Footer'
+
+# Information added by Drupal.org packaging script on 2024-12-06
+version: '5.5.19'
+project: 'bootstrap_barrio'
+datestamp: 1733499141

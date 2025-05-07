@@ -15,7 +15,8 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Exception\InvalidArgumentException;
 
 /**
- * Validates that all the elements of the given collection are unique.
+ * @Annotation
+ * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  *
  * @author Yevgeniy Zholkevskiy <zhenya.zholkevskiy@gmail.com>
  */
@@ -25,20 +26,22 @@ class Unique extends Constraint
     public const IS_NOT_UNIQUE = '7911c98d-b845-4da0-94b7-a8dac36bc55a';
 
     public array|string $fields = [];
-    public ?string $errorPath = null;
 
     protected const ERROR_NAMES = [
         self::IS_NOT_UNIQUE => 'IS_NOT_UNIQUE',
     ];
 
-    public string $message = 'This collection should contain only unique elements.';
+    /**
+     * @deprecated since Symfony 6.1, use const ERROR_NAMES instead
+     */
+    protected static $errorNames = self::ERROR_NAMES;
+
+    public $message = 'This collection should contain only unique elements.';
     /** @var callable|null */
     public $normalizer;
 
     /**
-     * @param array<string,mixed>|null $options
-     * @param string[]|null            $groups
-     * @param string[]|string|null     $fields  Defines the key or keys in the collection that should be checked for uniqueness (defaults to null, which ensure uniqueness for all keys)
+     * @param array|string $fields the combination of fields that must contain unique values or a set of options
      */
     public function __construct(
         ?array $options = null,
@@ -47,17 +50,15 @@ class Unique extends Constraint
         ?array $groups = null,
         mixed $payload = null,
         array|string|null $fields = null,
-        ?string $errorPath = null,
     ) {
         parent::__construct($options, $groups, $payload);
 
         $this->message = $message ?? $this->message;
         $this->normalizer = $normalizer ?? $this->normalizer;
         $this->fields = $fields ?? $this->fields;
-        $this->errorPath = $errorPath ?? $this->errorPath;
 
         if (null !== $this->normalizer && !\is_callable($this->normalizer)) {
-            throw new InvalidArgumentException(\sprintf('The "normalizer" option must be a valid callable ("%s" given).', get_debug_type($this->normalizer)));
+            throw new InvalidArgumentException(sprintf('The "normalizer" option must be a valid callable ("%s" given).', get_debug_type($this->normalizer)));
         }
     }
 }
