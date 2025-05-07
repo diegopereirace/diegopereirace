@@ -1,11 +1,4 @@
 {% set image_uri = row._entity.field_image.entity.uri.value %}
 {% set image_url = file_url(image_uri) %}
 
-<div id="banner-image-home" style="
-    background-image: url('{{ image_url }}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 600px;
-    width: 100%;"
-></div>
+<img src="{{ image_url }}" style="width:100%" />

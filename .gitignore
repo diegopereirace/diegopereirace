@@ -15,3 +15,5 @@ package-lock.json
 sites/default/files/php/*
 sites/default/files/css/*
 sites/default/files/js/*
+sites/default/files/languages
+sites/default/files/languages/*
