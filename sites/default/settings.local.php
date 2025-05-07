@@ -1,6 +1,6 @@
 <?php
 
-// phpcs:ignoreFile
+// @codingStandardsIgnoreFile
 
 /**
  * @file
@@ -26,10 +26,14 @@
  * @see http://php.net/assert
  * @see https://www.drupal.org/node/2492225
  *
- * It is strongly recommended that you set zend.assertions=1 in the PHP.ini file
- * (It cannot be changed from .htaccess or runtime) on development machines and
- * to 0 or -1 in production.
+ * If you are using PHP 7.0 it is strongly recommended that you set
+ * zend.assertions=1 in the PHP.ini file (It cannot be changed from .htaccess
+ * or runtime) on development machines and to 0 in production.
+ *
+ * @see https://wiki.php.net/rfc/expectations
  */
+assert_options(ASSERT_ACTIVE, TRUE);
+\Drupal\Component\Assertion\Handle::register();
 
 /**
  * Enable local development services.
@@ -62,7 +66,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  *
  * Only use this setting once the site has been installed.
  */
-# $settings['cache']['bins']['render'] = 'cache.backend.null';
+ $settings['cache']['bins']['render'] = 'cache.backend.null';
 
 /**
  * Disable caching for migrations.
@@ -84,7 +88,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  *
  * Only use this setting once the site has been installed.
  */
-# $settings['cache']['bins']['page'] = 'cache.backend.null';
+$settings['cache']['bins']['page'] = 'cache.backend.null';
 
 /**
  * Disable Dynamic Page Cache.
@@ -93,7 +97,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * cacheability metadata is present (and hence the expected behavior). However,
  * in the early stages of development, you may want to disable it.
  */
-# $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
+ $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
 
 /**
  * Allow test modules and themes to be installed.
@@ -112,7 +116,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * be gained by generating a query string from rebuild_token_calculator.sh and
  * using these parameters in a request to rebuild.php.
  */
-$settings['rebuild_access'] = TRUE;
+$settings['rebuild_access'] = FALSE;
 
 /**
  * Skip file system permissions hardening.
@@ -126,26 +130,16 @@ $settings['rebuild_access'] = TRUE;
  */
 $settings['skip_permissions_hardening'] = TRUE;
 
-/**
- * Exclude modules from configuration synchronization.
- *
- * On config export sync, no config or dependent config of any excluded module
- * is exported. On config import sync, any config of any installed excluded
- * module is ignored. In the exported configuration, it will be as if the
- * excluded module had never been installed. When syncing configuration, if an
- * excluded module is already installed, it will not be uninstalled by the
- * configuration synchronization, and dependent configuration will remain
- * intact. This affects only configuration synchronization; single import and
- * export of configuration are not affected.
- *
- * Drupal does not validate or sanity check the list of excluded modules. For
- * instance, it is your own responsibility to never exclude required modules,
- * because it would mean that the exported configuration can not be imported
- * anymore.
- *
- * This is an advanced feature and using it means opting out of some of the
- * guarantees the configuration synchronization provides. It is not recommended
- * to use this feature with modules that affect Drupal in a major way such as
- * the language or field module.
- */
-# $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy'];
+/*
+$databases['default']['default'] = array (
+  'database' => 'dut_print',
+  'username' => 'postgres',
+  'password' => 'avz114',
+  'prefix' => '',
+  'host' => '192.168.0.130',
+  'port' => '5432',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\pgsql',
+  'driver' => 'pgsql',
+);*/
+//require_once DRUPAL_ROOT . '/modules/contrib/devel/kint/kint/Kint.class.php';
+//Kint::$maxLevels = 4;

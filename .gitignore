@@ -12,8 +12,9 @@ themes/custom/default/package-lock.json
 themes/custom/default/package.json
 package-lock.json
 
-sites/default/files/php/*
+sites/default/files/php/twig/*
 sites/default/files/css/*
 sites/default/files/js/*
+sites/default/files/js/js_*
 sites/default/files/languages
 sites/default/files/languages/*
