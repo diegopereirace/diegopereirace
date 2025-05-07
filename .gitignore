@@ -1,0 +1,17 @@
+.vscode
+\.cspell
+\.idea
+*\.DS_Store
+*.DS_Store
+composer.lock
+node_modules
+sites/default/settings.php
+sites/default/files/*
+sites/default/files/*
+themes/custom/default/package-lock.json
+themes/custom/default/package.json
+package-lock.json
+
+sites/default/files/php/*
+sites/default/files/css/*
+sites/default/files/js/*
