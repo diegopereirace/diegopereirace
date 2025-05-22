@@ -33,7 +33,7 @@ body {
 }
 
 a {
-    color: var(--color-gold-primary);
+    color: var(--color-gold-primary) !important;
     text-decoration: none;
     transition: var(--transition-default);
 }
