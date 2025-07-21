@@ -139,9 +139,7 @@ class Parser extends ParserAbstract
             "allowReturn" => false,
             "allowIn" => false,
             "allowYield" => false,
-            "allowAwait" => false,
-            "inSwitch" => false,
-            "inIteration" => false
+            "allowAwait" => false
         );
         //If async/await is not enabled remove the
         //relative context properties
@@ -678,10 +676,6 @@ class Parser extends ParserAbstract
     {
         if ($token = $this->scanner->consume("continue")) {
             
-            if (!$this->context->inIteration) {
-                $this->error("Illegal continue statement");
-            }
-
             $node = $this->createNode("ContinueStatement", $token);
             
             if ($this->scanner->noLineTerminators() &&
@@ -715,11 +709,6 @@ class Parser extends ParserAbstract
                 $this->assertEndOfStatement();
             } else {
                 $this->scanner->consume(";");
-
-                if (!$this->context->inIteration &&
-                    !$this->context->inSwitch) {
-                    $this->error("Illegal break statement");
-                }
             }
             
             return $this->completeNode($node);
@@ -859,9 +848,7 @@ class Parser extends ParserAbstract
                     array("allowIn" => true), "parseExpression"
                 )) &&
                 $this->scanner->consume(")") &&
-                ($cases = $this->isolateContext(
-                    array("inSwitch" => true), "parseCaseBlock"
-                )) !== null
+                ($cases = $this->parseCaseBlock()) !== null
             ) {
             
                 $node = $this->createNode("SwitchStatement", $token);
@@ -1019,9 +1006,7 @@ class Parser extends ParserAbstract
     {
         if ($token = $this->scanner->consume("do")) {
             
-            if (($body = $this->isolateContext(
-                    array("inIteration" => true), "parseStatement"
-                )) &&
+            if (($body = $this->parseStatement()) &&
                 $this->scanner->consume("while") &&
                 $this->scanner->consume("(") &&
                 ($test = $this->isolateContext(
@@ -1057,9 +1042,7 @@ class Parser extends ParserAbstract
                     array("allowIn" => true), "parseExpression"
                 )) &&
                 $this->scanner->consume(")") &&
-                $body = $this->isolateContext(
-                    array("inIteration" => true), "parseStatement"
-                )
+                $body = $this->parseStatement()
             ) {
                     
                 $node = $this->createNode("WhileStatement", $token);
@@ -1113,9 +1096,7 @@ class Parser extends ParserAbstract
                 );
 
                 if ($this->scanner->consume(")") &&
-                    $body = $this->isolateContext(
-                        array("inIteration" => true), "parseStatement"
-                    )
+                    $body = $this->parseStatement()
                 ) {
 
                     $node = $this->createNode("ForStatement", $forToken);
@@ -1161,9 +1142,7 @@ class Parser extends ParserAbstract
                             array("allowIn" => true), "parseExpression"
                         )) &&
                         $this->scanner->consume(")") &&
-                        $body = $this->isolateContext(
-                            array("inIteration" => true), "parseStatement"
-                        )
+                        $body = $this->parseStatement()
                     ) {
 
                         $node = $this->createNode(
@@ -1180,9 +1159,7 @@ class Parser extends ParserAbstract
                             array("allowIn" => true), "parseAssignmentExpression"
                         )) &&
                         $this->scanner->consume(")") &&
-                        $body = $this->isolateContext(
-                            array("inIteration" => true), "parseStatement"
-                        )
+                        $body = $this->parseStatement()
                     ) {
 
                         $node = $this->createNode(
@@ -1219,9 +1196,7 @@ class Parser extends ParserAbstract
                     array("allowIn" => true), "parseExpression"
                 )) &&
                 $this->scanner->consume(")") &&
-                $body = $this->isolateContext(
-                    array("inIteration" => true), "parseStatement"
-                )
+                $body = $this->parseStatement()
             ) {
                 
                 $node = $this->createNode("ForInStatement", $forToken);
@@ -1235,9 +1210,7 @@ class Parser extends ParserAbstract
                     array("allowIn" => true), "parseAssignmentExpression"
                 )) &&
                 $this->scanner->consume(")") &&
-                $body = $this->isolateContext(
-                    array("inIteration" => true), "parseStatement"
-                )
+                $body = $this->parseStatement()
             ) {
                 
                 $node = $this->createNode("ForOfStatement", $forToken);
@@ -1264,9 +1237,7 @@ class Parser extends ParserAbstract
                     );
                     
                     if ($this->scanner->consume(")") &&
-                        $body = $this->isolateContext(
-                            array("inIteration" => true), "parseStatement"
-                        )
+                        $body = $this->parseStatement()
                     ) {
                         
                         $node = $this->createNode("ForStatement", $forToken);
@@ -1314,9 +1285,7 @@ class Parser extends ParserAbstract
                 );
                 
                 if ($this->scanner->consume(")") &&
-                    $body = $this->isolateContext(
-                        array("inIteration" => true), "parseStatement"
-                    )
+                    $body = $this->parseStatement()
                 ) {
                     
                     $node = $this->createNode("ForStatement", $forToken);
@@ -1347,9 +1316,7 @@ class Parser extends ParserAbstract
                         array("allowIn" => true), "parseExpression"
                     )) &&
                     $this->scanner->consume(")") &&
-                    $body = $this->isolateContext(
-                        array("inIteration" => true), "parseStatement"
-                    )
+                    $body = $this->parseStatement()
                 ) {
                     
                     $node = $this->createNode("ForInStatement", $forToken);
@@ -1367,9 +1334,7 @@ class Parser extends ParserAbstract
                         "parseAssignmentExpression"
                     )) &&
                     $this->scanner->consume(")") &&
-                    $body = $this->isolateContext(
-                        array("inIteration" => true), "parseStatement"
-                    )
+                    $body = $this->parseStatement()
                 ) {
                     
                     $node = $this->createNode("ForOfStatement", $forToken);
@@ -1664,11 +1629,7 @@ class Parser extends ParserAbstract
     protected function parseFunctionBody()
     {
         $body = $this->isolateContext(
-            array(
-                "allowReturn" => true,
-                "inSwitch" => false,
-                "inIteration" => false
-            ),
+            array("allowReturn" => true),
             "parseStatementList",
             array(true)
         );
@@ -1883,15 +1844,6 @@ class Parser extends ParserAbstract
             );
             
             if ($declarations) {
-                // "const" requires that all declarations have an initializer
-                if ($token->value === "const") {
-                    foreach ($declarations as $dec) {
-                        if (!$dec->getInit()) {
-                            $this->error("Missing initializer in const declaration");
-                        }
-                    }
-                }
-
                 $this->assertEndOfStatement();
                 $node = $this->createNode("VariableDeclaration", $token);
                 $node->setKind($token->value);
