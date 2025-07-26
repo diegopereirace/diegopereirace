@@ -1,20 +1,29 @@
 global-styling:
   version: VERSION
   js:
-    js/global.js: {}
+    assets/js/global.js: {}
   css:
     component:
       assets/css/style.css: {}
       assets/css/colors.css: {}
 bootstrap:
   js:
-    /libraries/popperjs/dist/umd/popper.min.js: { weight: -19 }
-    /libraries/bootstrap/dist/js/bootstrap.min.js: { weight: -20 }
+    /libraries/popperjs/popper.min.js: { weight: -19 }
+    /libraries/bootstrap/js/bootstrap.min.js: { weight: -20 }
   css:
     component:
-      /libraries/bootstrap/dist/css/bootstrap.min.css: {}
+      /libraries/bootstrap/css/bootstrap.min.css: {}
   dependencies:
     - core/popperjs
+bootstrap_cdn:
+  js:
+    //cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js: {}
+  css:
+    component:
+      //cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css: {}
+scenejs:
+  js:
+    /libraries/scenejs/scenejs.min.js: {}  
 color.preview:
   version: VERSION
   css:
