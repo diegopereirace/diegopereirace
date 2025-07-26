@@ -596,6 +596,63 @@
             "install-path": "../../modules/contrib/admin_toolbar"
         },
         {
+            "name": "drupal/bootstrap_barrio",
+            "version": "5.5.20",
+            "version_normalized": "5.5.20.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/bootstrap_barrio.git",
+                "reference": "5.5.20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/bootstrap_barrio-5.5.20.zip",
+                "reference": "5.5.20",
+                "shasum": "1aa1dcd370eece14f61bed105398bf55565cc7a3"
+            },
+            "require": {
+                "drupal/core": "^10.3 || ^11.0",
+                "twbs/bootstrap": "^5.0.0"
+            },
+            "type": "drupal-theme",
+            "extra": {
+                "drupal": {
+                    "version": "5.5.20",
+                    "datestamp": "1749525785",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Alberto Siles",
+                    "homepage": "https://www.drupal.org/user/3520894",
+                    "email": "alberto@siles.pe"
+                },
+                {
+                    "name": "hatuhay",
+                    "homepage": "https://www.drupal.org/user/827704"
+                },
+                {
+                    "name": "WillAcon",
+                    "homepage": "https://www.drupal.org/user/2824325"
+                }
+            ],
+            "description": "Bootstrap 5 base theme.",
+            "homepage": "https://www.drupal.org/project/bootstrap_barrio",
+            "support": {
+                "source": "https://git.drupalcode.org/project/bootstrap_barrio"
+            },
+            "install-path": "../../themes/contrib/bootstrap_barrio"
+        },
+        {
             "name": "drupal/core",
             "version": "11.2.2",
             "version_normalized": "11.2.2.0",
@@ -1438,18 +1495,18 @@
         },
         {
             "name": "drupal/webform",
-            "version": "6.3.0-beta2",
-            "version_normalized": "6.3.0.0-beta2",
+            "version": "6.3.0-beta3",
+            "version_normalized": "6.3.0.0-beta3",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/webform.git",
-                "reference": "6.3.0-beta2"
+                "reference": "6.3.0-beta3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/webform-6.3.0-beta2.zip",
-                "reference": "6.3.0-beta2",
-                "shasum": "02e45bf3716c6e81846a9b77837782a43053e6f9"
+                "url": "https://ftp.drupal.org/files/projects/webform-6.3.0-beta3.zip",
+                "reference": "6.3.0-beta3",
+                "shasum": "60af12e66a7898c81a34400979973b046867582e"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11.0"
@@ -1494,8 +1551,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "6.3.0-beta2",
-                    "datestamp": "1742582977",
+                    "version": "6.3.0-beta3",
+                    "datestamp": "1753217750",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Beta releases are not covered by Drupal security advisories."
@@ -5553,6 +5610,59 @@
                 }
             ],
             "install-path": "../symfony/yaml"
+        },
+        {
+            "name": "twbs/bootstrap",
+            "version": "v5.3.7",
+            "version_normalized": "5.3.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twbs/bootstrap.git",
+                "reference": "e0032ae6a5a628a51a8552091816cec09b6434df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/e0032ae6a5a628a51a8552091816cec09b6434df",
+                "reference": "e0032ae6a5a628a51a8552091816cec09b6434df",
+                "shasum": ""
+            },
+            "replace": {
+                "twitter/bootstrap": "self.version"
+            },
+            "time": "2025-06-10T15:44:49+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Otto",
+                    "email": "markdotto@gmail.com"
+                },
+                {
+                    "name": "Jacob Thornton",
+                    "email": "jacobthornton@gmail.com"
+                }
+            ],
+            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "homepage": "https://getbootstrap.com/",
+            "keywords": [
+                "JS",
+                "css",
+                "framework",
+                "front-end",
+                "mobile-first",
+                "responsive",
+                "sass",
+                "web"
+            ],
+            "support": {
+                "issues": "https://github.com/twbs/bootstrap/issues",
+                "source": "https://github.com/twbs/bootstrap/tree/v5.3.7"
+            },
+            "install-path": "../twbs/bootstrap"
         },
         {
             "name": "twig/twig",
