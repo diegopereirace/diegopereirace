@@ -39,3 +39,5 @@ sites/simpletest
 # */private
 
 sites/default/settings.php
+
+sites/default/files/*
