@@ -338,8 +338,8 @@ class ComposerStaticInit9d559ab354f63dc7e9a3fc1a03ad7d46
         ),
         'Doctrine\\Common\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/event-manager/src',
-            1 => __DIR__ . '/..' . '/doctrine/common/src',
+            0 => __DIR__ . '/..' . '/doctrine/common/src',
+            1 => __DIR__ . '/..' . '/doctrine/event-manager/src',
         ),
         'Composer\\Semver\\' => 
         array (
