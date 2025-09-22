@@ -51,6 +51,7 @@ global-styling:
 
   js:
     js/checkbox.js: {}
+    js/base.js: {}
 
   dependencies:
     - core/drupal
@@ -291,3 +292,7 @@ tags:
   css:
     theme:
       css/components/tags.css: {}
+
+particlesjs:
+  js:
+    /libraries/particles.js/particles.min.js: {}
