@@ -27,6 +27,7 @@
         "drupal/gin": "5.0.3",
         "drupal/metatag": "2.1.2",
         "drupal/pathauto": "1.13",
+        "drupal/radix": "6.0",
         "drupal/sitemap": "2.3",
         "drupal/token": "1.16",
         "drupal/webform": "6.3.0-beta4"
