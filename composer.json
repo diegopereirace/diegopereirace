@@ -16,7 +16,7 @@
     ],
     "require": {
         "composer/installers": "^2.3",
-        "drupal/admin_toolbar": "3.6",
+        "drupal/admin_toolbar": "3.6.2",
         "drupal/bootstrap_barrio": "5.5.20",
         "drupal/coffee": "^2.0",
         "drupal/core-composer-scaffold": "^11.2.3",
