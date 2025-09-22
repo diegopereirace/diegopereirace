@@ -1860,18 +1860,18 @@
         },
         {
             "name": "drupal/radix",
-            "version": "6.0.0",
-            "version_normalized": "6.0.0.0",
+            "version": "6.0.2",
+            "version_normalized": "6.0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/radix.git",
-                "reference": "6.0.0"
+                "reference": "6.0.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/radix-6.0.0.zip",
-                "reference": "6.0.0",
-                "shasum": "a10567c8f81cd8c6223d574d339d15375443c54d"
+                "url": "https://ftp.drupal.org/files/projects/radix-6.0.2.zip",
+                "reference": "6.0.2",
+                "shasum": "3bcad62aae4e213c50775c83edab742d9702840c"
             },
             "require": {
                 "drupal/core": "^10.3 || ^11"
@@ -1882,8 +1882,8 @@
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "6.0.0",
-                    "datestamp": "1737030503",
+                    "version": "6.0.2",
+                    "datestamp": "1746711637",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"

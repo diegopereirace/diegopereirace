@@ -3,13 +3,11 @@ description: "radix_starterkit theme based on <a href='https://www.drupal.org/pr
 screenshot: screenshot.png
 'alt text': 'radix_starterkit theme screenshot'
 core_version_requirement: ^10.3 || ^11
-# version: '1.0.0'
+# version: '6.0'
 engine: twig
 type: theme
 base theme: radix
 starterkit: true
-dependencies:
-  - drupal:serialization
 
 'interface translation project': radix_starterkit
 'interface translation server pattern': 'themes/custom/radix_starterkit/translations/%language.po'
@@ -45,7 +43,7 @@ libraries-extend:
   clientside_validation_jquery/cv.jquery.validate:
     - radix_starterkit/jquery.validate
 
-# Information added by Drupal.org packaging script on 2025-01-16
-version: '6.0.0'
+# Information added by Drupal.org packaging script on 2025-05-08
+version: '6.0.2'
 project: 'radix'
-datestamp: 1737030506
+datestamp: 1746711574
