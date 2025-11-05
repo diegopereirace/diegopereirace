@@ -84,7 +84,7 @@
   --color--gray-80: hsl(var(--color--gray-hue), var(--color--gray-saturation), 30%); /* Cinza escuro */
   --color--gray-90: hsl(var(--color--gray-hue), var(--color--gray-saturation), 22%); /* Cinza muito escuro */
   --color--gray-95: hsl(var(--color--gray-hue), var(--color--gray-saturation), 19%); /* Background secundário */
-  --color--gray-100: hsl(var(--color--gray-hue), var(--color--gray-saturation), 17%); /* Background principal escuro */
+  --color--gray-100: #11181e; /* Background principal escuro */
 
   /**
    * Primary colors.
@@ -114,7 +114,7 @@
    * Named Colors.
    */
   --color--black: #1a1e22; /* Preto ajustado para cinza muito escuro */
-  --color--white: #292c2e; /* Branco ajustado para cinza escuro (fundo de conteúdo) */
+  --color--white: #11181e; /* Branco ajustado para cinza escuro (fundo de conteúdo) */
   --color--red: #e33f1e; /* Red */
   --color--gold: #fdca40; /* Gold */
   --color--green: #00f5a0; /* Green - Verde principal do site */

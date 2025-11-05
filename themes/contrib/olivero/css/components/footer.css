@@ -13,7 +13,7 @@
 .site-footer {
   position: relative; /* stack above left social bar */
   color: var(--color--primary-50);
-  background: #292c2e;
+  background: #11181e;
 }
 
 .site-footer .menu {
