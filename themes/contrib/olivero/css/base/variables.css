@@ -72,51 +72,52 @@
    *
    * Color number roughly corresponds to its luminosity.
    */
-  --color--gray-hue: 201;
-  --color--gray-saturation: 15%;
-  --color--gray-5: hsl(var(--color--gray-hue), var(--color--gray-saturation), 5%); /* Black */
-  --color--gray-10: hsl(var(--color--gray-hue), var(--color--gray-saturation), 11%);
-  --color--gray-20: hsl(var(--color--gray-hue), var(--color--gray-saturation), 20%); /* Black 2 */
-  --color--gray-45: hsl(var(--color--gray-hue), var(--color--gray-saturation), 44%); /* Gray Dark */
-  --color--gray-60: hsl(var(--color--gray-hue), var(--color--gray-saturation), 57%); /* Gray medium */
-  --color--gray-65: hsl(var(--color--gray-hue), var(--color--gray-saturation), 63%); /* Black 4 */
-  --color--gray-70: hsl(var(--color--gray-hue), var(--color--gray-saturation), 72%); /* Gray medium 2 */
-  --color--gray-90: hsl(var(--color--gray-hue), var(--color--gray-saturation), 88%); /* Gray light */
-  --color--gray-95: hsl(var(--color--gray-hue), var(--color--gray-saturation), 93%); /* Gray light 1 */
-  --color--gray-100: hsl(var(--color--gray-hue), var(--color--gray-saturation), 97%); /* Gray light 2 */
+  --color--gray-hue: 200;
+  --color--gray-saturation: 5%;
+  --color--gray-5: hsl(var(--color--gray-hue), var(--color--gray-saturation), 95%); /* Cinza muito claro (bordas) */
+  --color--gray-10: hsl(var(--color--gray-hue), var(--color--gray-saturation), 90%); /* Cinza claro */
+  --color--gray-20: hsl(var(--color--gray-hue), var(--color--gray-saturation), 80%); /* Cinza claro para texto */
+  --color--gray-45: hsl(var(--color--gray-hue), var(--color--gray-saturation), 65%); /* Gray médio */
+  --color--gray-60: hsl(var(--color--gray-hue), var(--color--gray-saturation), 50%); /* Gray medium */
+  --color--gray-65: hsl(var(--color--gray-hue), var(--color--gray-saturation), 45%); /* Gray médio escuro */
+  --color--gray-70: hsl(var(--color--gray-hue), var(--color--gray-saturation), 40%); /* Gray escuro */
+  --color--gray-80: hsl(var(--color--gray-hue), var(--color--gray-saturation), 30%); /* Cinza escuro */
+  --color--gray-90: hsl(var(--color--gray-hue), var(--color--gray-saturation), 22%); /* Cinza muito escuro */
+  --color--gray-95: hsl(var(--color--gray-hue), var(--color--gray-saturation), 19%); /* Background secundário */
+  --color--gray-100: hsl(var(--color--gray-hue), var(--color--gray-saturation), 17%); /* Background principal escuro */
 
   /**
    * Primary colors.
    *
    * Color number roughly corresponds to its luminosity.
    */
-  --color--primary-hue: 202;
-  --color--primary-saturation: 79%;
-  --color--primary-lightness: 50;
+  --color--primary-hue: 160;
+  --color--primary-saturation: 100%;
+  --color--primary-lightness: 48;
   --color--primary-30: hsl(var(--color--primary-hue), var(--color--primary-saturation), calc(1% * (var(--color--primary-lightness) - (0.36 * var(--color--primary-lightness)))));
-  --color--primary-40: hsl(var(--color--primary-hue), var(--color--primary-saturation), calc(1% * (var(--color--primary-lightness) - (0.24 * var(--color--primary-lightness))))); /* Blue dark */
-  --color--primary-50: hsl(var(--color--primary-hue), var(--color--primary-saturation), calc(1% * var(--color--primary-lightness))); /* Blue medium */
-  --color--primary-60: hsl(var(--color--primary-hue), var(--color--primary-saturation), calc(1% * (var(--color--primary-lightness) + (0.24 * (100 - var(--color--primary-lightness)))))); /* Blue bright */
-  --color--primary-80: hsl(var(--color--primary-hue), var(--color--primary-saturation), calc(1% * (var(--color--primary-lightness) + (0.85 * (100 - var(--color--primary-lightness)))))); /* Blue very bright */
+  --color--primary-40: hsl(var(--color--primary-hue), var(--color--primary-saturation), calc(1% * (var(--color--primary-lightness) - (0.24 * var(--color--primary-lightness))))); /* Verde escuro */
+  --color--primary-50: hsl(var(--color--primary-hue), var(--color--primary-saturation), calc(1% * var(--color--primary-lightness))); /* Verde principal */
+  --color--primary-60: hsl(var(--color--primary-hue), var(--color--primary-saturation), calc(1% * (var(--color--primary-lightness) + (0.24 * (100 - var(--color--primary-lightness)))))); /* Verde claro */
+  --color--primary-80: hsl(var(--color--primary-hue), var(--color--primary-saturation), calc(1% * (var(--color--primary-lightness) + (0.85 * (100 - var(--color--primary-lightness)))))); /* Verde muito claro */
 
   /**
    * Variables specific to text.
    */
   --color-text-neutral-soft: var(--color--gray-45);
   --color-text-neutral-medium: var(--color--gray-20);
-  --color-text-neutral-loud: var(--color--gray-5);
+  --color-text-neutral-loud: #ffffff;
 
-  --color-text-primary-medium: var(--color--primary-40);
-  --color-text-primary-loud: var(--color--primary-30);
+  --color-text-primary-medium: var(--color--primary-50);
+  --color-text-primary-loud: var(--color--primary-60);
 
   /**
    * Named Colors.
    */
-  --color--black: #000; /* Black */
-  --color--white: #fff; /* White */
+  --color--black: #1a1e22; /* Preto ajustado para cinza muito escuro */
+  --color--white: #292c2e; /* Branco ajustado para cinza escuro (fundo de conteúdo) */
   --color--red: #e33f1e; /* Red */
   --color--gold: #fdca40; /* Gold */
-  --color--green: #3fa21c; /* Green */
+  --color--green: #00f5a0; /* Green - Verde principal do site */
 
   /* Header */
   --header-height-wide-when-fixed: var(--sp6);

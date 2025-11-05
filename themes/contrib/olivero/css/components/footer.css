@@ -12,8 +12,8 @@
 
 .site-footer {
   position: relative; /* stack above left social bar */
-  color: var(--color--gray-65);
-  background: linear-gradient(180deg, var(--color--gray-5) 0%, var(--color--gray-10) 100%);
+  color: var(--color--primary-50);
+  background: #292c2e;
 }
 
 .site-footer .menu {
@@ -40,6 +40,6 @@
 
 @media (min-width: 75rem) {
   body:not(.is-always-mobile-nav) .site-footer {
-    border-inline-start: solid var(--content-left) var(--color--black);
+    border-inline-start: solid var(--content-left) var(--color--white);
   }
 }
