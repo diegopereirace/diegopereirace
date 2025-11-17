@@ -25,6 +25,7 @@
         "drupal/core-recommended": "^11.2.4",
         "drupal/devel": "5.4",
         "drupal/gin": "5.0.3",
+        "drupal/google_analytics": "4.0.3",
         "drupal/metatag": "2.1.2",
         "drupal/pathauto": "1.13",
         "drupal/radix": "6.0.2",

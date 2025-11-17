@@ -847,8 +847,13 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
+
+if (file_exists(__DIR__ . '/settings.ddev.php') && getenv('IS_DDEV_PROJECT') == 'true') {
+  include __DIR__ . '/settings.ddev.php';
+}
+
 $databases['default']['default'] = array (
-  'database' => 'diegopereiraces',
+  'database' => 'diegopereirace',
   'username' => 'root',
   'password' => '',
   'prefix' => 'drupal_',
@@ -860,7 +865,3 @@ $databases['default']['default'] = array (
   'autoload' => 'core/modules/mysql\\src\\Driver\\Database\\mysql\\',
 );
 $settings['config_sync_directory'] = 'sites/default/files/config_m8r_2512xK1YUyenpzj0ysetpLQvlHw3BJ2WOaNPXzEH2jsOqQMZa8pQYNFAydaDwcZtG3QT8w/sync';
-
-if (file_exists(__DIR__ . '/settings.ddev.php') && getenv('IS_DDEV_PROJECT') == 'true') {
-  include __DIR__ . '/settings.ddev.php';
-}

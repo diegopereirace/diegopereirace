@@ -1,0 +1,29 @@
+# Nome do projeto (usado para a URL .ddev.site)
+name: diegopereirace
+
+# Tipo de projeto
+type: drupal10
+
+# A CORREÇÃO MAIS IMPORTANTE:
+# Define a raiz do site como o diretório principal (raiz),
+# pois seu index.php NÃO está na pasta /web.
+docroot: ""
+
+# Versão do PHP
+php_version: "8.3"
+
+# Servidor web (como você solicitou, Apache)
+webserver_type: apache-fpm
+
+# Configuração do Banco de Dados
+database:
+    type: mariadb
+    version: "10.6"
+
+# Versão do Composer
+composer_version: "2"
+
+# Configurações padrão do DDEV que estavam no seu arquivo anterior
+xdebug_enabled: false
+use_dns_when_possible: true
+default_container_timeout: "240"

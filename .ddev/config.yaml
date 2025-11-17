@@ -1,8 +1,8 @@
 name: diegopereirace
-type: drupal10
-docroot: web
+type: drupal11
+docroot: ""
 php_version: "8.3"
-webserver_type: nginx-fpm
+webserver_type: apache-fpm
 xdebug_enabled: false
 additional_hostnames: []
 additional_fqdns: []
