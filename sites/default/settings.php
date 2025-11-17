@@ -851,17 +851,3 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 if (file_exists(__DIR__ . '/settings.ddev.php') && getenv('IS_DDEV_PROJECT') == 'true') {
   include __DIR__ . '/settings.ddev.php';
 }
-
-$databases['default']['default'] = array (
-  'database' => 'diegopereirace',
-  'username' => 'root',
-  'password' => '',
-  'prefix' => 'drupal_',
-  'host' => 'localhost',
-  'port' => '306',
-  'isolation_level' => 'READ COMMITTED',
-  'driver' => 'mysql',
-  'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
-  'autoload' => 'core/modules/mysql\\src\\Driver\\Database\\mysql\\',
-);
-$settings['config_sync_directory'] = 'sites/default/files/config_m8r_2512xK1YUyenpzj0ysetpLQvlHw3BJ2WOaNPXzEH2jsOqQMZa8pQYNFAydaDwcZtG3QT8w/sync';
