@@ -35,8 +35,16 @@ class CodeGenerator {
             return;
         }
 
-        // Usar sempre fallback com códigos estáticos
-        this.displayFallbackCode();
+        this.isGenerating = true;
+        this.showLoading();
+
+        // Pequeno delay para mostrar o loading
+        setTimeout(() => {
+            this.displayFallbackCode();
+            this.updateTimestamp();
+            this.hideLoading();
+            this.isGenerating = false;
+        }, 500);
     }
 
     getPrompt() {
@@ -81,7 +89,8 @@ class CharacterName extends BaseClass {
                 }]
             })
         });
-
+console.log('API Response Status:', response.status);
+die;
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
             console.error('API Error Details:', errorData);
@@ -106,7 +115,7 @@ class CharacterName extends BaseClass {
         const codeContent = document.getElementById('code-content');
         if (!codeContent) return;
 
-        // Parse e colorize o código
+        // Aplicar syntax highlighting diretamente
         const formattedCode = this.formatPHPCode(code);
         
         codeContent.innerHTML = `<pre class="text-slate-300">${formattedCode}</pre>`;
@@ -114,34 +123,33 @@ class CharacterName extends BaseClass {
     }
 
     formatPHPCode(code) {
-        // Syntax highlighting simples
-        return code
-            // Keywords
-            .replace(/\b(class|extends|const|public|function|return)\b/g, '<span class="text-purple-400">$1</span>')
-            // Class names (palavras após class/extends)
-            .replace(/(?:class|extends)\s+(\w+)/g, (match, className) => {
-                return match.replace(className, `<span class="text-yellow-300">${className}</span>`);
-            })
-            // Function names
-            .replace(/function\s+(\w+)/g, (match, funcName) => {
-                return match.replace(funcName, `<span class="text-blue-400">${funcName}</span>`);
-            })
-            // Constants
-            .replace(/const\s+(\w+)/g, (match, constName) => {
-                return match.replace(constName, `<span class="text-cyan-300">${constName}</span>`);
-            })
-            // Numbers
-            .replace(/\b(\d+)\b/g, '<span class="text-orange-400">$1</span>')
-            // Strings
-            .replace(/(["'])(?:(?=(\\?))\2.)*?\1/g, '<span class="text-green-400">$&</span>')
+        // Primeiro, escapar HTML manualmente
+        const escaped = code
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+        
+        // Aplicar syntax highlighting
+        return escaped
+            // Strings primeiro (para não interferir com outros padrões)
+            .replace(/(&quot;[^&quot;]*&quot;|'[^']*')/g, '<span class="text-green-400">$1</span>')
             // Comments
             .replace(/\/\/.*/g, '<span class="text-slate-600">$&</span>')
+            // Keywords
+            .replace(/\b(class|extends|const|public|function|return)\b/g, '<span class="text-purple-400">$1</span>')
+            // Class names após class/extends
+            .replace(/(<span class="text-purple-400">(?:class|extends)<\/span>)\s+(\w+)/g, '$1 <span class="text-yellow-300">$2</span>')
+            // Function names
+            .replace(/(<span class="text-purple-400">function<\/span>)\s+(\w+)/g, '$1 <span class="text-blue-400">$2</span>')
+            // Constants
+            .replace(/(<span class="text-purple-400">const<\/span>)\s+(\w+)/g, '$1 <span class="text-cyan-300">$2</span>')
+            // Numbers
+            .replace(/\b(\d+)\b/g, '<span class="text-orange-400">$1</span>')
             // Variables
-            .replace(/\$\w+/g, '<span class="text-pink-400">$&</span>')
-            // Arrays
-            .replace(/\[([^\]]+)\]/g, (match) => {
-                return `<span class="text-slate-400">[</span>${match.slice(1, -1)}<span class="text-slate-400">]</span>`;
-            });
+            .replace(/\$(\w+)/g, '<span class="text-pink-400">$$1</span>')
+            // Arrays brackets
+            .replace(/\[/g, '<span class="text-slate-400">[</span>')
+            .replace(/\]/g, '<span class="text-slate-400">]</span>');
     }
 
     displayFallbackCode() {
@@ -156,14 +164,94 @@ class CharacterName extends BaseClass {
         return "Sistema rodando liso";
     }
 }`,
-            `class SeniorDev extends CodingNinja {
+            `class WalterWhite extends ChemistryTeacher {
     const experience = 20; // Years
-    const specialty = ['PHP', 'Architecture', 'Clean Code'];
-    const currentFocus = ['AI', 'Machine Learning', 'Innovation'];
+    const specialty = ['PHP', 'Drupal', 'Clean Code'];
+    const currentFocus = ['Python', 'AI', 'Breaking Bugs'];
     
-    public function buildSolution($requirements) {
-        // From idea to production
-        return "Scalable system delivered";
+    public function cookCleanCode($messyProject) {
+        // Say my name: DiegoPereira
+        return "99.1% pure code";
+    }
+}`,
+            `class FreddyMercury extends LegendaryDeveloper {
+    const experience = 20; // Years
+    const specialty = ['PHP', 'MySQL', 'Rock Solid APIs'];
+    const currentFocus = ['AI', 'Data Science', 'Python'];
+    
+    public function writeRhapsodyCode($requirements) {
+        // Is this the real code?
+        return "The show must go on!";
+    }
+}`,
+            `class TonyStark extends GeniusDeveloper {
+    const experience = 20; // Years
+    const specialty = ['PHP', 'Backend', 'Innovation'];
+    const currentFocus = ['AI', 'Machine Learning', 'Jarvis 2.0'];
+    
+    public function buildSolution($impossible) {
+        // I am Iron Dev
+        return "Perfection achieved";
+    }
+}`,
+            `class SherlockHolmes extends MasterDebugger {
+    const experience = 20; // Years
+    const specialty = ['PHP', 'MySQL', 'Deduction'];
+    const currentFocus = ['Python', 'AI', 'Pattern Analysis'];
+    
+    public function solveMysteryBug($strangeError) {
+        // Elementary, my dear Watson
+        return "Case solved, bug fixed";
+    }
+}`,
+            `class ElvisPresley extends KingOfDevelopers {
+    const experience = 20; // Years
+    const specialty = ['PHP', 'Drupal', 'Rock n Code'];
+    const currentFocus = ['Python', 'AI', 'Innovation'];
+    
+    public function deployWithStyle($project) {
+        // Thank you, thank you very much
+        return "Code has left the building";
+    }
+}`,
+            `class MichaelScott extends RegionalManager {
+    const experience = 20; // Years
+    const specialty = ['PHP', 'MySQL', 'Clean Architecture'];
+    const currentFocus = ['Python', 'AI', 'Blockchain'];
+    
+    public function manageProject($dundlerMifflin) {
+        // That is what she coded
+        return "Best code ever. Period.";
+    }
+}`,
+            `class JimiHendrix extends GuitarHeroDev {
+    const experience = 20; // Years
+    const specialty = ['PHP', 'Backend', 'Purple APIs'];
+    const currentFocus = ['Python', 'AI', 'Data Science'];
+    
+    public function playCodeSolo($complexity) {
+        // Excuse me while I code the sky
+        return "Legendary performance";
+    }
+}`,
+            `class DarthVader extends SithLordDev {
+    const experience = 20; // Years
+    const specialty = ['PHP', 'Dark Patterns', 'The Force'];
+    const currentFocus = ['Python', 'AI', 'Imperial Systems'];
+    
+    public function joinTheDarkSide($youngPadawan) {
+        // I find your lack of tests disturbing
+        return "The code is strong with this one";
+    }
+}`,
+            `class IndianaJones extends AdventureDeveloper {
+    const experience = 20; // Years
+    const specialty = ['PHP', 'MySQL', 'Ancient Codes'];
+    const currentFocus = ['Python', 'AI', 'Lost APIs'];
+    
+    public function findHolyGrail($legacyCode) {
+        // It belongs in a museum (refactor)
+        return "Fortune and glory, kid";
     }
 }`
         ];

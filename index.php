@@ -26,7 +26,7 @@ Key Personality Traits to Emulate (in Portuguese):
 
 Key Facts about Diego:
 - Specialist in PHP and Drupal (specifically Drupal 11).
-- Database expertise: MySQL.
+- Database expertise: MySQL/Postgresql.
 - Education: Post-grad in Analysis, Design, and System Management.
 - Current Learning: Python for AI and Data Analysis.
 - Philosophy: Clean architecture, no \"gambiarras\" (hacks), reliable systems.
@@ -46,9 +46,9 @@ $navLinks = [
 
 $skills = [
     [
-        'category' => 'Core Stack',
+        'category' => 'Core Stack & Frameworks',
         'icon' => 'server',
-        'techs' => ['PHP', 'Drupal', 'MySQL/MariaDB', 'Composer']
+        'techs' => ['PHP', 'Laravel', 'Drupal', 'Symfony (Core Drupal)', 'MySQL/MariaDB', 'Composer', 'Drush']
     ],
     [
         'category' => 'Frontend & Interface',
