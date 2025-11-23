@@ -1,7 +1,3 @@
-/**
- * Code Generator usando Gemini AI
- */
-
 class CodeGenerator {
     constructor() {
         this.apiKey = window.PHP_DATA?.API_KEY || '';
@@ -14,7 +10,7 @@ class CodeGenerator {
     init() {
         // Gerar código inicial ao carregar
         this.generateCode();
-        
+
         // Botão refresh
         const refreshBtn = document.getElementById('refresh-code-btn');
         if (refreshBtn) {
@@ -38,13 +34,22 @@ class CodeGenerator {
         this.isGenerating = true;
         this.showLoading();
 
-        // Pequeno delay para mostrar o loading
-        setTimeout(() => {
-            this.displayFallbackCode();
-            this.updateTimestamp();
-            this.hideLoading();
+        try {
+            const prompt = this.getPrompt();
+            const code = await this.callGeminiAPI(prompt);
+            
+            if (code) {
+                this.currentCode = code;
+                this.displayCode(code);
+                this.updateTimestamp();
+            }
+        } catch (error) {
+            console.error('Erro ao gerar código:', error);
+            this.displayErrorMessage();
+        } finally {
             this.isGenerating = false;
-        }, 500);
+            this.hideLoading();
+        }
     }
 
     getPrompt() {
@@ -74,7 +79,7 @@ class CharacterName extends BaseClass {
     }
 
     async callGeminiAPI(prompt) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${this.apiKey}`;
         
         const response = await fetch(url, {
             method: 'POST',
@@ -89,8 +94,9 @@ class CharacterName extends BaseClass {
                 }]
             })
         });
-console.log('API Response Status:', response.status);
-die;
+
+
+
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
             console.error('API Error Details:', errorData);
@@ -118,38 +124,107 @@ die;
         // Aplicar syntax highlighting diretamente
         const formattedCode = this.formatPHPCode(code);
         
-        codeContent.innerHTML = `<pre class="text-slate-300">${formattedCode}</pre>`;
+        codeContent.innerHTML = `<pre class="text-slate-300 whitespace-pre-wrap break-words">${formattedCode}</pre>`;
         codeContent.classList.remove('hidden');
     }
 
     formatPHPCode(code) {
-        // Primeiro, escapar HTML manualmente
-        const escaped = code
-            .replace(/&/g, '&amp;')
+        // Aplicar syntax highlighting ANTES de escapar
+        let formatted = code
+            // 1. Comentários primeiro (cinza)
+            .replace(/(\/\/[^\n]*)/g, '##COMMENT_START##$1##COMMENT_END##')
+            // 2. Strings (verde) - aspas simples e duplas
+            .replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g, '##STRING_START##$1##STRING_END##')
+            // 3. Keywords (roxo)
+            .replace(/\b(class|extends|const|public|function|return)\b/g, '##KEYWORD_START##$1##KEYWORD_END##')
+            // 4. Números (laranja)
+            .replace(/\b(\d+)\b/g, '##NUMBER_START##$1##NUMBER_END##')
+            // 5. Variables (rosa)
+            .replace(/\$(\w+)/g, '##VAR_START###DOLLAR##$1##VAR_END##')
+            // 6. Brackets (cinza claro)
+            .replace(/\[/g, '##BRACKET_OPEN##')
+            .replace(/\]/g, '##BRACKET_CLOSE##');
+        
+        // Escapar HTML
+        formatted = formatted
             .replace(/</g, '&lt;')
             .replace(/>/g, '&gt;');
         
-        // Aplicar syntax highlighting
-        return escaped
-            // Strings primeiro (para não interferir com outros padrões)
-            .replace(/(&quot;[^&quot;]*&quot;|'[^']*')/g, '<span class="text-green-400">$1</span>')
-            // Comments
-            .replace(/\/\/.*/g, '<span class="text-slate-600">$&</span>')
-            // Keywords
-            .replace(/\b(class|extends|const|public|function|return)\b/g, '<span class="text-purple-400">$1</span>')
-            // Class names após class/extends
-            .replace(/(<span class="text-purple-400">(?:class|extends)<\/span>)\s+(\w+)/g, '$1 <span class="text-yellow-300">$2</span>')
-            // Function names
+        // Aplicar spans com cores
+        formatted = formatted
+            .replace(/##COMMENT_START##(.*?)##COMMENT_END##/g, '<span class="text-slate-600">$1</span>')
+            .replace(/##STRING_START##(.*?)##STRING_END##/g, '<span class="text-green-400">$1</span>')
+            .replace(/##KEYWORD_START##(.*?)##KEYWORD_END##/g, '<span class="text-purple-400">$1</span>')
+            .replace(/##NUMBER_START##(.*?)##NUMBER_END##/g, '<span class="text-orange-400">$1</span>')
+            .replace(/##VAR_START##(.*?)##VAR_END##/g, '<span class="text-pink-400">$1</span>')
+            .replace(/##BRACKET_OPEN##/g, '<span class="text-slate-400">[</span>')
+            .replace(/##BRACKET_CLOSE##/g, '<span class="text-slate-400">]</span>')
+            .replace(/#DOLLAR#/g, '$');
+        
+        // Aplicar cores específicas para nomes após keywords
+        formatted = formatted
+            .replace(/(<span class="text-purple-400">class<\/span>)\s+(\w+)/g, '$1 <span class="text-yellow-300">$2</span>')
+            .replace(/(<span class="text-purple-400">extends<\/span>)\s+(\w+)/g, '$1 <span class="text-yellow-300">$2</span>')
             .replace(/(<span class="text-purple-400">function<\/span>)\s+(\w+)/g, '$1 <span class="text-blue-400">$2</span>')
-            // Constants
-            .replace(/(<span class="text-purple-400">const<\/span>)\s+(\w+)/g, '$1 <span class="text-cyan-300">$2</span>')
-            // Numbers
-            .replace(/\b(\d+)\b/g, '<span class="text-orange-400">$1</span>')
-            // Variables
-            .replace(/\$(\w+)/g, '<span class="text-pink-400">$$1</span>')
-            // Arrays brackets
-            .replace(/\[/g, '<span class="text-slate-400">[</span>')
-            .replace(/\]/g, '<span class="text-slate-400">]</span>');
+            .replace(/(<span class="text-purple-400">const<\/span>)\s+(\w+)/g, '$1 <span class="text-cyan-300">$2</span>');
+        
+        return formatted;
+    }
+
+    displayErrorMessage() {
+        const codeContent = document.getElementById('code-content');
+        if (!codeContent) return;
+
+        const errorMessages = [
+            `// Ops! A IA tirou um cafezinho ☕
+// (Verifique sua API Key do Gemini)
+
+class Developer extends Human {
+    const status = "Waiting for AI...";
+    
+    public function tryAgain() {
+        // Click no refresh acima 👆
+        return "Let's try again!";
+    }
+}`,
+            `// Houston, we have a problem! 🚀
+// (A API do Gemini não respondeu)
+
+class Astronaut extends Developer {
+    const problem = "Connection lost";
+    
+    public function reconnect() {
+        // Tente novamente em alguns segundos
+        return "Mission not accomplished... yet";
+    }
+}`,
+            `// A Matrix desconectou! 🕶️
+// (Erro ao acessar o Gemini)
+
+class Neo extends Developer {
+    const error = "Red pill or blue pill?";
+    
+    public function reloadMatrix() {
+        // Follow the white rabbit (refresh button)
+        return "There is no code";
+    }
+}`
+        ];
+
+        const randomError = errorMessages[Math.floor(Math.random() * errorMessages.length)];
+        
+        // Aplicar syntax highlighting na mensagem de erro também
+        const formattedError = this.formatPHPCode(randomError);
+        
+        codeContent.innerHTML = `<pre class="text-slate-300">${formattedError}</pre>`;
+        codeContent.classList.remove('hidden');
+    }
+
+    escapeHtml(text) {
+        return text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
     }
 
     displayFallbackCode() {

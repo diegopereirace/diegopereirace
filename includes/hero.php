@@ -5,8 +5,8 @@
         <div class="absolute bottom-10 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center">
-        <div class="w-full lg:w-1/2 text-center lg:text-left mt-10 lg:mt-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center gap-8">
+        <div class="w-full lg:w-2/5 text-center lg:text-left mt-10 lg:mt-0">
             <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
                 Disponível para projetos
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+        <div class="w-full lg:w-3/5 flex justify-center lg:justify-end">
             <div class="relative w-full max-w-lg">
                 <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-blue-500 rounded-2xl transform rotate-3 blur opacity-30"></div>
                 
@@ -71,7 +71,7 @@
                     </div>
                     
                     <!-- Code Content -->
-                    <div id="code-display" class="p-6 font-mono text-sm leading-relaxed min-h-[400px] relative">
+                    <div id="code-display" class="p-4 font-mono text-xs leading-relaxed min-h-[400px] max-h-[500px] overflow-x-auto overflow-y-auto relative">
                         <!-- Loading State -->
                         <div id="code-loading" class="absolute inset-0 flex items-center justify-center bg-slate-900">
                             <div class="text-center">
