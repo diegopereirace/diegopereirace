@@ -74,6 +74,11 @@ $skills = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Desenvolvedor Sênior PHP e consultor Drupal. Especialista em back-end de alta performance, arquitetura limpa e soluções sob medida."/>
+    <meta name="keywords" content="Desenvolvedor, Sênior, PHP, Drupal, Consultor, Back-end, Performance, Arquitetura Limpa, Soluções sob Medida"/>
+    <meta name="author" content="Diego Pereira"/>
+    <link rel="canonical" href="https://diegopereirace.com.br/"/>
+    <link rel="shortlink" href="https://diegopereirace.com.br/"/>
     <title>Diego Pereira - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -84,10 +89,20 @@ $skills = [
         }
     }
     </script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .font-mono { font-family: 'Fira Code', monospace; }
+        body { 
+            font-family: 'Outfit', sans-serif; 
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: -0.02em;
+        }
+        .font-mono { 
+            font-family: 'JetBrains Mono', monospace; 
+        }
         
         .animate-fade-in-up {
             animation: fadeInUp 0.5s ease-out forwards;
@@ -104,32 +119,34 @@ $skills = [
             API_KEY: <?php echo json_encode($apiKey); ?>,
             SYSTEM_INSTRUCTION: <?php echo json_encode($systemInstruction); ?>
         };
+        
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
     </script>
 </head>
 <body class="bg-slate-950 text-slate-200 overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-200">
-    
-    <!-- Header -->
     <?php include 'includes/header.php'; ?>
     
     <main>
-        <!-- Hero -->
         <?php include 'includes/hero.php'; ?>
-        
-        <!-- About -->
         <?php include 'includes/about.php'; ?>
-        
-        <!-- Skills -->
         <?php include 'includes/skills.php'; ?>
     </main>
     
     <!-- Footer -->
     <?php include 'includes/footer.php'; ?>
-    
-    <!-- Chat Widget -->
-    <?php include 'includes/chat-widget.php'; ?>
+
     
     <script src="js/main.js"></script>
-    <script src="js/chat.js" type="module"></script>
     <script>
         lucide.createIcons();
     </script>
