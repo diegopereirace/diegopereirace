@@ -8,6 +8,16 @@ class CodeGenerator {
     }
 
     init() {
+        // Verificar API Key
+        if (!this.apiKey) {
+            console.error('❌ API Key do Gemini não encontrada!');
+            console.log('Verifique se o arquivo .env.local contém GEMINI_API_KEY');
+            this.displayErrorMessage();
+            return;
+        }
+        
+        console.log('✅ API Key carregada:', this.apiKey.substring(0, 10) + '...');
+        
         // Gerar código inicial ao carregar
         this.generateCode();
 
@@ -79,42 +89,51 @@ class CharacterName extends BaseClass {
     }
 
     async callGeminiAPI(prompt) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${this.apiKey}`;
+        console.log('Chamando API Gemini...');
         
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                contents: [{
-                    parts: [{
-                        text: prompt
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.apiKey}`;
+        
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: prompt
+                        }]
                     }]
-                }]
-            })
-        });
+                })
+            });
 
+            console.log('Status da resposta:', response.status);
 
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                console.error('Detalhes do erro da API:', errorData);
+                throw new Error(`API Error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
+            }
 
-        if (!response.ok) {
-            const errorData = await response.json().catch(() => ({}));
-            console.error('API Error Details:', errorData);
-            throw new Error(`API Error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
-        }
-
-        const data = await response.json();
-        
-        if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-            let code = data.candidates[0].content.parts[0].text.trim();
+            const data = await response.json();
             
-            // Remove markdown code blocks se existirem
-            code = code.replace(/```php\n?/g, '').replace(/```\n?/g, '');
+            console.log('Código gerado com sucesso!');
             
-            return code;
-        }
+            if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+                let code = data.candidates[0].content.parts[0].text.trim();
+                
+                // Remove markdown code blocks se existirem
+                code = code.replace(/```php\n?/g, '').replace(/```\n?/g, '');
+                
+                return code;
+            }
 
-        throw new Error('Resposta inválida da API');
+            throw new Error('Resposta inválida da API');
+        } catch (error) {
+            console.error('Erro na chamada da API:', error);
+            throw error;
+        }
     }
 
     displayCode(code) {
@@ -179,34 +198,34 @@ class CharacterName extends BaseClass {
             `// Ops! A IA tirou um cafezinho ☕
 // (Verifique sua API Key do Gemini)
 
-class Developer extends Human {
-    const status = "Waiting for AI...";
+class Desenvolvedor extends Humano {
+    const status = "Aguardando IA...";
     
-    public function tryAgain() {
+    public function tentarNovamente() {
         // Click no refresh acima 👆
-        return "Let's try again!";
+        return "Vamos tentar de novo!";
     }
 }`,
-            `// Houston, we have a problem! 🚀
+            `// Houston, temos um problema! 🚀
 // (A API do Gemini não respondeu)
 
-class Astronaut extends Developer {
-    const problem = "Connection lost";
+class Astronauta extends Desenvolvedor {
+    const problema = "Conexão perdida";
     
-    public function reconnect() {
+    public function reconectar() {
         // Tente novamente em alguns segundos
-        return "Mission not accomplished... yet";
+        return "Missão não cumprida... ainda";
     }
 }`,
             `// A Matrix desconectou! 🕶️
 // (Erro ao acessar o Gemini)
 
-class Neo extends Developer {
-    const error = "Red pill or blue pill?";
+class Neo extends Desenvolvedor {
+    const erro = "Pílula vermelha ou azul?";
     
-    public function reloadMatrix() {
-        // Follow the white rabbit (refresh button)
-        return "There is no code";
+    public function recarregarMatrix() {
+        // Siga o coelho branco (botão refresh)
+        return "Não há código";
     }
 }`
         ];
