@@ -57,17 +57,6 @@
                         alt="Diego Pereira Coding" 
                         class="rounded-xl w-full max-w-md object-cover h-auto grayscale hover:grayscale-0 transition-all duration-500"
                     />
-                    
-                    <!-- Floating Badge -->
-                    <div class="absolute -bottom-6 -left-6 bg-slate-900 p-4 rounded-xl border border-slate-700 shadow-xl flex items-center gap-3">
-                        <div class="bg-emerald-500/20 p-2 rounded-lg">
-                            <span class="text-2xl">🇧🇷</span>
-                        </div>
-                        <div>
-                            <p class="text-xs text-slate-400 uppercase font-bold">Localização</p>
-                            <p class="text-white font-semibold">Ceará, Brasil</p>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

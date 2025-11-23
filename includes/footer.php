@@ -12,13 +12,10 @@
             </div>
 
             <div class="flex space-x-6">
-                <a href="#" class="text-slate-400 hover:text-emerald-400 transition-colors">
-                    <i data-lucide="github" style="width: 24px; height: 24px;"></i>
-                </a>
-                <a href="#" class="text-slate-400 hover:text-blue-400 transition-colors">
+                <a href="https://linkedin.com/in/diegopereirace" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank">
                     <i data-lucide="linkedin" style="width: 24px; height: 24px;"></i>
                 </a>
-                <a href="mailto:contato@diegopereirace.com.br" class="text-slate-400 hover:text-red-400 transition-colors">
+                <a href="mailto:atendimento@diegopereirace.com.br" class="text-slate-400 hover:text-red-400 transition-colors">
                     <i data-lucide="mail" style="width: 24px; height: 24px;"></i>
                 </a>
             </div>

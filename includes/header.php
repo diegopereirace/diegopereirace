@@ -3,11 +3,11 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <div class="bg-emerald-500 p-1.5 rounded-lg">
-                    <i data-lucide="code-2" class="text-slate-900" style="width: 24px; height: 24px;"></i>
+                <div class="p-1.5 rounded-lg">
+                    <img src="assets/imgs/favicon.png" draggable="false" width="40" height="40" />
                 </div>
-                <span class="text-xl font-bold text-white tracking-tight">
-                    Diego<span class="text-emerald-400">.dev</span>
+                <span class="text-2xl font-bold tracking-tighter text-white">
+                    DIEGO PEREIRA <span class="text-emerald-400">{</span>dev<span class="text-emerald-400">}</span>
                 </span>
             </div>
 
@@ -15,7 +15,7 @@
             <nav class="hidden md:flex items-center space-x-8">
                 <?php foreach ($navLinks as $link): ?>
                     <a href="<?php echo $link['href']; ?>" 
-                       class="text-slate-300 hover:text-emerald-400 font-medium transition-colors text-sm uppercase tracking-wide">
+                        class="text-slate-300 hover:text-emerald-400 font-medium transition-colors text-sm uppercase tracking-wide">
                         <?php echo $link['name']; ?>
                     </a>
                 <?php endforeach; ?>

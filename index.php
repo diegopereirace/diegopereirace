@@ -79,6 +79,7 @@ $skills = [
     <meta name="author" content="Diego Pereira"/>
     <link rel="canonical" href="https://diegopereirace.com.br/"/>
     <link rel="shortlink" href="https://diegopereirace.com.br/"/>
+    <link rel="icon" type="image/png" href="/assets/imgs/favicon.png"/>
     <title>Diego Pereira - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
