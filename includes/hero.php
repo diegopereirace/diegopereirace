@@ -1,4 +1,3 @@
-
 <section id="home" class="relative pt-20 lg:pt-32 pb-16 overflow-hidden">
     <!-- Background decorations -->
     <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
@@ -18,10 +17,10 @@
                 Especialista PHP
             </h1>
             <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                20 anos transformando café em código limpo. Do Ceará para o mundo, criando soluções robustas com 
-                <span class="text-slate-200 font-semibold"> Drupal</span>, 
-                <span class="text-slate-200 font-semibold"> PHP</span> e 
-                <span class="text-slate-200 font-semibold"> MySQL</span>.
+                Quase 20 anos vivendo e respirando tecnologia. Da base sólida em 
+                <span class="text-slate-200 font-semibold"> PHP</span>, 
+                <span class="text-slate-200 font-semibold"> Drupal</span> e 
+                <span class="text-slate-200 font-semibold"> MySQL</span> à expansão para Python, IA e Data Science.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <a href="#contact" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-1">
@@ -49,14 +48,49 @@
         </div>
 
         <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
-            <div class="relative">
+            <div class="relative w-full max-w-lg">
                 <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-blue-500 rounded-2xl transform rotate-3 blur opacity-30"></div>
-                <div class="relative bg-slate-800 p-2 rounded-2xl shadow-2xl border border-slate-700">
-                    <img 
-                        src="https://picsum.photos/600/600?grayscale" 
-                        alt="Diego Pereira Coding" 
-                        class="rounded-xl w-full max-w-md object-cover h-auto grayscale hover:grayscale-0 transition-all duration-500"
-                    />
+                
+                <!-- Code Terminal Card -->
+                <div class="relative bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden">
+                    <!-- Terminal Header -->
+                    <div class="bg-slate-800 px-4 py-3 flex items-center justify-between border-b border-slate-700">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="flex items-center gap-2 ml-4">
+                            <i data-lucide="laptop" class="text-slate-400" style="width: 16px; height: 16px;"></i>
+                            <span class="text-sm text-slate-400 font-mono">DiegoPereira.php</span>
+                        </div>
+                        <button id="refresh-code-btn" class="p-1 hover:bg-slate-700 rounded transition-colors" title="Gerar novo código">
+                            <i data-lucide="refresh-cw" class="text-slate-400" style="width: 16px; height: 16px;"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Code Content -->
+                    <div id="code-display" class="p-6 font-mono text-sm leading-relaxed min-h-[400px] relative">
+                        <!-- Loading State -->
+                        <div id="code-loading" class="absolute inset-0 flex items-center justify-center bg-slate-900">
+                            <div class="text-center">
+                                <div class="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                                <p class="text-slate-400">Gerando código...</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Code will be inserted here by JavaScript -->
+                        <div id="code-content" class="hidden"></div>
+                    </div>
+                    
+                    <!-- Footer with AI badge -->
+                    <div class="bg-slate-800 px-4 py-2 border-t border-slate-700 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                            <span class="text-xs text-slate-400">Powered by Gemini AI</span>
+                        </div>
+                        <span class="text-xs text-slate-500 font-mono" id="code-timestamp"></span>
+                    </div>
                 </div>
             </div>
         </div>

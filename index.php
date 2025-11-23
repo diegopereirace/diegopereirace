@@ -1,5 +1,4 @@
 <?php
-// Carregar variáveis de ambiente
 $envFile = __DIR__ . '/.env.local';
 if (file_exists($envFile)) {
     $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -12,9 +11,8 @@ if (file_exists($envFile)) {
 
 $apiKey = $_ENV['GEMINI_API_KEY'] ?? '';
 
-// Configurações
 $bioText = [
-    'intro' => "Sou Diego Pereira, desenvolvedor cearense, especialista em PHP e Drupal, com 20 anos de estrada em tecnologia, sendo os últimos 15 dedicados à programação. Já encarei projeto grande, bug enjoado e prazo apertado — e sempre dei meu jeito de deixar o sistema rodando liso e massa, do jeito que o cliente precisa.",
+    'intro' => "Sou Diego Pereira, cearense especialista em PHP e mestre em Drupal, a plataforma que aproveita toda a robustez do PHP para entregar sites escaláveis, seguros e sob medida. Há 20 anos respiro tecnologia e, há 15, foco em deixar sistemas web rodando lisos, massa e sem gambiarra.",
     'details' => "Tenho pós-graduação em Análise, Projeto e Gerência de Sistemas e sou cabôco que gosta de fazer as coisas direito, com arquitetura limpa e sem gambiarra. Aqui a pegada é resolver bronca sem enrolação. Tô sempre em aprendizado contínuo, especialmente em Python, para explorar o potencial de inteligência artificial e análise de dados, porque a tecnologia muda toda hora e eu não fico parado não. Quanto mais a gente aprende, mais ligeiro fica pra desenrolar qualquer desafio."
 ];
 
@@ -50,7 +48,7 @@ $skills = [
     [
         'category' => 'Core Stack',
         'icon' => 'server',
-        'techs' => ['PHP 8+', 'Drupal 11', 'MySQL/MariaDB', 'Composer']
+        'techs' => ['PHP', 'Drupal', 'MySQL/MariaDB', 'Composer']
     ],
     [
         'category' => 'Frontend & Interface',
@@ -80,7 +78,7 @@ $skills = [
     <link rel="canonical" href="https://diegopereirace.com.br/"/>
     <link rel="shortlink" href="https://diegopereirace.com.br/"/>
     <link rel="icon" type="image/png" href="/assets/imgs/favicon.png"/>
-    <title>Diego Pereira - Portfolio</title>
+    <title>Diego Pereira</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script type="importmap">
@@ -143,11 +141,10 @@ $skills = [
         <?php include 'includes/skills.php'; ?>
     </main>
     
-    <!-- Footer -->
     <?php include 'includes/footer.php'; ?>
-
     
-    <script src="js/main.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/code-generator.js"></script>
     <script>
         lucide.createIcons();
     </script>

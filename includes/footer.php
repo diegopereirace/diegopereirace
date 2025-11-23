@@ -23,7 +23,7 @@
         
         <div class="mt-8 border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
             <p>&copy; <?php echo date('Y'); ?> Diego Pereira. Todos os direitos reservados.</p>
-            <p class="mt-2 md:mt-0">Feito com PHP, Tailwind e muita cafeína.</p>
+            <p class="mt-2 md:mt-0">Feito com PHP e muita tecnologia</p>
         </div>
     </div>
 </footer>
