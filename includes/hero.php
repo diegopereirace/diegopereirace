@@ -27,7 +27,7 @@
                     Vamos conversar?
                 </a>
                 <a href="#about" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-semibold rounded-lg border border-slate-700 transition-all duration-300">
-                    Conheça minha história
+                    Minha experiência
                 </a>
             </div>
             
