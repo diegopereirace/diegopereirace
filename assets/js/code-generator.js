@@ -232,34 +232,34 @@ class DocBrown extends DesenvolvedorVeterano {
 
         const errorMessages = [
             `// Ops! A IA tirou um cafezinho
-class Desenvolvedor extends Humano {
-    const status = "Aguardando IA...";
-    
-    public function tentarNovamente() {
-        // Click no refresh acima
+    class Desenvolvedor extends Humano {
+        const status = "Aguardando IA...";
+        
+        public function tentarNovamente() {
+        // Um novo código será gerado em breve
         return "Vamos tentar de novo!";
-    }
-}`,
+        }
+    }`,
             `// Houston, temos um problema!
 
-class Astronauta extends Desenvolvedor {
-    const problema = "Conexão perdida";
-    
-    public function reconectar() {
+    class Astronauta extends Desenvolvedor {
+        const problema = "Conexão perdida";
+        
+        public function reconectar() {
         // Tente novamente em alguns segundos
         return "Missão não cumprida... ainda";
-    }
-}`,
+        }
+    }`,
             `// A Matrix desconectou!
 
-class Neo extends Desenvolvedor {
-    const erro = "Pílula vermelha ou azul?";
-    
-    public function recarregarMatrix() {
-        // Siga o coelho branco (botão refresh)
+    class Neo extends Desenvolvedor {
+        const erro = "Pílula vermelha ou azul?";
+        
+        public function recarregarMatrix() {
+        // A recarga automática vai começar
         return "Não há código";
-    }
-}`
+        }
+    }`
         ];
 
         const randomError = errorMessages[Math.floor(Math.random() * errorMessages.length)];
