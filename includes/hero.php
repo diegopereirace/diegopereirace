@@ -12,7 +12,7 @@
                 Disponível para projetos
             </div>
             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up delay-100">
-                Desenvolvedor <span class="text-transparent bg-clip-text animate-gradient">Full Stack</span>
+                Desenvolvedor <br /><span class="text-transparent bg-clip-text animate-gradient">Full Stack</span>
                 <br />
                 Especialista PHP
             </h1>

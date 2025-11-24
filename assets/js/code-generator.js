@@ -59,12 +59,14 @@ IMPORTANTE:
 Regras obrigatórias:
 - class [NomePersonagem] extends [ClasseBase]
 - const experiencia = 20
-- const especialidade = ['PHP', 'Habilidade']
+- const especialidade = ['PHP', 'Habilidade', 'Drupal]
 - const focoAtual = ['Python', 'IA']
 - public function fazerAlgo($parametro) - SEMPRE use $ antes de parâmetros (ex: $bug, $problema, $desafio)
 - Nomes de variáveis SEMPRE começam com $ (cifrão)
 - Comentários em português, engraçados e relacionados ao personagem
 - return com frase em português
+
+- Na constante 'especialidade', adicione mais duas habilidades relevantes para um dev sênior (ex: 'MySQL', 'APIs').
 
 ATENÇÃO: Variáveis PHP SEMPRE começam com $ (dólar). Exemplos corretos:
 - $bug, $problema, $desafio, $codigo, $projeto
