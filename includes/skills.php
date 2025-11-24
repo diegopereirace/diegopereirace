@@ -31,7 +31,7 @@
         <!-- Featured Tech Banner -->
         <div class="mt-16 bg-gradient-to-r from-emerald-900/20 to-slate-900 border border-emerald-500/20 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between">
             <div class="mb-6 md:mb-0">
-                <h4 class="text-2xl font-bold text-white mb-2">Especialista Drupal 11</h4>
+                <h4 class="text-2xl font-bold text-white mb-2">Especialista Drupal</h4>
                 <p class="text-slate-400">Desenvolvimento de módulos customizados, migrações complexas e otimização de performance.</p>
             </div>
             <div class="flex gap-4">

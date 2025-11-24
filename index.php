@@ -46,24 +46,24 @@ $navLinks = [
 
 $skills = [
     [
-        'category' => 'Core Stack & Frameworks',
+        'category' => 'Base principal de tecnologias e frameworks.',
         'icon' => 'server',
-        'techs' => ['PHP', 'Laravel', 'Drupal', 'Symfony (Core Drupal)', 'MySQL/MariaDB', 'Composer', 'Drush']
+        'techs' => ['PHP', 'Drupal', 'Symfony', 'Laravel', 'MySQL/MariaDB', 'PostgreSQL', 'Composer']
     ],
     [
         'category' => 'Frontend & Interface',
         'icon' => 'layout',
-        'techs' => ['HTML5 / CSS3', 'JavaScript (ES6+)', 'Tailwind CSS', 'Twig Engine']
-    ],
-    [
-        'category' => 'Next Steps / Learning',
-        'icon' => 'line-chart',
-        'techs' => ['Python', 'Data Analysis', 'Artificial Intelligence', 'React']
+        'techs' => ['HTML5 / CSS3', 'JavaScript (ES6+)', 'JQuery', 'Twig Engine']
     ],
     [
         'category' => 'Ferramentas & DevOps',
         'icon' => 'layers',
-        'techs' => ['Git / GitHub', 'Docker', 'Linux Terminal', 'Agile Methodologies']
+        'techs' => ['Git / GitHub', 'Docker', 'Terminal Linux', 'Azure', 'SSH', 'Metodologias Ágeis']
+    ],
+    [
+        'category' => 'Próximos Passos / Aprendizado',
+        'icon' => 'line-chart',
+        'techs' => ['Python', 'Análise de Dados', 'Inteligência Artificial', 'React']
     ]
 ];
 ?>
