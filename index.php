@@ -53,15 +53,15 @@ $skills = [
     [
         'category' => 'Frontend & Interface',
         'icon' => 'layout',
-        'techs' => ['HTML5 / CSS3', 'JavaScript (ES6+)', 'JQuery', 'Twig Engine']
+        'techs' => ['HTML5 / CSS3', 'JavaScript', 'JQuery', 'Twig', 'Bootstrap', 'CSS Grid & Flexbox']
     ],
     [
         'category' => 'Ferramentas & DevOps',
         'icon' => 'layers',
-        'techs' => ['Git / GitHub', 'Docker', 'Terminal Linux', 'Azure', 'SSH', 'Metodologias Ágeis']
+        'techs' => ['Git / GitHub', 'Docker', 'DDEV', 'Terminal Linux', 'Azure Cloud', 'SSH', 'Scrum', 'Metodologias Ágeis']
     ],
     [
-        'category' => 'Próximos Passos / Aprendizado',
+        'category' => 'Estudos Atuais e Próximos Passos',
         'icon' => 'line-chart',
         'techs' => ['Python', 'Análise de Dados', 'Inteligência Artificial', 'React']
     ]

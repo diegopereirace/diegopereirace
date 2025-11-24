@@ -65,9 +65,7 @@
                             <i data-lucide="laptop" class="text-slate-400" style="width: 16px; height: 16px;"></i>
                             <span class="text-sm text-slate-400 font-mono">DiegoPereira.php</span>
                         </div>
-                        <button id="refresh-code-btn" class="p-1 hover:bg-slate-700 rounded transition-colors" title="Gerar novo código">
-                            <i data-lucide="refresh-cw" class="text-slate-400" style="width: 16px; height: 16px;"></i>
-                        </button>
+                        <span class="w-6 h-6"></span>
                     </div>
                     
                     <!-- Code Content -->

@@ -3,7 +3,12 @@ class CodeGenerator {
         this.apiKey = window.PHP_DATA?.API_KEY || '';
         this.isGenerating = false;
         this.currentCode = null;
-        this.modelEndpoint = 'models/gemini-2.5-flash';
+        this.modelCandidates = [
+            'models/gemini-2.5-flash',
+            'models/gemini-1.5-pro',
+            'models/gemini-1.5-flash'
+        ];
+        this.currentModelIndex = 0;
         
         this.init();
     }
@@ -11,19 +16,6 @@ class CodeGenerator {
     init() {
         // Gerar código inicial ao carregar
         this.generateCode();
-
-        // Botão refresh
-        const refreshBtn = document.getElementById('refresh-code-btn');
-        if (refreshBtn) {
-            refreshBtn.addEventListener('click', () => this.generateCode());
-        }
-        
-        // Auto-refresh a cada 30 segundos
-        setInterval(() => {
-            if (!this.isGenerating) {
-                this.generateCode();
-            }
-        }, 50000);
     }
 
     async generateCode() {
@@ -37,15 +29,15 @@ class CodeGenerator {
 
         try {
             const prompt = this.getPrompt();
-            const code = await this.callGeminiAPI(prompt);
-            
-            if (code) {
-                this.currentCode = code;
-                this.displayCode(code);
-                this.updateTimestamp();
-            }
+            const endpoint = this.getCurrentModelEndpoint();
+            const code = await this.callGeminiAPI(prompt, endpoint);
+
+            this.currentCode = code;
+            this.displayCode(code);
+            this.updateTimestamp();
         } catch (error) {
             console.error('Erro ao gerar código:', error);
+            this.handleModelFailure(error);
             this.displayErrorMessage();
         } finally {
             this.isGenerating = false;
@@ -62,16 +54,23 @@ IMPORTANTE:
 - Use um personagem de filmes, séries ou bandas de rock famosas
 - SEM tags <?php
 - Retorne APENAS o código da classe
+- CÓDIGO DEVE SER SINTATICAMENTE CORRETO
 
 Regras obrigatórias:
 - class [NomePersonagem] extends [ClasseBase]
 - const experiencia = 20
 - const especialidade = ['PHP', 'Habilidade']
 - const focoAtual = ['Python', 'IA']
-- public function fazerAlgo($parametro) com comentário engraçado em português
+- public function fazerAlgo($parametro) - SEMPRE use $ antes de parâmetros (ex: $bug, $problema, $desafio)
+- Nomes de variáveis SEMPRE começam com $ (cifrão)
+- Comentários em português, engraçados e relacionados ao personagem
 - return com frase em português
 
-Exemplo da estrutura:
+ATENÇÃO: Variáveis PHP SEMPRE começam com $ (dólar). Exemplos corretos:
+- $bug, $problema, $desafio, $codigo, $projeto
+- NUNCA use #desafio ou desafio sem $
+
+Exemplo da estrutura CORRETA:
 class DocBrown extends DesenvolvedorVeterano {
     const experiencia = 20;
     const especialidade = ['PHP', 'Viagem no Tempo'];
@@ -84,8 +83,24 @@ class DocBrown extends DesenvolvedorVeterano {
 }`;
     }
 
-    async callGeminiAPI(prompt) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/${this.modelEndpoint}:generateContent?key=${this.apiKey}`;
+    getCurrentModelEndpoint() {
+        return this.modelCandidates[this.currentModelIndex] || this.modelCandidates[0];
+    }
+
+    handleModelFailure(error) {
+        if (this.shouldRotateModel(error) && this.currentModelIndex < this.modelCandidates.length - 1) {
+            this.currentModelIndex += 1;
+            console.warn(`Modelo indisponível. Próxima tentativa usará ${this.getCurrentModelEndpoint()}`);
+        }
+    }
+
+    shouldRotateModel(error) {
+        const message = error?.message || '';
+        return /not found|unsupported|404/i.test(message);
+    }
+
+    async callGeminiAPI(prompt, endpoint = this.getCurrentModelEndpoint()) {
+        const url = `https://generativelanguage.googleapis.com/v1beta/${endpoint}:generateContent?key=${this.apiKey}`;
 
         try {
             const response = await fetch(url, {
@@ -104,7 +119,7 @@ class DocBrown extends DesenvolvedorVeterano {
 
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
-                console.error('Detalhes do erro da API:', errorData);
+                console.error(`Detalhes do erro da API (${endpoint}):`, errorData);
                 throw new Error(`API Error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
             }
 
@@ -116,14 +131,46 @@ class DocBrown extends DesenvolvedorVeterano {
                 // Remove markdown code blocks se existirem
                 code = code.replace(/```php\n?/g, '').replace(/```\n?/g, '');
                 
+                // CORREÇÃO: Sanitizar código para remover erros de sintaxe PHP
+                code = this.sanitizePHPCode(code);
+
+                if (!this.isCodeValid(code)) {
+                    throw new Error('Código inválido detectado após sanitização');
+                }
+
+                if (!code.trim()) {
+                    throw new Error('Código vazio retornado pela IA');
+                }
+                
                 return code;
             }
 
             throw new Error('Resposta inválida da API');
         } catch (error) {
-            console.error('Erro na chamada da API:', error);
+            console.error(`Erro na chamada da API (${endpoint}):`, error);
             throw error;
         }
+    }
+
+    sanitizePHPCode(code) {
+        const letterClass = 'A-Za-z_\\x80-\\uFFFF';
+        const wordClass = `${letterClass}0-9`;
+
+        const removeInvalidBetweenDollarAndName = new RegExp(`\\$[^${letterClass}]+([${letterClass}][${wordClass}]*)`, 'g');
+        const removeSpacesAfterDollar = new RegExp(`\\$\\s+([${letterClass}][${wordClass}]*)`, 'g');
+
+        const normalize = (match, name) => `$${name}`;
+
+        code = code.replace(removeInvalidBetweenDollarAndName, normalize);
+        code = code.replace(removeSpacesAfterDollar, normalize);
+
+        return code;
+    }
+
+    isCodeValid(code) {
+        const invalidSpecialCharPattern = /\$[\s#@!&*%]/;
+        const startsWithNumberPattern = /\$\d/;
+        return !invalidSpecialCharPattern.test(code) && !startsWithNumberPattern.test(code);
     }
 
     displayCode(code) {
@@ -149,7 +196,7 @@ class DocBrown extends DesenvolvedorVeterano {
             // 4. Números (laranja)
             .replace(/\b(\d+)\b/g, '##NUMBER_START##$1##NUMBER_END##')
             // 5. Variables (rosa)
-            .replace(/\$(\w+)/g, '##VAR_START###DOLLAR##$1##VAR_END##')
+            .replace(/\$(\w+)/g, '##VAR_START##$$$1##VAR_END##')
             // 6. Brackets (cinza claro)
             .replace(/\[/g, '##BRACKET_OPEN##')
             .replace(/\]/g, '##BRACKET_CLOSE##');
@@ -167,8 +214,7 @@ class DocBrown extends DesenvolvedorVeterano {
             .replace(/##NUMBER_START##(.*?)##NUMBER_END##/g, '<span class="text-orange-400">$1</span>')
             .replace(/##VAR_START##(.*?)##VAR_END##/g, '<span class="text-pink-400">$1</span>')
             .replace(/##BRACKET_OPEN##/g, '<span class="text-slate-400">[</span>')
-            .replace(/##BRACKET_CLOSE##/g, '<span class="text-slate-400">]</span>')
-            .replace(/#DOLLAR#/g, '$');
+            .replace(/##BRACKET_CLOSE##/g, '<span class="text-slate-400">]</span>');
         
         // Aplicar cores específicas para nomes após keywords
         formatted = formatted
@@ -185,19 +231,16 @@ class DocBrown extends DesenvolvedorVeterano {
         if (!codeContent) return;
 
         const errorMessages = [
-            `// Ops! A IA tirou um cafezinho ☕
-// (Verifique sua API Key do Gemini)
-
+            `// Ops! A IA tirou um cafezinho
 class Desenvolvedor extends Humano {
     const status = "Aguardando IA...";
     
     public function tentarNovamente() {
-        // Click no refresh acima 👆
+        // Click no refresh acima
         return "Vamos tentar de novo!";
     }
 }`,
-            `// Houston, temos um problema! 🚀
-// (A API do Gemini não respondeu)
+            `// Houston, temos um problema!
 
 class Astronauta extends Desenvolvedor {
     const problema = "Conexão perdida";
@@ -207,8 +250,7 @@ class Astronauta extends Desenvolvedor {
         return "Missão não cumprida... ainda";
     }
 }`,
-            `// A Matrix desconectou! 🕶️
-// (Erro ao acessar o Gemini)
+            `// A Matrix desconectou!
 
 class Neo extends Desenvolvedor {
     const erro = "Pílula vermelha ou azul?";
