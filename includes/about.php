@@ -35,17 +35,17 @@
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
-                        <i data-lucide="brain-circuit" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
-                        <div>
-                            <h4 class="font-semibold text-white">Aprendizado em IA</h4>
-                            <p class="text-sm text-slate-400">Estudos intensos em Python, Data Science e fundamentos de inteligência artificial.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
                         <i data-lucide="hexagon" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
                         <div>
                             <h4 class="font-semibold text-white">Drupal Expert</h4>
                             <p class="text-sm text-slate-400">15 anos dominando Drupal, de módulos customizado a arquiteturas complexas.</p>
+                        </div>
+                    </div>                    
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="brain-circuit" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
+                        <div>
+                            <h4 class="font-semibold text-white">Aprendizado em IA</h4>
+                            <p class="text-sm text-slate-400">Estudos intensos em Python, Data Science e fundamentos de inteligência artificial.</p>
                         </div>
                     </div>
                 </div>
