@@ -115,12 +115,12 @@ $skills = [
     </style>
     
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYJPQ4LBVG"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8Q40NWWTR"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-CYJPQ4LBVG');
+        gtag('config', 'G-V8Q40NWWTR');
     </script>
     
     <script>
