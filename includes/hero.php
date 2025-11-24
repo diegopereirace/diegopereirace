@@ -88,7 +88,7 @@
                     <div class="bg-slate-800 px-4 py-2 border-t border-slate-700 flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-                            <span class="text-xs text-slate-400">Powered by Gemini AI</span>
+                            <span class="text-xs text-slate-400">IA criativa ajudando nos bastidores</span>
                         </div>
                         <span class="text-xs text-slate-500 font-mono" id="code-timestamp"></span>
                     </div>
