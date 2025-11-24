@@ -64,54 +64,58 @@ IMPORTANTE:
 Regras obrigatórias:
 - class [NomePersonagem] extends [ClasseBase]
 - const experiencia = 20
-- const especialidade = ['PHP', 'Habilidade', 'Drupal]
+- const especialidade = ['PHP']
 - const focoAtual = ['Python', 'IA']
 - public function fazerAlgo($parametro) - SEMPRE use $ antes de parâmetros (ex: $bug, $problema, $desafio)
 - Nomes de variáveis SEMPRE começam com $ (cifrão)
-- Comentários em português, engraçados e relacionados ao personagem
-- return com frase em português
+- Comentários CURTOS (máximo 6 palavras), engraçados e relacionados ao personagem
+- return com frase em português (máximo 8 palavras)
 
-- Na constante 'especialidade', adicione mais duas habilidades relevantes para um dev sênior.
+- Na constante 'especialidade', adicione mais 2 habilidades relevantes para um dev sênior.
+- Inclua também 2 habilidades relacionadas ao universo do personagem (ex: "Viagem no Tempo" para Doc Brown).
 
 ATENÇÃO: Variáveis PHP SEMPRE começam com $ (dólar). Exemplos corretos:
 - $bug, $problema, $desafio, $codigo, $projeto
 - NUNCA use #desafio ou desafio sem $
 
-VARIEDADE: Escolha ALEATORIAMENTE um personagem diferente de filmes/séries nerds/tech. NUNCA repita o mesmo personagem:
+IMPORTANTE: Comentários devem ser MUITO CURTOS para evitar quebra de linha!
+
+VARIEDADE: Escolha ALEATORIAMENTE um personagem diferente de filmes/séries/livros nerds/tech. NUNCA repita o mesmo personagem:
 - Matrix: Neo, Morpheus, Trinity, Cypher, Agent Smith
-- Black Mirror: (personagens de episódios tech)
-- A Origem
 - O Exterminador do Futuro
 - Sexta-feira 13
 - Alien, o Oitavo Passageiro
-- Interestelar
+- Black Mirror
 - A Chegada
 - Duna
 - Perdido em Marte
 - Mad Max
-- A Viagem de Chihiro
 - O Senhor dos Anéis
 - Super Loja
-- Dois Homens e Meio
+- Two and a Half Men
 - Eu, a Patria e as Crianças
-- Alf, o eteimoso
-- Deadpool
-- Rick and Morty
+- Alf, o eteimoso(serie)
+- Deadpool(filme)
+- Rick and Morty(serie)
 - The Office
-- Parks and Recreation
-- Community
 - Breaking Bad
 - Better Call Saul
-- The Sopranos
+- Severance
+- Futurama
+- Os Simpsons
+- Game of Thrones(filme/livro)
+- Fundação(livro)(Isaac Asimov)
+- O mundo assombrado pelos demônios(Carl Sagan)
+- Prison Break
 
 Exemplo da estrutura CORRETA:
 class DocBrown extends DesenvolvedorVeterano {
     const experiencia = 20;
-    const especialidade = ['PHP', 'Viagem no Tempo'];
+    const especialidade = ['PHP', 'Viagem no Tempo', 'MySQL', 'APIs', 'DeLorean'];
     const focoAtual = ['Python', 'IA'];
     
-    public function resolverProblema($bug) {
-        // Onde estamos indo, não precisamos de bugs
+    public function viajarNoTempo($bug) {
+        // Não precisamos de bugs
         return "1.21 gigawatts de código limpo!";
     }
 }`;
