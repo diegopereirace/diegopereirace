@@ -88,17 +88,12 @@ class CodeGenerator {
         - Exemplos PROIBIDOS nas habilidades: 'Fraude', 'Lavagem', 'Tráfico', 'Crime'
         - Comentários e returns podem ter humor relacionado ao personagem, mas habilidades técnicas são sérias
 
-        VARIEDADE: Escolha ALEATORIAMENTE um personagem diferente de filmes/séries/livros nerds/tech. NUNCA repita o mesmo personagem:
-        - Matrix: Neo, Morpheus, Trinity, Cypher, Agent Smith
-        - O Exterminador do Futuro
+        VARIEDADE: Escolha ALEATORIAMENTE um personagem diferente dos seguintes filmes/séries/livros:
         - Sexta-feira 13
         - Alien, o Oitavo Passageiro
         - Black Mirror
         - A Chegada
         - Duna
-        - Perdido em Marte
-        - Mad Max
-        - O Senhor dos Anéis
         - Super Loja
         - Two and a Half Men
         - Eu, a Patria e as Crianças
@@ -120,6 +115,8 @@ class CodeGenerator {
         - O mundo assombrado pelos demônios(Carl Sagan)
         - Eu, Robô (Isaac Asimov)
         - The Last of Us
+        - O Senhor dos Anéis
+        - Mad Max
 
         Exemplo da estrutura CORRETA:
         // nome do filme/serie/livro
