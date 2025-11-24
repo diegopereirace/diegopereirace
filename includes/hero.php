@@ -49,7 +49,7 @@
         </div>
 
         <div class="w-full lg:w-1/2 flex justify-center lg:justify-end animate-slide-in-right">
-            <div class="relative w-full max-w-lg">
+            <div class="relative w-full">
                 <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-blue-500 rounded-2xl transform rotate-3 blur opacity-30"></div>
                 
                 <!-- Code Terminal Card -->

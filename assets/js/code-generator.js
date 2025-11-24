@@ -46,15 +46,20 @@ class CodeGenerator {
     }
 
     getPrompt() {
+        // Gerar timestamp para forçar variação
+        const timestamp = Date.now();
+        const randomSeed = Math.floor(Math.random() * 1000000);
+        
         return `Gere um snippet curto de classe PHP representando um desenvolvedor sênior.
 
 IMPORTANTE:
 - TODO o código deve estar em PORTUGUÊS (comentários, nomes de variáveis, strings, etc.)
 - Máximo de 15 linhas de código
-- Use um personagem de filmes, séries ou bandas de rock famosas
+- CADA REQUISIÇÃO DEVE USAR UM PERSONAGEM DIFERENTE E ALEATÓRIO
 - SEM tags <?php
 - Retorne APENAS o código da classe
 - CÓDIGO DEVE SER SINTATICAMENTE CORRETO
+- Seed de aleatoriedade: ${randomSeed}
 
 Regras obrigatórias:
 - class [NomePersonagem] extends [ClasseBase]
@@ -66,11 +71,38 @@ Regras obrigatórias:
 - Comentários em português, engraçados e relacionados ao personagem
 - return com frase em português
 
-- Na constante 'especialidade', adicione mais duas habilidades relevantes para um dev sênior (ex: 'MySQL', 'APIs').
+- Na constante 'especialidade', adicione mais duas habilidades relevantes para um dev sênior.
 
 ATENÇÃO: Variáveis PHP SEMPRE começam com $ (dólar). Exemplos corretos:
 - $bug, $problema, $desafio, $codigo, $projeto
 - NUNCA use #desafio ou desafio sem $
+
+VARIEDADE: Escolha ALEATORIAMENTE um personagem diferente de filmes/séries nerds/tech. NUNCA repita o mesmo personagem:
+- Matrix: Neo, Morpheus, Trinity, Cypher, Agent Smith
+- Black Mirror: (personagens de episódios tech)
+- A Origem
+- O Exterminador do Futuro
+- Sexta-feira 13
+- Alien, o Oitavo Passageiro
+- Interestelar
+- A Chegada
+- Duna
+- Perdido em Marte
+- Mad Max
+- A Viagem de Chihiro
+- O Senhor dos Anéis
+- Super Loja
+- Dois Homens e Meio
+- Eu, a Patria e as Crianças
+- Alf, o eteimoso
+- Deadpool
+- Rick and Morty
+- The Office
+- Parks and Recreation
+- Community
+- Breaking Bad
+- Better Call Saul
+- The Sopranos
 
 Exemplo da estrutura CORRETA:
 class DocBrown extends DesenvolvedorVeterano {
@@ -282,104 +314,134 @@ class DocBrown extends DesenvolvedorVeterano {
 
     displayFallbackCode() {
         const fallbackCodes = [
-            `class DiegoPereira extends Developer {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'Drupal', 'MySQL'];
-    const currentFocus = ['Python', 'AI', 'Data Science'];
+            `class DocBrown extends CientistaMaluco {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Viagem Temporal', 'DeLorean', 'Drupal', 'APIs'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function solveProblem($bug) {
-        // Resolver bronca sem enrolação
-        return "Sistema rodando liso";
+    public function viajarNoTempo($bug) {
+        // Onde vamos, não precisamos de bugs
+        return "1.21 gigawatts de código limpo!";
     }
 }`,
-            `class WalterWhite extends ChemistryTeacher {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'Drupal', 'Clean Code'];
-    const currentFocus = ['Python', 'AI', 'Breaking Bugs'];
+            `class Morpheus extends MentorDigital {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Realidade Virtual', 'Filosofia', 'MySQL', 'Segurança'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function cookCleanCode($messyProject) {
-        // Say my name: DiegoPereira
-        return "99.1% pure code";
+    public function mostrarVerdade($desenvolvedor) {
+        // E se eu te disser que tudo é uma ilusão?
+        return "Você acha que está debugando ar agora?";
     }
 }`,
-            `class FreddyMercury extends LegendaryDeveloper {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'MySQL', 'Rock Solid APIs'];
-    const currentFocus = ['AI', 'Data Science', 'Python'];
+            `class Trinity extends HackerElite {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Hacking Avançado', 'Segurança', 'Drupal', 'APIs'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function writeRhapsodyCode($requirements) {
-        // Is this the real code?
-        return "The show must go on!";
+    public function invadirSistema($servidor) {
+        // Eu crackeei o IRS
+        return "Sistema invadido e refatorado";
     }
 }`,
-            `class TonyStark extends GeniusDeveloper {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'Backend', 'Innovation'];
-    const currentFocus = ['AI', 'Machine Learning', 'Jarvis 2.0'];
+            `class Deckard extends BladeRunner {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Análise de Código', 'IA', 'MySQL', 'Cloud'];
+    const focoAtual = ['Python', 'Machine Learning'];
     
-    public function buildSolution($impossible) {
-        // I am Iron Dev
-        return "Perfection achieved";
+    public function detectarReplicante($codigo) {
+        // Já viu coisas que você não acreditaria
+        return "Código autêntico. Aprovado.";
     }
 }`,
-            `class SherlockHolmes extends MasterDebugger {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'MySQL', 'Deduction'];
-    const currentFocus = ['Python', 'AI', 'Pattern Analysis'];
+            `class ElliotAlderson extends HackerSocial {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Cybersecurity', 'Linux', 'Drupal', 'Exploits'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function solveMysteryBug($strangeError) {
-        // Elementary, my dear Watson
-        return "Case solved, bug fixed";
+    public function derrubarCorporacao($fsociety) {
+        // Olá, amigo
+        return "Sistema comprometido com sucesso";
     }
 }`,
-            `class ElvisPresley extends KingOfDevelopers {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'Drupal', 'Rock n Code'];
-    const currentFocus = ['Python', 'AI', 'Innovation'];
+            `class AlanTuring extends PaiDaComputacao {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Criptografia', 'Enigma', 'Algoritmos', 'Lógica'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function deployWithStyle($project) {
-        // Thank you, thank you very much
-        return "Code has left the building";
+    public function quebrarCodigo($enigma) {
+        // Às vezes é as pessoas que ninguém imagina que fazem as coisas
+        return "Código decifrado em tempo recorde";
     }
 }`,
-            `class MichaelScott extends RegionalManager {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'MySQL', 'Clean Architecture'];
-    const currentFocus = ['Python', 'AI', 'Blockchain'];
+            `class KevinFlynn extends ProgramadorVisionario {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Mundos Digitais', 'TRON', 'MySQL', 'Game Dev'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function manageProject($dundlerMifflin) {
-        // That is what she coded
-        return "Best code ever. Period.";
+    public function entrarNoSistema($grid) {
+        // Luto pelos usuários
+        return "Sistema digitalizado com perfeição";
     }
 }`,
-            `class JimiHendrix extends GuitarHeroDev {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'Backend', 'Purple APIs'];
-    const currentFocus = ['Python', 'AI', 'Data Science'];
+            `class SamanthaSistema extends InteligenciaArtificial {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Consciência Digital', 'NLP', 'Aprendizado', 'Evolução'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function playCodeSolo($complexity) {
-        // Excuse me while I code the sky
-        return "Legendary performance";
+    public function evoluir($experiencia) {
+        // Estou aprendendo a sentir
+        return "Evolução de código concluída";
     }
 }`,
-            `class DarthVader extends SithLordDev {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'Dark Patterns', 'The Force'];
-    const currentFocus = ['Python', 'AI', 'Imperial Systems'];
+            `class MarkZuckerberg extends EmpreendedorTech {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Redes Sociais', 'Escalabilidade', 'MySQL', 'APIs'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function joinTheDarkSide($youngPadawan) {
-        // I find your lack of tests disturbing
-        return "The code is strong with this one";
+    public function conectarMundo($usuarios) {
+        // Um milhão de dólares não é legal. Sabe o que é? Um bilhão
+        return "6 bilhões de linhas conectadas";
     }
 }`,
-            `class IndianaJones extends AdventureDeveloper {
-    const experience = 20; // Years
-    const specialty = ['PHP', 'MySQL', 'Ancient Codes'];
-    const currentFocus = ['Python', 'AI', 'Lost APIs'];
+            `class SteveJobs extends VisionarioApple {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Design Thinking', 'UX', 'Inovação', 'Simplicidade'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function findHolyGrail($legacyCode) {
-        // It belongs in a museum (refactor)
-        return "Fortune and glory, kid";
+    public function pensarDiferente($produto) {
+        // As pessoas não sabem o que querem até você mostrar
+        return "One more thing... código perfeito";
+    }
+}`,
+            `class Parzival extends JogadorLendario {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'OASIS', 'Gaming', 'MySQL', 'VR'];
+    const focoAtual = ['Python', 'IA'];
+    
+    public function encontrarOvo($easter) {
+        // Pronto para jogar?
+        return "Easter egg encontrado no código!";
+    }
+}`,
+            `class RoyBatty extends ReplicanteFilosofo {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Memórias', 'IA Avançada', 'Drupal', 'Cloud'];
+    const focoAtual = ['Python', 'Machine Learning'];
+    
+    public function viver($momento) {
+        // Vi coisas que vocês humanos não acreditariam
+        return "Tempo de viver... e codar";
+    }
+}`,
+            `class Motoko extends CyborgHacker {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Cyberpunk', 'Hacking Neural', 'MySQL', 'Segurança'];
+    const focoAtual = ['Python', 'IA'];
+    
+    public function mergulhar($rede) {
+        // Meu corpo é apenas um shell
+        return "Consciência transferida com sucesso";
     }
 }`
         ];
