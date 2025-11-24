@@ -113,6 +113,16 @@ $skills = [
         
         .hidden { display: none; }
     </style>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYJPQ4LBVG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CYJPQ4LBVG');
+    </script>
+    
     <script>
         window.PHP_DATA = {
             API_KEY: <?php echo json_encode($apiKey); ?>,

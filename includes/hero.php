@@ -6,7 +6,7 @@
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center gap-8">
-        <div class="w-full lg:w-2/5 text-center lg:text-left mt-10 lg:mt-0 lg:pl-0">
+        <div class="w-full lg:w-1/2 text-center lg:text-left mt-10 lg:mt-0 lg:pl-0">
             <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
                 Disponível para projetos
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="w-full lg:w-3/5 flex justify-center lg:justify-end">
+        <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
             <div class="relative w-full max-w-lg">
                 <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-blue-500 rounded-2xl transform rotate-3 blur opacity-30"></div>
                 
