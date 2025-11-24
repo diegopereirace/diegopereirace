@@ -3,21 +3,12 @@ class CodeGenerator {
         this.apiKey = window.PHP_DATA?.API_KEY || '';
         this.isGenerating = false;
         this.currentCode = null;
+        this.modelEndpoint = 'models/gemini-2.5-flash';
         
         this.init();
     }
 
     init() {
-        // Verificar API Key
-        if (!this.apiKey) {
-            console.error('❌ API Key do Gemini não encontrada!');
-            console.log('Verifique se o arquivo .env.local contém GEMINI_API_KEY');
-            this.displayErrorMessage();
-            return;
-        }
-        
-        console.log('✅ API Key carregada:', this.apiKey.substring(0, 10) + '...');
-        
         // Gerar código inicial ao carregar
         this.generateCode();
 
@@ -32,7 +23,7 @@ class CodeGenerator {
             if (!this.isGenerating) {
                 this.generateCode();
             }
-        }, 30000);
+        }, 50000);
     }
 
     async generateCode() {
@@ -89,10 +80,8 @@ class CharacterName extends BaseClass {
     }
 
     async callGeminiAPI(prompt) {
-        console.log('Chamando API Gemini...');
-        
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${this.apiKey}`;
-        
+        const url = `https://generativelanguage.googleapis.com/v1beta/${this.modelEndpoint}:generateContent?key=${this.apiKey}`;
+
         try {
             const response = await fetch(url, {
                 method: 'POST',
@@ -108,8 +97,6 @@ class CharacterName extends BaseClass {
                 })
             });
 
-            console.log('Status da resposta:', response.status);
-
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({}));
                 console.error('Detalhes do erro da API:', errorData);
@@ -117,8 +104,6 @@ class CharacterName extends BaseClass {
             }
 
             const data = await response.json();
-            
-            console.log('Código gerado com sucesso!');
             
             if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
                 let code = data.candidates[0].content.parts[0].text.trim();
