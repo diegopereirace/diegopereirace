@@ -103,13 +103,56 @@ $skills = [
             font-family: 'JetBrains Mono', monospace; 
         }
         
+        /* Animações modernas */
         .animate-fade-in-up {
-            animation: fadeInUp 0.5s ease-out forwards;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
         }
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .animate-slide-in-right {
+            animation: slideInRight 0.7s ease-out forwards;
+            opacity: 0;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .animate-gradient {
+            background: linear-gradient(90deg, #10b981, #06b6d4, #8b5cf6, #10b981);
+            background-size: 300% 300%;
+            animation: gradientShift 8s ease infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(16, 185, 129, 0.2);
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
         
         .hidden { display: none; }
     </style>
@@ -128,7 +171,8 @@ $skills = [
             API_KEY: <?php echo json_encode($apiKey); ?>,
             SYSTEM_INSTRUCTION: <?php echo json_encode($systemInstruction); ?>
         };
-        
+    </script>
+    <script>
         tailwind.config = {
             theme: {
                 extend: {

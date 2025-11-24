@@ -54,15 +54,15 @@
             <!-- Visual/Decoration -->
             <div class="order-1 lg:order-2">
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 transform translate-y-8">
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 transform translate-y-8 hover-lift animate-fade-in-up">
                         <span class="text-4xl font-bold text-white block mb-2">15+</span>
                         <span class="text-slate-400 text-sm uppercase tracking-wider">Anos programando</span>
                     </div>
-                    <div class="bg-emerald-900/20 p-4 rounded-2xl border border-emerald-500/30">
+                    <div class="bg-emerald-900/20 p-4 rounded-2xl border border-emerald-500/30 hover-lift animate-fade-in-up delay-100">
                         <span class="text-4xl font-bold text-emerald-400 block mb-2">100%</span>
                         <span class="text-emerald-200/70 text-xs uppercase tracking-wide break-words">Comprometimento</span>
                     </div>
-                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 col-span-2">
+                    <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 col-span-2 hover-lift animate-fade-in-up delay-200">
                         <h4 class="text-white font-bold mb-3">Filosofia de Trabalho</h4>
                         <p class="text-slate-400 text-sm">
                             "Aqui a pegada é resolver bronca sem enrolação." - Foco total em entregar valor para o cliente com código sustentável.

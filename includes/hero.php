@@ -7,23 +7,23 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center gap-8">
         <div class="w-full lg:w-1/2 text-center lg:text-left mt-10 lg:mt-0 lg:pl-0">
-            <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6">
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-fade-in">
                 <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
                 Disponível para projetos
             </div>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-                Desenvolvedor <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500">Full Stack</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up delay-100">
+                Desenvolvedor <span class="text-transparent bg-clip-text animate-gradient">Full Stack</span>
                 <br />
                 Especialista PHP
             </h1>
-            <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed animate-fade-in-up delay-200">
                 Quase 20 anos vivendo e respirando tecnologia. Da base sólida em 
                 <span class="text-slate-200 font-semibold"> PHP</span>, 
                 <span class="text-slate-200 font-semibold"> MySQL/PostgreSQL</span> e
                 <span class="text-slate-200 font-semibold"> Drupal</span> 
                 à expansão para Python, IA e Data Science.
             </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-up delay-300">
                 <a href="#contact" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-1">
                     Vamos conversar?
                 </a>
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="w-full lg:w-1/2 flex justify-center lg:justify-end">
+        <div class="w-full lg:w-1/2 flex justify-center lg:justify-end animate-slide-in-right">
             <div class="relative w-full max-w-lg">
                 <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500 to-blue-500 rounded-2xl transform rotate-3 blur opacity-30"></div>
                 
