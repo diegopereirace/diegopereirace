@@ -52,73 +52,105 @@ class CodeGenerator {
         
         return `Gere um snippet curto de classe PHP representando um desenvolvedor sênior.
 
-IMPORTANTE:
-- TODO o código deve estar em PORTUGUÊS (comentários, nomes de variáveis, strings, etc.)
-- Máximo de 15 linhas de código
-- CADA REQUISIÇÃO DEVE USAR UM PERSONAGEM DIFERENTE E ALEATÓRIO
-- SEM tags <?php
-- Retorne APENAS o código da classe
-- CÓDIGO DEVE SER SINTATICAMENTE CORRETO
-- Seed de aleatoriedade: ${randomSeed}
+        IMPORTANTE:
+        - TODO o código deve estar em PORTUGUÊS (comentários, nomes de variáveis, strings, etc.)
+        - Máximo de 15 linhas de código
+        - CADA REQUISIÇÃO DEVE USAR UM PERSONAGEM DIFERENTE E ALEATÓRIO
+        - SEM tags <?php
+        - Retorne APENAS o código da classe
+        - CÓDIGO DEVE SER SINTATICAMENTE CORRETO
+        - Seed de aleatoriedade: ${randomSeed}
 
-Regras obrigatórias:
-- class [NomePersonagem] extends [ClasseBase]
-- const experiencia = 20
-- const especialidade = ['PHP']
-- const focoAtual = ['Python', 'IA']
-- public function fazerAlgo($parametro) - SEMPRE use $ antes de parâmetros (ex: $bug, $problema, $desafio)
-- Nomes de variáveis SEMPRE começam com $ (cifrão)
-- Comentários CURTOS (máximo 6 palavras), engraçados e relacionados ao personagem
-- return com frase em português (máximo 8 palavras)
+        Regras obrigatórias:
+        - class [NomePersonagem] extends [ClasseBase]
+        - const experiencia = 20
+        - const especialidade = ['PHP']
+        - const focoAtual = ['Python', 'IA']
+        - public function fazerAlgo($parametro) - SEMPRE use $ antes de parâmetros (ex: $bug, $problema, $desafio)
+        - Nomes de variáveis SEMPRE começam com $ (cifrão)
+        - Comentários CURTOS (máximo 6 palavras), engraçados e relacionados ao personagem
+        - return com frase em português (máximo 8 palavras)
 
-- Na constante 'especialidade', adicione mais 2 habilidades relevantes para um dev sênior.
-- Inclua também 2 habilidades relacionadas ao universo do personagem (ex: "Viagem no Tempo" para Doc Brown).
+        - Na constante 'especialidade', adicione mais 2 habilidades relevantes para um dev sênior.
+        - Inclua também 2 habilidades relacionadas ao universo do personagem (ex: "Viagem no Tempo" para Doc Brown).
 
-ATENÇÃO: Variáveis PHP SEMPRE começam com $ (dólar). Exemplos corretos:
-- $bug, $problema, $desafio, $codigo, $projeto
-- NUNCA use #desafio ou desafio sem $
+        ATENÇÃO: Variáveis PHP SEMPRE começam com $ (dólar). Exemplos corretos:
+        - $bug, $problema, $desafio, $codigo, $projeto
+        - NUNCA use #desafio ou desafio sem $
 
-IMPORTANTE: Comentários devem ser MUITO CURTOS para evitar quebra de linha!
+        IMPORTANTE: Comentários devem ser MUITO CURTOS para evitar quebra de linha!
 
-VARIEDADE: Escolha ALEATORIAMENTE um personagem diferente de filmes/séries/livros nerds/tech. NUNCA repita o mesmo personagem:
-- Matrix: Neo, Morpheus, Trinity, Cypher, Agent Smith
-- O Exterminador do Futuro
-- Sexta-feira 13
-- Alien, o Oitavo Passageiro
-- Black Mirror
-- A Chegada
-- Duna
-- Perdido em Marte
-- Mad Max
-- O Senhor dos Anéis
-- Super Loja
-- Two and a Half Men
-- Eu, a Patria e as Crianças
-- Alf, o eteimoso(serie)
-- Deadpool(filme)
-- Rick and Morty(serie)
-- The Office
-- Breaking Bad
-- Better Call Saul
-- Severance
-- Futurama
-- Os Simpsons
-- Game of Thrones(filme/livro)
-- Fundação(livro)(Isaac Asimov)
-- O mundo assombrado pelos demônios(Carl Sagan)
-- Prison Break
+        RESTRIÇÕES DE CONTEÚDO:
+        - NUNCA mencione crimes, fraudes, drogas ou atividades ilegais nas habilidades técnicas
+        - Se o personagem tiver características controversas (ex: advogado trapaceiro, traficante), use APENAS como TEMA HUMORÍSTICO em comentários/returns
+        - Habilidades em 'especialidade' devem ser SEMPRE tecnologias legítimas e profissionais
+        - Exemplos CORRETOS: 'PHP', 'MySQL', 'APIs', 'Cloud', 'DevOps', 'Security'
+        - Exemplos PROIBIDOS nas habilidades: 'Fraude', 'Lavagem', 'Tráfico', 'Crime'
+        - Comentários e returns podem ter humor relacionado ao personagem, mas habilidades técnicas são sérias
 
-Exemplo da estrutura CORRETA:
-class DocBrown extends DesenvolvedorVeterano {
-    const experiencia = 20;
-    const especialidade = ['PHP', 'Viagem no Tempo', 'MySQL', 'APIs', 'DeLorean'];
-    const focoAtual = ['Python', 'IA'];
-    
-    public function viajarNoTempo($bug) {
-        // Não precisamos de bugs
-        return "1.21 gigawatts de código limpo!";
-    }
-}`;
+        VARIEDADE: Escolha ALEATORIAMENTE um personagem diferente de filmes/séries/livros nerds/tech. NUNCA repita o mesmo personagem:
+        - Matrix: Neo, Morpheus, Trinity, Cypher, Agent Smith
+        - O Exterminador do Futuro
+        - Sexta-feira 13
+        - Alien, o Oitavo Passageiro
+        - Black Mirror
+        - A Chegada
+        - Duna
+        - Perdido em Marte
+        - Mad Max
+        - O Senhor dos Anéis
+        - Super Loja
+        - Two and a Half Men
+        - Eu, a Patria e as Crianças
+        - Alf, o eteimoso(serie)
+        - Deadpool(filme)
+        - Rick and Morty(serie)
+        - The Office
+        - Breaking Bad
+        - Better Call Saul
+        - Severance
+        - Futurama
+        - Os Simpsons
+        - Game of Thrones(filme/livro)
+        - Fundação(livro)(Isaac Asimov)
+        - O mundo assombrado pelos demônios(Carl Sagan)
+        - Prison Break
+
+        Exemplo da estrutura CORRETA:
+        // nome do filme/serie/livro
+        // descrição curta
+        class DocBrown extends DesenvolvedorVeterano {
+            const experiencia = 20;
+            const especialidade = ['PHP', 'MySQL', 'APIs', 'DeLorean Tech', 'Temporal Logic'];
+            const focoAtual = ['Python', 'IA'];
+            
+            public function viajarNoTempo($bug) {
+                // Não precisamos de bugs
+                return "1.21 gigawatts de código limpo!";
+            }
+        }
+
+        Exemplo CORRETO (personagem controverso - Better Call Saul):
+        // Better Call Saul
+        // Advogado com métodos questionáveis
+        class JimmyMcGill extends AdvogadoEstrategista {
+            const experiencia = 20;
+            const especialidade = ['PHP', 'MySQL', 'APIs', 'Negociação Legal', 'Marketing Criativo'];
+            const focoAtual = ['Python', 'IA'];
+            
+            public function encontrarBrecha($desafio) {
+                // Sempre há uma solução legal
+                return "Consegui a brecha, ligue para Saul!";
+            }
+        }
+        const especialidade = ['PHP', 'Gestão de Estoque', 'MySQL', 'APIs', 'Anúncios na Loja'];
+        const focoAtual = ['Python', 'IA'];
+        
+        public function organizarPromocao($produto) {
+            // Tenham um dia celestial!
+            return "Promoção implementada com sucesso!";
+        }
+        }`;
     }
 
     getCurrentModelEndpoint() {
