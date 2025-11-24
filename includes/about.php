@@ -58,9 +58,9 @@
                         <span class="text-4xl font-bold text-white block mb-2">15+</span>
                         <span class="text-slate-400 text-sm uppercase tracking-wider">Anos programando</span>
                     </div>
-                    <div class="bg-emerald-900/20 p-6 rounded-2xl border border-emerald-500/30">
+                    <div class="bg-emerald-900/20 p-4 rounded-2xl border border-emerald-500/30">
                         <span class="text-4xl font-bold text-emerald-400 block mb-2">100%</span>
-                        <span class="text-emerald-200/70 text-sm uppercase tracking-wider">Comprometimento</span>
+                        <span class="text-emerald-200/70 text-xs uppercase tracking-wide break-words">Comprometimento</span>
                     </div>
                     <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 col-span-2">
                         <h4 class="text-white font-bold mb-3">Filosofia de Trabalho</h4>
