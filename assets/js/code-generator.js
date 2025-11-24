@@ -113,8 +113,13 @@ class CodeGenerator {
         - Os Simpsons
         - Game of Thrones(filme/livro)
         - Fundação(livro)(Isaac Asimov)
+        - Segunda Fundação(livro)(Isaac Asimov)
+        - Fundação e Império(livro)(Isaac Asimov)
+        - Prelúdio à Fundação(livro)(Isaac Asimov)
+        - Limites da Fundação(livro)(Isaac Asimov)
         - O mundo assombrado pelos demônios(Carl Sagan)
-        - Prison Break
+        - Eu, Robô (Isaac Asimov)
+        - The Last of Us
 
         Exemplo da estrutura CORRETA:
         // nome do filme/serie/livro
