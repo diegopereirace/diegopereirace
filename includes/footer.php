@@ -4,7 +4,7 @@
         <div class="flex flex-col md:flex-row justify-between items-center">
             <div class="mb-6 md:mb-0">
                 <span class="text-2xl font-bold tracking-tighter text-white">
-                    <span class="text-emerald-400">{</span> DIEGO PEREIRA <span class="text-emerald-400">}</span>
+                    DIEGO PEREIRA <span class="text-emerald-400">{</span>dev<span class="text-emerald-400">}</span>
                 </span>
                 <p class="text-slate-500 mt-2 max-w-md">
                     Desenvolvedor focado em resolver problemas reais com código limpo e eficiente.

@@ -5,7 +5,7 @@
             <h2 class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Tecnologias</h2>
             <h3 class="text-3xl font-bold text-white">Minha Caixa de Ferramentas</h3>
             <p class="mt-4 text-slate-400 max-w-2xl mx-auto">
-                Stack focada em performance, escalabilidade e segurança. Especialista em resolver problemas complexos com soluções robustas.
+                Do front-end ao back-end, estas são as principais ferramentas e tecnologias que me permitem construir soluções digitais robustas, escaláveis e eficientes.
             </p>
         </div>
 
