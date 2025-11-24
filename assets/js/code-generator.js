@@ -54,27 +54,32 @@ class CodeGenerator {
     }
 
     getPrompt() {
-        return `Generate a funny PHP class snippet representing a senior developer.
+        return `Gere um snippet curto de classe PHP representando um desenvolvedor sênior.
 
-Rules:
-- Create a class that extends a base class
-- Use const experience = 20
-- Use const specialty with array of skills including 'PHP'
-- Use const currentFocus with array including 'Python', 'AI'
-- Add one public function with a funny comment
-- Use a character from movies, TV shows, or music bands
-- NO <?php tags
-- Return ONLY the class code
+IMPORTANTE:
+- TODO o código deve estar em PORTUGUÊS (comentários, nomes de variáveis, strings, etc.)
+- Máximo de 15 linhas de código
+- Use um personagem de filmes, séries ou bandas de rock famosas
+- SEM tags <?php
+- Retorne APENAS o código da classe
 
-Example structure:
-class CharacterName extends BaseClass {
-    const experience = 20;
-    const specialty = ['PHP', 'Skill'];
-    const currentFocus = ['Python', 'AI'];
+Regras obrigatórias:
+- class [NomePersonagem] extends [ClasseBase]
+- const experiencia = 20
+- const especialidade = ['PHP', 'Habilidade']
+- const focoAtual = ['Python', 'IA']
+- public function fazerAlgo($parametro) com comentário engraçado em português
+- return com frase em português
+
+Exemplo da estrutura:
+class DocBrown extends DesenvolvedorVeterano {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Viagem no Tempo'];
+    const focoAtual = ['Python', 'IA'];
     
-    public function doSomething($param) {
-        // Funny comment
-        return "Result";
+    public function resolverProblema($bug) {
+        // Onde estamos indo, não precisamos de bugs
+        return "1.21 gigawatts de código limpo!";
     }
 }`;
     }
