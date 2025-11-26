@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✅ Checklist de Otimização - Diego Pereira</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+        }
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 12px;
+            border-left: 4px solid #10b981;
+        }
+        .section h2 {
+            color: #10b981;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .checklist li:hover {
+            background: rgba(16, 185, 129, 0.1);
+            transform: translateX(4px);
+        }
+        .checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #475569;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .checked {
+            background: #10b981;
+            border-color: #10b981;
+        }
+        .checked::after {
+            content: "✓";
+            color: white;
+            font-weight: bold;
+        }
+        .priority {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        .high { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+        .medium { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .low { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .done { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(71, 85, 105, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #06b6d4);
+            transition: width 0.3s ease;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 8px;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #10b981;
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ Checklist de Otimização de Performance</h1>
+        <p style="color: #94a3b8; margin-bottom: 2rem;">Acompanhe o progresso das otimizações aplicadas</p>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value" id="total-done">0</div>
+                <div class="stat-label">Concluídas</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="total-pending">0</div>
+                <div class="stat-label">Pendentes</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value" id="progress-percent">0%</div>
+                <div class="stat-label">Progresso</div>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+        </div>
+        
+        <div class="section">
+            <h2>🚀 Otimizações Aplicadas</h2>
+            <ul class="checklist" id="applied-list">
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>.htaccess com Gzip e Cache Headers</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>Service Worker implementado</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>Scripts com defer</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>Preconnect e DNS Prefetch</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>Preload de fontes</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>Google Analytics otimizado</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>Scroll com requestAnimationFrame</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>Manifest.json (PWA)</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>Security Headers</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+                <li data-checked="true">
+                    <div class="checkbox checked"></div>
+                    <span>Performance Monitor</span>
+                    <span class="priority done">✓ Feito</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>📋 Próximos Passos (Opcional)</h2>
+            <ul class="checklist" id="pending-list">
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Converter imagens para WebP/AVIF</span>
+                    <span class="priority high">Alta</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Adicionar lazy loading em imagens</span>
+                    <span class="priority high">Alta</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Melhorar acessibilidade (alt texts)</span>
+                    <span class="priority high">Alta</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Garantir contraste WCAG AA</span>
+                    <span class="priority medium">Média</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Adicionar ARIA labels</span>
+                    <span class="priority medium">Média</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Criar sitemap.xml</span>
+                    <span class="priority medium">Média</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Adicionar Open Graph tags</span>
+                    <span class="priority low">Baixa</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Implementar Schema.org markup</span>
+                    <span class="priority low">Baixa</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>🧪 Testes Recomendados</h2>
+            <ul class="checklist" id="tests-list">
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Testar Service Worker no DevTools</span>
+                    <span class="priority high">Alta</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Verificar recursos vindo do cache</span>
+                    <span class="priority high">Alta</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Testar modo offline</span>
+                    <span class="priority high">Alta</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Rodar PageSpeed Insights</span>
+                    <span class="priority high">Alta</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Verificar Cache Headers (curl -I)</span>
+                    <span class="priority medium">Média</span>
+                </li>
+                <li data-checked="false">
+                    <div class="checkbox"></div>
+                    <span>Testar compressão Gzip</span>
+                    <span class="priority medium">Média</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    <script>
+        function updateStats() {
+            const allItems = document.querySelectorAll('.checklist li');
+            const checkedItems = document.querySelectorAll('.checklist li[data-checked="true"]');
+            
+            const total = allItems.length;
+            const done = checkedItems.length;
+            const pending = total - done;
+            const percent = Math.round((done / total) * 100);
+            
+            document.getElementById('total-done').textContent = done;
+            document.getElementById('total-pending').textContent = pending;
+            document.getElementById('progress-percent').textContent = percent + '%';
+            document.getElementById('progress-fill').style.width = percent + '%';
+        }
+        
+        document.querySelectorAll('.checklist li').forEach(item => {
+            item.addEventListener('click', () => {
+                const checkbox = item.querySelector('.checkbox');
+                const isChecked = item.dataset.checked === 'true';
+                
+                item.dataset.checked = !isChecked;
+                checkbox.classList.toggle('checked');
+                
+                updateStats();
+                
+                // Salvar no localStorage
+                const id = Array.from(item.parentElement.children).indexOf(item);
+                const listId = item.parentElement.id;
+                localStorage.setItem(`${listId}-${id}`, !isChecked);
+            });
+        });
+        
+        // Carregar estado do localStorage
+        document.querySelectorAll('.checklist').forEach(list => {
+            Array.from(list.children).forEach((item, index) => {
+                const saved = localStorage.getItem(`${list.id}-${index}`);
+                if (saved === 'true') {
+                    item.dataset.checked = 'true';
+                    item.querySelector('.checkbox').classList.add('checked');
+                } else if (saved === 'false') {
+                    item.dataset.checked = 'false';
+                    item.querySelector('.checkbox').classList.remove('checked');
+                }
+            });
+        });
+        
+        updateStats();
+    </script>
+</body>
+</html>
