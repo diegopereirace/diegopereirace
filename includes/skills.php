@@ -13,14 +13,14 @@
             <?php foreach ($skills as $index => $skill): ?>
                 <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-emerald-500/50 transition-colors duration-300 group">
                     <div class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-4 border border-slate-700 group-hover:border-emerald-500/30">
-                        <i data-lucide="<?php echo $skill['icon']; ?>" class="text-emerald-400" aria-hidden="true"></i>
+                        <i data-lucide="<?php echo htmlspecialchars($skill['icon'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" class="text-emerald-400" aria-hidden="true"></i>
                     </div>
-                    <h4 class="text-xl font-bold text-white mb-4"><?php echo $skill['category']; ?></h4>
+                    <h4 class="text-xl font-bold text-white mb-4"><?php echo htmlspecialchars($skill['category'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></h4>
                     <ul class="space-y-2">
                         <?php foreach ($skill['techs'] as $tech): ?>
                             <li class="flex items-center text-slate-400 text-sm">
                                 <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-2" aria-hidden="true"></span>
-                                <?php echo $tech; ?>
+                                <?php echo htmlspecialchars($tech, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                             </li>
                         <?php endforeach; ?>
                     </ul>

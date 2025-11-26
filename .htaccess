@@ -13,6 +13,28 @@
   </IfModule>
 </FilesMatch>
 
+# Proteger arquivos .env e outros arquivos sensíveis
+<FilesMatch "^\.env">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# Bloquear acesso a arquivos de configuração e logs
+<FilesMatch "\.(log|ini|conf|config|bak|backup|sql|db)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
 # Don't show directory listings for URLs which map to a directory.
 Options -Indexes
 
@@ -111,6 +133,21 @@ AddEncoding gzip svgz
   # directories from your webroot or otherwise protect them from being
   # downloaded.
   RewriteRule "/\.|^\.(?!well-known/)" - [F]
+  
+  # Proteção contra Path Traversal
+  RewriteCond %{QUERY_STRING} (\.\./|\.\.\\) [NC,OR]
+  RewriteCond %{QUERY_STRING} (\.\./) [NC]
+  RewriteRule .* - [F,L]
+  
+  # Proteção contra SQL Injection via URL
+  RewriteCond %{QUERY_STRING} (union.*select|insert.*into|delete.*from|drop.*table) [NC]
+  RewriteRule .* - [F,L]
+  
+  # Bloquear tentativas de acesso a arquivos PHP maliciosos
+  RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+  RewriteCond %{QUERY_STRING} GLOBALS(=|[|%[0-9A-Z]{0,2}) [OR]
+  RewriteCond %{QUERY_STRING} _REQUEST(=|[|%[0-9A-Z]{0,2})
+  RewriteRule .* - [F,L]
 
   # If your site can be accessed both with and without the 'www.' prefix, you
   # can use one of the following settings to redirect users to your preferred
@@ -204,6 +241,17 @@ AddEncoding gzip svgz
   # Disable Proxy header, since it's an attack vector.
   RequestHeader unset Proxy
   
+  # Security Headers adicionais
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  
+  # Content Security Policy
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://esm.run https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://generativelanguage.googleapis.com;"
+  
+  # Prevenir clickjacking
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+  
   # Performance: Cache-Control para recursos estáticos
   <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|otf|eot)$">
     Header set Cache-Control "max-age=31536000, public, immutable"
@@ -212,11 +260,6 @@ AddEncoding gzip svgz
   <FilesMatch "\.(css|js)$">
     Header set Cache-Control "max-age=2592000, public"
   </FilesMatch>
-  
-  # Security Headers
-  Header always set X-Frame-Options "SAMEORIGIN"
-  Header always set X-XSS-Protection "1; mode=block"
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
 # Compressão adicional via mod_deflate

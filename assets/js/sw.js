@@ -1,11 +1,13 @@
 // Service Worker para cache offline e performance
-const CACHE_VERSION = 'diego-pereira-v1.0.0';
+const CACHE_VERSION = 'diego-pereira-v1.0.1';
 const CACHE_NAME = `portfolio-${CACHE_VERSION}`;
 
-// Arquivos para cache imediato
+// Arquivos para cache imediato (apenas recursos críticos que existem)
 const PRECACHE_URLS = [
-  '/index.php',
-  '/assets/imgs/favicon.png'
+  '/assets/imgs/favicon.png',
+  '/assets/js/main.js',
+  '/assets/js/code-generator.js',
+  '/assets/js/tailwind-config.js'
 ];
 
 // Estratégia de cache para diferentes tipos de recursos
@@ -31,11 +33,24 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('[SW] Precaching resources');
-        return cache.addAll(PRECACHE_URLS);
+        // Cachear recursos individualmente para evitar falha total
+        return Promise.allSettled(
+          PRECACHE_URLS.map(url => 
+            cache.add(url).catch(err => {
+              console.warn('[SW] Failed to cache:', url, err);
+              return null;
+            })
+          )
+        );
       })
-      .then(() => self.skipWaiting())
+      .then(() => {
+        console.log('[SW] Precache completed');
+        return self.skipWaiting();
+      })
+      .catch(err => {
+        console.error('[SW] Installation failed:', err);
+      })
   );
-});
 });
 
 // Ativação e limpeza de caches antigos

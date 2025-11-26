@@ -1,33 +1,39 @@
 // Main JavaScript file
 
-// Registrar Service Worker para performance e cache (apenas em produção ou localhost)
-if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname.includes('.ddev.site'))) {
-    window.addEventListener('load', () => {
-        const swPath = '/assets/js/sw.js';
-        
-        navigator.serviceWorker.register(swPath)
-            .then(registration => {
-                console.log('✅ Service Worker registrado:', registration.scope);
-                
-                // Verificar atualizações
-                registration.addEventListener('updatefound', () => {
-                    const newWorker = registration.installing;
-                    newWorker.addEventListener('statechange', () => {
-                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                            console.log('🔄 Nova versão disponível. Recarregue a página.');
-                        }
+// Registrar Service Worker para performance e cache
+if ('serviceWorker' in navigator) {
+    // Verificar se está em ambiente seguro (HTTPS, localhost, ou DDEV)
+    const isSecureContext = location.protocol === 'https:' || 
+                           location.hostname === 'localhost' || 
+                           location.hostname === '127.0.0.1' ||
+                           location.hostname.includes('.ddev.site') ||
+                           location.hostname.includes('.local');
+    
+    if (isSecureContext) {
+        window.addEventListener('load', () => {
+            const swPath = '/assets/js/sw.js';
+            
+            navigator.serviceWorker.register(swPath)
+                .then(registration => {
+                    console.log('✅ Service Worker registrado:', registration.scope);
+                    
+                    // Verificar atualizações
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                console.log('🔄 Nova versão disponível. Recarregue a página.');
+                            }
+                        });
                     });
-                });
-            })
-            .catch(err => {
-                // Não exibir erro se for apenas desenvolvimento sem HTTPS
-                if (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname.includes('.ddev.site')) {
+                })
+                .catch(err => {
                     console.warn('⚠️ Service Worker não pôde ser registrado:', err.message);
-                }
-            });
-    });
-} else if ('serviceWorker' in navigator) {
-    console.info('ℹ️ Service Worker requer HTTPS em produção');
+                });
+        });
+    } else {
+        console.info('ℹ️ Service Worker requer HTTPS em produção');
+    }
 }
 
 // Otimização de scroll com throttle

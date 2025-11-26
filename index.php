@@ -1,15 +1,85 @@
 <?php
-$envFile = __DIR__ . '/.env.local';
-if (file_exists($envFile)) {
-    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) continue;
-        list($key, $value) = explode('=', $line, 2);
-        $_ENV[trim($key)] = trim($value);
+// Configurações de segurança do PHP
+declare(strict_types=1);
+
+// Prevenir informações sensíveis em erros
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+error_reporting(E_ALL);
+
+// Headers de segurança
+header('X-Content-Type-Options: nosniff');
+header('X-Frame-Options: SAMEORIGIN');
+header('X-XSS-Protection: 1; mode=block');
+header('Referrer-Policy: strict-origin-when-cross-origin');
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://esm.run https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://generativelanguage.googleapis.com;");
+
+// Função segura para carregar .env
+function loadEnvFile(string $envPath): array {
+    $env = [];
+    
+    // Validar path - prevenir path traversal
+    $realPath = realpath($envPath);
+    $baseDir = realpath(__DIR__);
+    
+    if ($realPath === false || strpos($realPath, $baseDir) !== 0) {
+        error_log('Tentativa de acesso a arquivo .env fora do diretório permitido');
+        return $env;
     }
+    
+    if (!file_exists($realPath) || !is_readable($realPath)) {
+        return $env;
+    }
+    
+    $lines = file($realPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    
+    if ($lines === false) {
+        return $env;
+    }
+    
+    foreach ($lines as $line) {
+        $line = trim($line);
+        
+        // Ignorar comentários e linhas vazias
+        if (empty($line) || $line[0] === '#') {
+            continue;
+        }
+        
+        // Validar formato KEY=VALUE
+        if (!str_contains($line, '=')) {
+            continue;
+        }
+        
+        [$key, $value] = explode('=', $line, 2);
+        $key = trim($key);
+        $value = trim($value);
+        
+        // Validar nome da variável (apenas letras, números e underscore)
+        if (!preg_match('/^[A-Z_][A-Z0-9_]*$/', $key)) {
+            continue;
+        }
+        
+        // Remover aspas do valor se existirem
+        if ((str_starts_with($value, '"') && str_ends_with($value, '"')) ||
+            (str_starts_with($value, "'") && str_ends_with($value, "'"))) {
+            $value = substr($value, 1, -1);
+        }
+        
+        $env[$key] = $value;
+    }
+    
+    return $env;
 }
 
-$apiKey = $_ENV['GEMINI_API_KEY'] ?? '';
+// Carregar variáveis de ambiente de forma segura
+$envVars = loadEnvFile(__DIR__ . '/.env.local');
+$apiKey = $envVars['GEMINI_API_KEY'] ?? '';
+
+// Validar API key (deve ter formato esperado)
+if (!empty($apiKey) && !preg_match('/^[A-Za-z0-9_-]{20,}$/', $apiKey)) {
+    error_log('API key com formato inválido detectada');
+    $apiKey = '';
+}
 
 $bioText = [
     'intro' => "Sou Diego Pereira, cearense especialista em PHP e mestre em Drupal, a plataforma que aproveita toda a robustez do PHP para entregar sites escaláveis, seguros e sob medida. Há 20 anos respiro tecnologia e, há 15, foco em deixar sistemas web rodando lisos, massa e sem gambiarra.",
@@ -224,10 +294,14 @@ $skills = [
     </script>
     
     <script>
+        // Dados PHP sanitizados para JavaScript
         window.PHP_DATA = {
-            API_KEY: <?php echo json_encode($apiKey); ?>,
-            SYSTEM_INSTRUCTION: <?php echo json_encode($systemInstruction); ?>
+            API_KEY: <?php echo json_encode($apiKey, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR); ?>,
+            SYSTEM_INSTRUCTION: <?php echo json_encode($systemInstruction, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_THROW_ON_ERROR); ?>
         };
+        
+        // Prevenir acesso direto via console
+        Object.freeze(window.PHP_DATA);
     </script>
 </head>
 <body class="bg-slate-950 text-slate-200 overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-200">

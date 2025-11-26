@@ -1,6 +1,8 @@
 class CodeGenerator {
     constructor() {
-        this.apiKey = window.PHP_DATA?.API_KEY || '';
+        // Validar e sanitizar API key
+        const rawApiKey = window.PHP_DATA?.API_KEY || '';
+        this.apiKey = this.validateApiKey(rawApiKey);
         this.isGenerating = false;
         this.currentCode = null;
         this.modelCandidates = [
@@ -10,7 +12,28 @@ class CodeGenerator {
         ];
         this.currentModelIndex = 0;
         
+        // Limpar dados sensíveis do window após uso
+        if (window.PHP_DATA) {
+            delete window.PHP_DATA.API_KEY;
+        }
+        
         this.init();
+    }
+    
+    validateApiKey(key) {
+        // Validar formato da API key
+        if (!key || typeof key !== 'string') {
+            console.warn('API key não fornecida ou inválida');
+            return '';
+        }
+        
+        // API keys do Google geralmente têm 39 caracteres alfanuméricos
+        if (!/^[A-Za-z0-9_-]{20,}$/.test(key)) {
+            console.warn('Formato de API key suspeito');
+            return '';
+        }
+        
+        return key;
     }
 
     init() {

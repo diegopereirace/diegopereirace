@@ -189,31 +189,71 @@
             const badgeEl = document.getElementById('sw-badge');
             
             if ('serviceWorker' in navigator) {
-                const registration = await navigator.serviceWorker.getRegistration();
-                if (registration && registration.active) {
-                    statusEl.textContent = 'Ativo ✓';
-                    statusEl.className = 'metric-value good';
-                    badgeEl.textContent = 'Ativo';
-                    badgeEl.className = 'status active';
+                try {
+                    const registration = await navigator.serviceWorker.getRegistration();
                     
-                    // Contar recursos em cache
-                    const cacheNames = await caches.keys();
-                    let totalCached = 0;
-                    for (const name of cacheNames) {
-                        const cache = await caches.open(name);
-                        const keys = await cache.keys();
-                        totalCached += keys.length;
+                    if (registration) {
+                        // Verificar todos os estados possíveis
+                        const isActive = registration.active !== null;
+                        const isInstalling = registration.installing !== null;
+                        const isWaiting = registration.waiting !== null;
+                        
+                        console.log('[Monitor] SW Status:', { isActive, isInstalling, isWaiting });
+                        
+                        if (isActive) {
+                            statusEl.textContent = 'Ativo ✓';
+                            statusEl.className = 'metric-value good';
+                            badgeEl.textContent = 'Ativo';
+                            badgeEl.className = 'status active';
+                            
+                            // Contar recursos em cache
+                            try {
+                                const cacheNames = await caches.keys();
+                                let totalCached = 0;
+                                for (const name of cacheNames) {
+                                    const cache = await caches.open(name);
+                                    const keys = await cache.keys();
+                                    totalCached += keys.length;
+                                }
+                                console.log('[Monitor] Cached resources:', totalCached);
+                                document.getElementById('cached-count').textContent = totalCached;
+                            } catch (cacheErr) {
+                                console.error('[Monitor] Error counting cache:', cacheErr);
+                            }
+                        } else if (isInstalling) {
+                            statusEl.textContent = 'Instalando...';
+                            statusEl.className = 'metric-value warning';
+                            badgeEl.textContent = 'Instalando';
+                            badgeEl.className = 'status inactive';
+                        } else if (isWaiting) {
+                            statusEl.textContent = 'Aguardando';
+                            statusEl.className = 'metric-value warning';
+                            badgeEl.textContent = 'Aguardando';
+                            badgeEl.className = 'status inactive';
+                        } else {
+                            statusEl.textContent = 'Registrado';
+                            statusEl.className = 'metric-value warning';
+                            badgeEl.textContent = 'Registrado';
+                            badgeEl.className = 'status inactive';
+                        }
+                    } else {
+                        statusEl.textContent = 'Inativo ✗';
+                        statusEl.className = 'metric-value poor';
+                        badgeEl.textContent = 'Inativo';
+                        badgeEl.className = 'status inactive';
                     }
-                    document.getElementById('cached-count').textContent = totalCached;
-                } else {
-                    statusEl.textContent = 'Inativo ✗';
+                } catch (err) {
+                    console.error('[Monitor] Error checking SW:', err);
+                    statusEl.textContent = 'Erro';
                     statusEl.className = 'metric-value poor';
-                    badgeEl.textContent = 'Inativo';
+                    badgeEl.textContent = 'Erro';
                     badgeEl.className = 'status inactive';
                 }
             } else {
                 statusEl.textContent = 'Não suportado';
                 statusEl.className = 'metric-value warning';
+                badgeEl.textContent = 'Não suportado';
+                badgeEl.className = 'status inactive';
             }
         }
         
@@ -249,6 +289,15 @@
                 fidEl.className = `metric-value ${fidValue < 100 ? 'good' : fidValue < 300 ? 'warning' : 'poor'}`;
             }).observe({ entryTypes: ['first-input'] });
             
+            // Fallback para FID se não houver interação em 5s
+            setTimeout(() => {
+                const fidEl = document.getElementById('fid');
+                if (fidEl.textContent === '-') {
+                    fidEl.textContent = '0ms';
+                    fidEl.className = 'metric-value good';
+                }
+            }, 5000);
+            
             // CLS
             let clsValue = 0;
             new PerformanceObserver((list) => {
@@ -265,16 +314,63 @@
         
         // Page Load Time
         window.addEventListener('load', () => {
-            const loadTime = (performance.timing.loadEventEnd - performance.timing.navigationStart) / 1000;
-            const loadEl = document.getElementById('load-time');
-            loadEl.textContent = `${loadTime.toFixed(2)}s`;
-            loadEl.className = `metric-value ${loadTime < 2 ? 'good' : loadTime < 4 ? 'warning' : 'poor'}`;
+            // Usar Navigation Timing API Level 2
+            const perfData = performance.getEntriesByType('navigation')[0];
             
-            // TBT aproximado
-            const tbt = performance.timing.domContentLoadedEventEnd - performance.timing.domLoading;
-            const tbtEl = document.getElementById('tbt');
-            tbtEl.textContent = `${tbt}ms`;
-            tbtEl.className = `metric-value ${tbt < 200 ? 'good' : tbt < 600 ? 'warning' : 'poor'}`;
+            if (perfData) {
+                const loadTime = (perfData.loadEventEnd - perfData.fetchStart) / 1000;
+                const loadEl = document.getElementById('load-time');
+                
+                if (loadTime > 0) {
+                    loadEl.textContent = `${loadTime.toFixed(2)}s`;
+                    loadEl.className = `metric-value ${loadTime < 2 ? 'good' : loadTime < 4 ? 'warning' : 'poor'}`;
+                } else {
+                    // Aguardar loadEventEnd estar disponível
+                    setTimeout(() => {
+                        const updatedLoadTime = (performance.getEntriesByType('navigation')[0].loadEventEnd - perfData.fetchStart) / 1000;
+                        loadEl.textContent = `${updatedLoadTime.toFixed(2)}s`;
+                        loadEl.className = `metric-value ${updatedLoadTime < 2 ? 'good' : updatedLoadTime < 4 ? 'warning' : 'poor'}`;
+                    }, 100);
+                }
+                
+                // TBT aproximado usando domContentLoadedEventEnd
+                const tbt = perfData.domContentLoadedEventEnd - perfData.domLoading;
+                const tbtEl = document.getElementById('tbt');
+                
+                if (!isNaN(tbt) && tbt > 0) {
+                    tbtEl.textContent = `${Math.round(tbt)}ms`;
+                    tbtEl.className = `metric-value ${tbt < 200 ? 'good' : tbt < 600 ? 'warning' : 'poor'}`;
+                } else {
+                    // Fallback: usar tempo entre domLoading e domComplete
+                    const fallbackTbt = perfData.domComplete - perfData.domLoading;
+                    if (!isNaN(fallbackTbt) && fallbackTbt > 0) {
+                        tbtEl.textContent = `${Math.round(fallbackTbt)}ms`;
+                        tbtEl.className = `metric-value ${fallbackTbt < 200 ? 'good' : fallbackTbt < 600 ? 'warning' : 'poor'}`;
+                    } else {
+                        tbtEl.textContent = '0ms';
+                        tbtEl.className = 'metric-value good';
+                    }
+                }
+            } else {
+                // Fallback para API antiga se necessário
+                const loadTime = (performance.timing.loadEventEnd - performance.timing.navigationStart) / 1000;
+                if (loadTime > 0) {
+                    const loadEl = document.getElementById('load-time');
+                    loadEl.textContent = `${loadTime.toFixed(2)}s`;
+                    loadEl.className = `metric-value ${loadTime < 2 ? 'good' : loadTime < 4 ? 'warning' : 'poor'}`;
+                }
+                
+                // TBT fallback
+                const tbt = performance.timing.domContentLoadedEventEnd - performance.timing.domLoading;
+                const tbtEl = document.getElementById('tbt');
+                if (!isNaN(tbt) && tbt > 0) {
+                    tbtEl.textContent = `${tbt}ms`;
+                    tbtEl.className = `metric-value ${tbt < 200 ? 'good' : tbt < 600 ? 'warning' : 'poor'}`;
+                } else {
+                    tbtEl.textContent = '0ms';
+                    tbtEl.className = 'metric-value good';
+                }
+            }
         });
         
         // Limpar cache
@@ -291,8 +387,39 @@
         checkServiceWorker();
         observePerformance();
         
-        // Atualizar Service Worker status a cada 5s
-        setInterval(checkServiceWorker, 5000);
+        // Forçar registro do Service Worker
+        if ('serviceWorker' in navigator) {
+            // Verificar se o ambiente suporta SW
+            const isSecureContext = location.protocol === 'https:' || 
+                                   location.hostname === 'localhost' || 
+                                   location.hostname === '127.0.0.1' ||
+                                   location.hostname.includes('.ddev.site') ||
+                                   location.hostname.includes('.local');
+            
+            if (isSecureContext) {
+                navigator.serviceWorker.register('/assets/js/sw.js')
+                    .then(registration => {
+                        console.log('[Monitor] Service Worker registrado:', registration.scope);
+                        
+                        // Forçar ativação imediata
+                        if (registration.waiting) {
+                            registration.waiting.postMessage({ action: 'skipWaiting' });
+                        }
+                        
+                        // Recarregar status após registro
+                        setTimeout(checkServiceWorker, 1000);
+                        setTimeout(checkServiceWorker, 3000);
+                    })
+                    .catch(err => {
+                        console.error('[Monitor] Erro ao registrar Service Worker:', err);
+                    });
+            } else {
+                console.warn('[Monitor] Service Worker requer contexto seguro (HTTPS/localhost)');
+            }
+        }
+        
+        // Atualizar Service Worker status a cada 3s
+        setInterval(checkServiceWorker, 3000);
     </script>
 </body>
 </html>

@@ -12,10 +12,10 @@
                 
                 <div class="space-y-6 text-slate-300 leading-relaxed text-lg">
                     <p class="border-l-4 border-emerald-500 pl-4 italic bg-slate-800/50 py-2 pr-2 rounded-r">
-                        "<?php echo $bioText['intro']; ?>"
+                        "<?php echo htmlspecialchars($bioText['intro'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
                     </p>
                     <p>
-                        <?php echo $bioText['details']; ?>
+                        <?php echo htmlspecialchars($bioText['details'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                     </p>
                 </div>
 
