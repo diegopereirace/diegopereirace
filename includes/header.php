@@ -4,7 +4,11 @@
         <div class="flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <div class="p-1.5 rounded-lg">
-                    <img src="assets/imgs/favicon.png" alt="Logo Diego Pereira" draggable="false" width="40" height="40" />
+                    <picture>
+                        <source srcset="assets/imgs/logo-header.avif" type="image/avif">
+                        <source srcset="assets/imgs/logo-header.webp" type="image/webp">
+                        <img src="assets/imgs/logo-header.png" alt="Logo Diego Pereira" draggable="false" width="40" height="40" loading="eager" class="w-10 h-10 object-contain select-none" />
+                    </picture>
                 </div>
                 <span class="text-2xl font-bold tracking-tighter text-white">
                     DIEGO PEREIRA <span class="text-emerald-400">{</span>dev<span class="text-emerald-400">}</span>

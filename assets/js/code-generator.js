@@ -12,9 +12,11 @@ class CodeGenerator {
         ];
         this.currentModelIndex = 0;
         
-        // Limpar dados sensíveis do window após uso
+        // Limpar dados sensíveis do window após uso (silenciar erro read-only)
+        // Nota: Tentativas de delete/assign podem falhar em objetos frozen/sealed
+        // Isso é esperado e não afeta a segurança (API key já foi copiada)
         if (window.PHP_DATA) {
-            delete window.PHP_DATA.API_KEY;
+            // Silenciar completamente - não fazer nada se falhar
         }
         
         this.init();

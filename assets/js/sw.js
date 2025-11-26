@@ -4,6 +4,9 @@ const CACHE_NAME = `portfolio-${CACHE_VERSION}`;
 
 // Arquivos para cache imediato (apenas recursos críticos que existem)
 const PRECACHE_URLS = [
+  '/assets/imgs/logo-header.png',
+  '/assets/imgs/logo-header.webp',
+  '/assets/imgs/logo-header.avif',
   '/assets/imgs/favicon.png',
   '/assets/js/main.js',
   '/assets/js/code-generator.js',

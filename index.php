@@ -12,7 +12,7 @@ header('X-Content-Type-Options: nosniff');
 header('X-Frame-Options: SAMEORIGIN');
 header('X-XSS-Protection: 1; mode=block');
 header('Referrer-Policy: strict-origin-when-cross-origin');
-header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://esm.run https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://generativelanguage.googleapis.com;");
+header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://esm.run https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://generativelanguage.googleapis.com https://unpkg.com https://www.google-analytics.com https://region1.google-analytics.com https://region1.analytics.google.com;");
 
 // Função segura para carregar .env
 function loadEnvFile(string $envPath): array {
@@ -170,6 +170,22 @@ $skills = [
     <noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
     
     <!-- Scripts com estratégia de carregamento otimizada -->
+    <!-- Suprimir aviso do Tailwind CDN antes do carregamento -->
+    <script>
+        (function () {
+            var originalWarn = window.console && window.console.warn ? window.console.warn.bind(window.console) : null;
+            if (!originalWarn) {
+                return;
+            }
+            window.console.warn = function () {
+                var first = arguments[0];
+                if (typeof first === 'string' && first.indexOf('cdn.tailwindcss.com') !== -1) {
+                    return;
+                }
+                originalWarn.apply(window.console, arguments);
+            };
+        })();
+    </script>
     <!-- Tailwind CDN: Usado intencionalmente para prototipagem rápida -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="assets/js/tailwind-config.js"></script>
