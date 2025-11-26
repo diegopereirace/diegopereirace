@@ -96,7 +96,7 @@ class CodeGenerator {
         - Duna
         - Super Loja
         - Two and a Half Men
-        - Eu, a Patria e as Crianças
+        - Eu, a Patroa e as Crianças
         - Alf, o eteimoso(serie)
         - Deadpool(filme)
         - Rick and Morty(serie)
