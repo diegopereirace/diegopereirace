@@ -1,17 +1,17 @@
-<section id="home" class="relative pt-20 lg:pt-32 pb-16 overflow-hidden">
+<section id="home" class="relative pt-20 lg:pt-32 pb-16 overflow-hidden" aria-labelledby="hero-heading">
     <!-- Background decorations -->
-    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10" aria-hidden="true">
         <div class="absolute top-20 right-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl"></div>
         <div class="absolute bottom-10 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
     </div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col-reverse lg:flex-row items-center gap-8">
         <div class="w-full lg:w-1/2 text-center lg:text-left mt-10 lg:mt-0 lg:pl-0">
-            <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-fade-in">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
+            <div class="inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-emerald-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-fade-in" role="status" aria-live="polite">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse" aria-hidden="true"></span>
                 Disponível para projetos
             </div>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up delay-100">
+            <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up delay-100">
                 Desenvolvedor <br /><span class="text-transparent bg-clip-text animate-gradient">Full Stack</span>
                 <br />
                 Especialista PHP
@@ -34,15 +34,15 @@
             
             <div class="mt-12 flex items-center justify-center lg:justify-start gap-8 text-slate-500">
                 <div class="flex items-center gap-2">
-                    <i data-lucide="terminal" style="width: 20px; height: 20px;"></i>
+                    <i data-lucide="terminal" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                     <span class="font-mono text-sm">Backend Expert</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <i data-lucide="database" style="width: 20px; height: 20px;"></i>
+                    <i data-lucide="database" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                     <span class="font-mono text-sm">DB Architect</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <i data-lucide="server" style="width: 20px; height: 20px;"></i>
+                    <i data-lucide="server" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                     <span class="font-mono text-sm">DevOps aware</span>
                 </div>
             </div>
@@ -56,24 +56,24 @@
                 <div class="relative bg-slate-900 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden">
                     <!-- Terminal Header -->
                     <div class="bg-slate-800 px-4 py-3 flex items-center justify-between border-b border-slate-700">
-                        <div class="flex gap-2">
+                        <div class="flex gap-2" aria-hidden="true">
                             <div class="w-3 h-3 rounded-full bg-red-500"></div>
                             <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
                             <div class="w-3 h-3 rounded-full bg-green-500"></div>
                         </div>
                         <div class="flex items-center gap-2 ml-4">
-                            <i data-lucide="laptop" class="text-slate-400" style="width: 16px; height: 16px;"></i>
+                            <i data-lucide="laptop" class="text-slate-400" style="width: 16px; height: 16px;" aria-hidden="true"></i>
                             <span class="text-sm text-slate-400 font-mono">DiegoPereira.php</span>
                         </div>
-                        <span class="w-6 h-6"></span>
+                        <span class="w-6 h-6" aria-hidden="true"></span>
                     </div>
                     
                     <!-- Code Content -->
-                    <div id="code-display" class="p-4 font-mono text-xs leading-relaxed min-h-[400px] max-h-[500px] overflow-x-auto overflow-y-auto relative">
+                    <div id="code-display" class="p-4 font-mono text-xs leading-relaxed min-h-[400px] max-h-[500px] overflow-x-auto overflow-y-auto relative" role="region" aria-label="Código de exemplo gerado por IA" aria-live="polite">
                         <!-- Loading State -->
                         <div id="code-loading" class="absolute inset-0 flex items-center justify-center bg-slate-900">
                             <div class="text-center">
-                                <div class="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                                <div class="w-12 h-12 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" role="status" aria-label="Carregando código"></div>
                                 <p class="text-slate-400">Gerando código...</p>
                             </div>
                         </div>

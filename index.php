@@ -75,12 +75,35 @@ $skills = [
     <meta name="description" content="Desenvolvedor Sênior PHP e consultor Drupal. Especialista em back-end de alta performance, arquitetura limpa e soluções sob medida."/>
     <meta name="keywords" content="Desenvolvedor, Sênior, PHP, Drupal, Consultor, Back-end, Performance, Arquitetura Limpa, Soluções sob Medida"/>
     <meta name="author" content="Diego Pereira"/>
+    <meta name="theme-color" content="#0f172a"/>
+    <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://diegopereirace.com.br/"/>
     <link rel="shortlink" href="https://diegopereirace.com.br/"/>
     <link rel="icon" type="image/png" href="/assets/imgs/favicon.png"/>
+    <link rel="apple-touch-icon" href="/assets/imgs/favicon.png"/>
+    <link rel="manifest" href="/manifest.json"/>
     <title>DiegoPereira{dev}</title>
+    
+    <!-- DNS Prefetch para domínios externos -->
+    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://esm.run">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    
+    <!-- Preconnect para recursos críticos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
+    
+    <!-- Scripts com estratégia de carregamento otimizada -->
+    <!-- Tailwind CDN: Usado intencionalmente para prototipagem rápida -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="assets/js/tailwind-config.js"></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
     <script type="importmap">
     {
         "imports": {
@@ -88,9 +111,6 @@ $skills = [
         }
     }
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { 
             font-family: 'Outfit', sans-serif; 
@@ -101,6 +121,36 @@ $skills = [
         }
         .font-mono { 
             font-family: 'JetBrains Mono', monospace; 
+        }
+        
+        /* Skip link para acessibilidade */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        .sr-only:focus {
+            position: fixed;
+            width: auto;
+            height: auto;
+            padding: 1rem 1.5rem;
+            margin: 1rem;
+            overflow: visible;
+            clip: auto;
+            white-space: normal;
+            z-index: 9999;
+            background: #10b981;
+            color: white;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
         
         /* Animações modernas */
@@ -157,13 +207,20 @@ $skills = [
         .hidden { display: none; }
     </style>
     
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-V8Q40NWWTR"></script>
+    <!-- Google Analytics (carregado de forma assíncrona) -->
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-V8Q40NWWTR');
+        
+        // Carregar GA de forma não bloqueante
+        window.addEventListener('load', function() {
+            var script = document.createElement('script');
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-V8Q40NWWTR';
+            script.async = true;
+            document.head.appendChild(script);
+        });
     </script>
     
     <script>
@@ -172,24 +229,14 @@ $skills = [
             SYSTEM_INSTRUCTION: <?php echo json_encode($systemInstruction); ?>
         };
     </script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                        heading: ['Space Grotesk', 'sans-serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
 </head>
 <body class="bg-slate-950 text-slate-200 overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-200">
+    <!-- Skip to main content para acessibilidade -->
+    <a href="#main-content" class="sr-only">Pular para o conteúdo principal</a>
+    
     <?php include 'includes/header.php'; ?>
     
-    <main>
+    <main id="main-content" role="main">
         <?php include 'includes/hero.php'; ?>
         <?php include 'includes/about.php'; ?>
         <?php include 'includes/skills.php'; ?>
@@ -197,10 +244,19 @@ $skills = [
     
     <?php include 'includes/footer.php'; ?>
     
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/code-generator.js"></script>
+    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/code-generator.js" defer></script>
     <script>
-        lucide.createIcons();
+        // Executar após carregamento do Lucide
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        } else {
+            window.addEventListener('load', function() {
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            });
+        }
     </script>
 </body>
 </html>

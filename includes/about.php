@@ -1,11 +1,11 @@
 
-<section id="about" class="py-20 bg-slate-900 relative">
+<section id="about" class="py-20 bg-slate-900 relative" aria-labelledby="about-heading">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             
             <!-- Text Content -->
             <div class="order-2 lg:order-1">
-                <h2 class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Sobre Mim</h2>
+                <h2 id="about-heading" class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Sobre Mim</h2>
                 <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
                     Arquitetura limpa e sem gambiarra.
                 </h3>
@@ -21,14 +21,14 @@
 
                 <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div class="flex items-start gap-3">
-                        <i data-lucide="check-circle-2" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
+                        <i data-lucide="check-circle-2" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                         <div>
                             <h4 class="font-semibold text-white">20 Anos de Estrada</h4>
                             <p class="text-sm text-slate-400">Experiência sólida no mercado de tecnologia.</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
-                        <i data-lucide="award" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
+                        <i data-lucide="award" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                         <div>
                             <h4 class="font-semibold text-white">Pós-Graduado</h4>
                             <p class="text-sm text-slate-400">Análise, Projeto e Gerência de Sistemas.</p>

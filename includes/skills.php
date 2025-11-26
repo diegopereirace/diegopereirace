@@ -1,8 +1,8 @@
 
-<section id="skills" class="py-20 bg-slate-900 border-t border-slate-800">
+<section id="skills" class="py-20 bg-slate-900 border-t border-slate-800" aria-labelledby="skills-heading">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Tecnologias</h2>
+            <h2 id="skills-heading" class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Tecnologias</h2>
             <h3 class="text-3xl font-bold text-white">Minha Caixa de Ferramentas</h3>
             <p class="mt-4 text-slate-400 max-w-2xl mx-auto">
                 Do front-end ao back-end, estas são as principais ferramentas e tecnologias que me permitem construir soluções digitais robustas, escaláveis e eficientes.
@@ -13,13 +13,13 @@
             <?php foreach ($skills as $index => $skill): ?>
                 <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700 hover:border-emerald-500/50 transition-colors duration-300 group">
                     <div class="w-12 h-12 bg-slate-900 rounded-lg flex items-center justify-center mb-4 border border-slate-700 group-hover:border-emerald-500/30">
-                        <i data-lucide="<?php echo $skill['icon']; ?>" class="text-emerald-400"></i>
+                        <i data-lucide="<?php echo $skill['icon']; ?>" class="text-emerald-400" aria-hidden="true"></i>
                     </div>
                     <h4 class="text-xl font-bold text-white mb-4"><?php echo $skill['category']; ?></h4>
                     <ul class="space-y-2">
                         <?php foreach ($skill['techs'] as $tech): ?>
                             <li class="flex items-center text-slate-400 text-sm">
-                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-2"></span>
+                                <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-2" aria-hidden="true"></span>
                                 <?php echo $tech; ?>
                             </li>
                         <?php endforeach; ?>

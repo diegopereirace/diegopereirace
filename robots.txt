@@ -1,0 +1,32 @@
+# robots.txt - Diego Pereira Portfolio
+
+# Permitir acesso de todos os bots
+User-agent: *
+Allow: /
+
+# Bloquear acesso a diretórios administrativos e arquivos sensíveis
+Disallow: /includes/
+Disallow: /_arquivos/
+Disallow: /.ddev/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /*.sql$
+Disallow: /*.log$
+Disallow: /*.md$
+Disallow: /.env
+
+# Arquivos importantes
+Sitemap: https://diegopereirace.com.br/sitemap.xml
+
+# Crawl delay (opcional)
+Crawl-delay: 1
+
+# Bots específicos
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
