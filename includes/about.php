@@ -7,15 +7,15 @@
             <div class="order-2 lg:order-1">
                 <h2 id="about-heading" class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Sobre Mim</h2>
                 <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
-                    Arquitetura limpa e sem gambiarra.
+                    Do Back-end Sólido à Inovação em Dados e Front-end
                 </h3>
-                
                 <div class="space-y-6 text-slate-300 leading-relaxed text-lg">
                     <p class="border-l-4 border-emerald-500 pl-4 italic bg-slate-800/50 py-2 pr-2 rounded-r">
-                        "<?php echo htmlspecialchars($bioText['intro'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
+                        "Pós-graduado em <span class=\"text-emerald-400 font-bold\">Análise e Gerência de Sistemas</span>."
                     </p>
                     <p>
-                        <?php echo htmlspecialchars($bioText['details'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
+                        Meu foco é unir a <span class=\"text-emerald-400 font-bold\">experiência em ambientes robustos e escaláveis</span> à <span class=\"text-emerald-400 font-bold\">agilidade das novas ferramentas de dados e front-end</span>.<br />
+                        Atuo como <span class=\"text-emerald-400 font-bold\">Desenvolvedor Sênior</span>, sempre buscando entregar soluções que combinam <span class=\"text-emerald-400 font-bold\">performance</span>, <span class=\"text-emerald-400 font-bold\">segurança</span> e <span class=\"text-emerald-400 font-bold\">inovação</span>.
                     </p>
                 </div>
 
