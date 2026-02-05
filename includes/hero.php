@@ -29,16 +29,16 @@
             
             <div class="mt-12 flex items-center justify-center lg:justify-start gap-8 text-slate-500">
                 <div class="flex items-center gap-2">
-                    <i data-lucide="terminal" style="width: 20px; height: 20px;" aria-hidden="true"></i>
-                    <span class="font-mono text-sm">Backend Expert</span>
+                    <i data-lucide="droplet" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                    <span class="font-mono text-sm">Drupal Expert</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <i data-lucide="database" style="width: 20px; height: 20px;" aria-hidden="true"></i>
-                    <span class="font-mono text-sm">DB Architect</span>
+                    <i data-lucide="code-2" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                    <span class="font-mono text-sm">PHP Expert</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <i data-lucide="server" style="width: 20px; height: 20px;" aria-hidden="true"></i>
-                    <span class="font-mono text-sm">DevOps aware</span>
+                    <i data-lucide="brain-circuit" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                    <span class="font-mono text-sm">Python/Data</span>
                 </div>
             </div>
         </div>

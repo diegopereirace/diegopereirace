@@ -7,15 +7,17 @@
             <div class="order-2 lg:order-1">
                 <h2 id="about-heading" class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Sobre Mim</h2>
                 <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
-                    Do Back-end Sólido à Inovação em Dados e Front-end
+                    Visão Geral da Carreira
                 </h3>
                 <div class="space-y-6 text-slate-300 leading-relaxed text-lg">
                     <p class="border-l-4 border-emerald-500 pl-4 italic bg-slate-800/50 py-2 pr-2 rounded-r">
                         "Pós-graduado em <span class=\"text-emerald-400 font-bold\">Análise e Gerência de Sistemas</span>."
                     </p>
                     <p>
-                        Meu foco é unir a <span class=\"text-emerald-400 font-bold\">experiência em ambientes robustos e escaláveis</span> à <span class=\"text-emerald-400 font-bold\">agilidade das novas ferramentas de dados e front-end</span>.<br />
-                        Atuo como <span class=\"text-emerald-400 font-bold\">Desenvolvedor Sênior</span>, sempre buscando entregar soluções que combinam <span class=\"text-emerald-400 font-bold\">performance</span>, <span class=\"text-emerald-400 font-bold\">segurança</span> e <span class=\"text-emerald-400 font-bold\">inovação</span>.
+                        Com 20 anos de experiência no mercado de tecnologia, atuei por 6 anos como administrador de redes e responsável pela manutenção dos ativos de TI. 
+                        Nos últimos 14 anos, foquei em desenvolvimento de sistemas com <span class="text-emerald-400 font-bold">PHP</span> e <span class="text-emerald-400 font-bold">Drupal</span>, entregando soluções de alta performance, segurança e inovação para clientes de diversos segmentos. 
+                        Tenho segurança e dominio de <span class="text-emerald-400 font-bold">PHP</span>, principalmente com a ferramenta <span class="text-emerald-400 font-bold">Drupal</span>, arquitetura de sistemas e customização de módulos, 
+                        além de estudos intensos em inteligência artificial e ciência de dados com Python.
                     </p>
                 </div>
 
