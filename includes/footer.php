@@ -7,7 +7,7 @@
                     DIEGO PEREIRA <span class="text-emerald-400">{</span>dev<span class="text-emerald-400">}</span>
                 </h2>
                 <p class="text-slate-500 mt-2 max-w-md">
-                    Desenvolvedor focado em resolver problemas reais com código limpo e eficiente.
+                    Desenvolvedor sênior focado em <span class="text-emerald-400 font-bold">resolver problemas reais</span> com <span class="text-emerald-400 font-bold">código limpo</span> e <span class="text-emerald-400 font-bold">eficiente</span>.
                 </p>
             </div>
 
@@ -23,7 +23,7 @@
         
         <div class="mt-8 border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
             <p>&copy; <?php echo date('Y'); ?> Diego Pereira. Todos os direitos reservados.</p>
-            <p class="mt-2 md:mt-0">Feito com PHP e muita tecnologia</p>
+            <p class="mt-2 md:mt-0">Feito com <span class="text-emerald-400 font-bold">PHP</span>, e muita tecnologia</p>
         </div>
     </div>
 </footer>
