@@ -3,9 +3,10 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h2 id="skills-heading" class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Tecnologias</h2>
-            <h3 class="text-3xl font-bold text-white">Minha Caixa de Ferramentas</h3>
+            <h3 class="text-3xl font-bold text-white">Tecnologias que impulsionam minha jornada</h3>
             <p class="mt-4 text-slate-400 max-w-2xl mx-auto">
-                Do front-end ao back-end, estas são as principais ferramentas e tecnologias que me permitem construir soluções digitais robustas, escaláveis e eficientes.
+                <span class="text-emerald-400 font-bold">PHP</span>, <span class="text-emerald-400 font-bold">Drupal</span>, <span class="text-emerald-400 font-bold">Python</span>, <span class="text-emerald-400 font-bold">React</span>, <span class="text-emerald-400 font-bold">Análise de Dados</span> e <span class="text-emerald-400 font-bold">DevOps</span> fazem parte do meu dia a dia.<br />
+                Estou sempre expandindo meu repertório para entregar soluções completas e modernas.
             </p>
         </div>
 
