@@ -18,6 +18,9 @@
                 <a href="mailto:atendimento@diegopereirace.com.br" class="text-slate-400 hover:text-red-400 transition-colors" aria-label="Enviar e-mail para Diego Pereira">
                     <i data-lucide="mail" style="width: 24px; height: 24px;" aria-hidden="true"></i>
                 </a>
+                <a href="https://wa.me/558591966144?text=Ol%C3%A1%21%0AVim%20atrav%C3%A9s%20do%20site%20diegopereirace.com.br%2C%20e%20estou%20interessado%20em%20conversar%20sobre%20projetos." class="text-slate-400 hover:text-emerald-400 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp com Diego Pereira">
+                    <i data-lucide="message-circle" style="width: 24px; height: 24px;" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
         
