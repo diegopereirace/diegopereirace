@@ -33,11 +33,11 @@
                     <span class="font-mono text-sm">Drupal Expert</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <i data-lucide="code-2" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                    <span class="font-mono text-xs text-slate-500" style="width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center;" aria-hidden="true">&lt;?</span>
                     <span class="font-mono text-sm">PHP Expert</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <i data-lucide="brain-circuit" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                    <i data-lucide="binary" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                     <span class="font-mono text-sm">Python/Data</span>
                 </div>
             </div>
