@@ -83,7 +83,10 @@
                             <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
                             <span class="text-xs text-slate-400">IA criativa ajudando nos bastidores</span>
                         </div>
-                        <span class="text-xs text-slate-500 font-mono" id="code-timestamp"></span>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xs text-slate-500 font-mono" id="code-source" aria-live="polite"></span>
+                            <span class="text-xs text-slate-500 font-mono" id="code-timestamp"></span>
+                        </div>
                     </div>
                 </div>
             </div>
