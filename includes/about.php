@@ -40,7 +40,7 @@
                         <i data-lucide="hexagon" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
                         <div>
                             <h4 class="font-semibold text-white">Drupal Expert</h4>
-                            <p class="text-sm text-slate-400">15 anos dominando Drupal, de módulos customizado a arquiteturas complexas.</p>
+                            <p class="text-sm text-slate-400">14 anos dominando Drupal, de módulos customizados a arquiteturas complexas.</p>
                         </div>
                     </div>                    
                     <div class="flex items-start gap-3">
@@ -57,7 +57,7 @@
             <div class="order-1 lg:order-2">
                 <div class="grid grid-cols-2 gap-4">
                     <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 transform translate-y-8 hover-lift animate-fade-in-up">
-                        <span class="text-4xl font-bold text-white block mb-2">15+</span>
+                        <span class="text-4xl font-bold text-white block mb-2">14</span>
                         <span class="text-slate-400 text-sm uppercase tracking-wider">Anos programando</span>
                     </div>
                     <div class="bg-emerald-900/20 p-4 rounded-2xl border border-emerald-500/30 hover-lift animate-fade-in-up delay-100">
