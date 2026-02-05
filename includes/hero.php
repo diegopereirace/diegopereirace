@@ -12,16 +12,11 @@
                 Disponível para projetos
             </div>
             <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up delay-100">
-                Desenvolvedor <br /><span class="text-transparent bg-clip-text animate-gradient">Full Stack</span>
-                <br />
-                Especialista PHP
+                Desenvolvedor Sênior<br />
             </h1>
             <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed animate-fade-in-up delay-200">
-                Quase 20 anos vivendo e respirando tecnologia. Da base sólida em 
-                <span class="text-slate-200 font-semibold"> PHP</span>, 
-                <span class="text-slate-200 font-semibold"> MySQL/PostgreSQL</span> e
-                <span class="text-slate-200 font-semibold"> Drupal</span> 
-                à expansão para Python, IA e Data Science.
+                14 anos <span class="text-emerald-400 font-bold">"vivendo"</span> arquiteturas em <span class="text-emerald-400 font-bold">PHP</span> e <span class="text-emerald-400 font-bold">Drupal</span>. 
+                Expandindo meu repertório técnico para o ecossistema de <span class="text-emerald-400 font-bold">Dados</span> com <span class="text-emerald-400 font-bold">Python</span> e interfaces modernas em <span class="text-emerald-400 font-bold">React</span>, unindo experiência de mercado a novas soluções.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-up delay-300">
                 <a href="#contact" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-1">
