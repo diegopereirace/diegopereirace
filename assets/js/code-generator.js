@@ -59,6 +59,7 @@ class CodeGenerator {
 
             this.currentCode = code;
             this.displayCode(code);
+            console.info('Plano A: API OK');
             this.updateTimestamp();
         } catch (error) {
             console.error('Erro ao gerar código:', error);
@@ -82,7 +83,6 @@ class CodeGenerator {
         - Máximo de 15 linhas de código
         - CADA REQUISIÇÃO DEVE USAR UM PERSONAGEM DIFERENTE E ALEATÓRIO
         - SEM tags <?php
-        - Retorne APENAS o código da classe
         - CÓDIGO DEVE SER SINTATICAMENTE CORRETO
         - Seed de aleatoriedade: ${randomSeed}
 
@@ -90,7 +90,7 @@ class CodeGenerator {
         - class [NomePersonagem] extends [ClasseBase]
         - const experiencia = 20
         - const especialidade = ['PHP']
-        - const focoAtual = ['Python', 'IA']
+        - const focoAtual = ['Python', 'IA', 'Machine Learning', 'React']
         - public function fazerAlgo($parametro) - SEMPRE use $ antes de parâmetros (ex: $bug, $problema, $desafio)
         - Nomes de variáveis SEMPRE começam com $ (cifrão)
         - Comentários CURTOS (máximo 6 palavras), engraçados e relacionados ao personagem
@@ -149,7 +149,7 @@ class CodeGenerator {
         class DocBrown extends DesenvolvedorVeterano {
             const experiencia = 20;
             const especialidade = ['PHP', 'MySQL', 'APIs', 'DeLorean Tech', 'Temporal Logic'];
-            const focoAtual = ['Python', 'IA'];
+            const focoAtual = ['Python', 'IA', 'Machine Learning', 'React'];
             
             public function viajarNoTempo($bug) {
                 // Não precisamos de bugs
@@ -163,7 +163,7 @@ class CodeGenerator {
         class JimmyMcGill extends AdvogadoEstrategista {
             const experiencia = 20;
             const especialidade = ['PHP', 'MySQL', 'APIs', 'Negociação Legal', 'Marketing Criativo'];
-            const focoAtual = ['Python', 'IA'];
+            const focoAtual = ['Python', 'IA', 'Machine Learning', 'React'];
             
             public function encontrarBrecha($desafio) {
                 // Sempre há uma solução legal
@@ -171,7 +171,7 @@ class CodeGenerator {
             }
         }
         const especialidade = ['PHP', 'Gestão de Estoque', 'MySQL', 'APIs', 'Anúncios na Loja'];
-        const focoAtual = ['Python', 'IA'];
+        const focoAtual = ['Python', 'IA', 'Machine Learning', 'React'];
         
         public function organizarPromocao($produto) {
             // Tenham um dia celestial!
@@ -279,6 +279,7 @@ class CodeGenerator {
         
         codeContent.innerHTML = `<pre class="text-slate-300 whitespace-pre-wrap break-words">${formattedCode}</pre>`;
         codeContent.classList.remove('hidden');
+        this.setSourceBadge('Fonte: IA');
     }
 
     formatPHPCode(code) {
@@ -366,6 +367,7 @@ class CodeGenerator {
         
         codeContent.innerHTML = `<pre class="text-slate-300">${formattedError}</pre>`;
         codeContent.classList.remove('hidden');
+        this.setSourceBadge('Fonte: Erro');
     }
 
     escapeHtml(text) {
@@ -380,7 +382,7 @@ class CodeGenerator {
             `class DocBrown extends CientistaMaluco {
     const experiencia = 20;
     const especialidade = ['PHP', 'Viagem Temporal', 'DeLorean', 'Drupal', 'APIs'];
-    const focoAtual = ['Python', 'IA'];
+    const focoAtual = ['Python', 'IA', 'Machine Learning', 'React'];
     
     public function viajarNoTempo($bug) {
         // Onde vamos, não precisamos de bugs
@@ -390,7 +392,7 @@ class CodeGenerator {
             `class Morpheus extends MentorDigital {
     const experiencia = 20;
     const especialidade = ['PHP', 'Realidade Virtual', 'Filosofia', 'MySQL', 'Segurança'];
-    const focoAtual = ['Python', 'IA'];
+    const focoAtual = ['Python', 'IA', 'Machine Learning', 'React'];
     
     public function mostrarVerdade($desenvolvedor) {
         // E se eu te disser que tudo é uma ilusão?
@@ -400,7 +402,7 @@ class CodeGenerator {
             `class Trinity extends HackerElite {
     const experiencia = 20;
     const especialidade = ['PHP', 'Hacking Avançado', 'Segurança', 'Drupal', 'APIs'];
-    const focoAtual = ['Python', 'IA'];
+    const focoAtual = ['Python', 'IA', 'Machine Learning', 'React'];
     
     public function invadirSistema($servidor) {
         // Eu crackeei o IRS
@@ -410,7 +412,7 @@ class CodeGenerator {
             `class Deckard extends BladeRunner {
     const experiencia = 20;
     const especialidade = ['PHP', 'Análise de Código', 'IA', 'MySQL', 'Cloud'];
-    const focoAtual = ['Python', 'Machine Learning'];
+    const focoAtual = ['Python', 'Machine Learning', 'React'];
     
     public function detectarReplicante($codigo) {
         // Já viu coisas que você não acreditaria
@@ -420,7 +422,7 @@ class CodeGenerator {
             `class ElliotAlderson extends HackerSocial {
     const experiencia = 20;
     const especialidade = ['PHP', 'Cybersecurity', 'Linux', 'Drupal', 'Exploits'];
-    const focoAtual = ['Python', 'IA'];
+    const focoAtual = ['Python', 'IA', 'Machine Learning', 'React'];
     
     public function derrubarCorporacao($fsociety) {
         // Olá, amigo
@@ -430,7 +432,7 @@ class CodeGenerator {
             `class AlanTuring extends PaiDaComputacao {
     const experiencia = 20;
     const especialidade = ['PHP', 'Criptografia', 'Enigma', 'Algoritmos', 'Lógica'];
-    const focoAtual = ['Python', 'IA'];
+    const focoAtual = ['Python', 'IA', 'Machine Learning', 'React'];
     
     public function quebrarCodigo($enigma) {
         // Às vezes é as pessoas que ninguém imagina que fazem as coisas
@@ -440,7 +442,7 @@ class CodeGenerator {
             `class KevinFlynn extends ProgramadorVisionario {
     const experiencia = 20;
     const especialidade = ['PHP', 'Mundos Digitais', 'TRON', 'MySQL', 'Game Dev'];
-    const focoAtual = ['Python', 'IA'];
+    const focoAtual = ['Python', 'IA', 'Machine Learning', 'React'];
     
     public function entrarNoSistema($grid) {
         // Luto pelos usuários
@@ -511,6 +513,7 @@ class CodeGenerator {
 
         const randomCode = fallbackCodes[Math.floor(Math.random() * fallbackCodes.length)];
         this.displayCode(randomCode);
+        this.setSourceBadge('Fonte: Fallback');
     }
 
     showLoading() {
@@ -518,6 +521,7 @@ class CodeGenerator {
         if (loading) {
             loading.classList.remove('hidden');
         }
+        this.setSourceBadge('Fonte: Gerando...');
     }
 
     hideLoading() {
@@ -537,6 +541,12 @@ class CodeGenerator {
             });
             timestamp.textContent = `Updated: ${timeStr}`;
         }
+    }
+
+    setSourceBadge(text) {
+        const source = document.getElementById('code-source');
+        if (!source) return;
+        source.textContent = text;
     }
 }
 
