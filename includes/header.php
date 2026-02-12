@@ -22,9 +22,12 @@
                         $href = $link['href'] ?? '#';
                         $name = $link['name'] ?? '';
                         $isExternal = str_starts_with($href, 'http://') || str_starts_with($href, 'https://');
+                        $isPrimary = strtoupper($name) === 'CONTRATE-ME';
                     ?>
                     <a href="<?php echo htmlspecialchars($href, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" 
-                       class="text-slate-300 hover:text-emerald-400 font-medium transition-colors text-sm uppercase tracking-wide"<?php if ($isExternal): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>>
+                       class="<?php echo $isPrimary 
+                           ? 'text-emerald-400 hover:text-emerald-300 font-bold transition-colors text-sm uppercase tracking-wide' 
+                           : 'text-slate-300 hover:text-emerald-400 font-medium transition-colors text-sm uppercase tracking-wide'; ?>"<?php if ($isExternal): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>>
                         <?php echo htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                     </a>
                 <?php endforeach; ?>
@@ -46,9 +49,12 @@
                     $href = $link['href'] ?? '#';
                     $name = $link['name'] ?? '';
                     $isExternal = str_starts_with($href, 'http://') || str_starts_with($href, 'https://');
+                    $isPrimary = strtoupper($name) === 'CONTRATE-ME';
                 ?>
                 <a href="<?php echo htmlspecialchars($href, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" 
-                   class="block px-4 py-3 text-slate-300 hover:text-emerald-400 hover:bg-slate-800 rounded-lg transition-colors mobile-link"<?php if ($isExternal): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>">
+                   class="block px-4 py-3 rounded-lg transition-colors mobile-link <?php echo $isPrimary 
+                       ? 'bg-emerald-500 text-white font-bold hover:bg-emerald-600' 
+                       : 'text-slate-300 hover:text-emerald-400 hover:bg-slate-800'; ?>"<?php if ($isExternal): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>">
                     <?php echo htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                 </a>
             <?php endforeach; ?>

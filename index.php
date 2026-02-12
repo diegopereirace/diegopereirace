@@ -112,7 +112,7 @@ $navLinks = [
     ['name' => 'Sobre', 'href' => '#about'],
     ['name' => 'Skills', 'href' => '#skills'],
     ['name' => 'Exercícios em Python · Análise de Dados', 'href' => 'https://portfolio-py-c45uvaal8fvasrmvlxrcxs.streamlit.app/'],
-    ['name' => 'Contato', 'href' => '#contact']
+    ['name' => 'CONTRATE-ME', 'href' => '#contact']
 ];
 
 $skills = [
