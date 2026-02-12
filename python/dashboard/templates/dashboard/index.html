@@ -1,0 +1,563 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Vendas - Data Science Academy</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Plotly JS -->
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #00CC96;
+            --secondary-color: #636EFA;
+            --dark-bg: #1a1a1a;
+            --card-bg: #262730;
+            --text-light: #FAFAFA;
+            --text-gray: #AAA;
+        }
+
+        body {
+            background-color: #111;
+            color: var(--text-light);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 20px 0;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-weight: 700;
+            margin: 0;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.9);
+            margin: 8px 0 0 0;
+            font-size: 0.9rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar h5 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .filter-group {
+            margin-bottom: 20px;
+        }
+
+        .filter-group label {
+            display: block;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-control, .form-select {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(0,204,150,0.2);
+            background-color: #1a1a1a;
+            color: var(--text-light);
+        }
+
+        .form-check-input {
+            background-color: #1a1a1a;
+            border-color: #444;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .form-check-label {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .checkbox-group {
+            max-height: 120px;
+            overflow-y: auto;
+            padding: 8px;
+            background-color: rgba(0,0,0,0.3);
+            border-radius: 4px;
+        }
+
+        .btn-filtrar {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #2cc990 100%);
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-filtrar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,204,150,0.3);
+        }
+
+        /* KPI Cards */
+        .kpi-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .kpi-label {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .kpi-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 5px;
+        }
+
+        .kpi-delta {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .kpi-delta.negative {
+            color: #FF5252;
+        }
+
+        /* Tabs */
+        .nav-tabs {
+            border-bottom: 2px solid #444;
+            margin-bottom: 25px;
+        }
+
+        .nav-tabs .nav-link {
+            color: var(--text-gray);
+            border: none;
+            border-bottom: 3px solid transparent;
+            padding: 10px 18px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: var(--text-light);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .nav-tabs .nav-link.active {
+            color: var(--primary-color);
+            background-color: transparent;
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Gráficos */
+        .chart-container {
+            background-color: var(--card-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Tabela */
+        .table-dark {
+            --bs-table-bg: var(--card-bg);
+            --bs-table-border-color: #444;
+        }
+
+        .table-dark thead th {
+            background-color: rgba(0,204,150,0.15);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* Export Section */
+        .export-section {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        .export-section h5 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .btn-export {
+            padding: 10px 20px;
+            border: 2px solid var(--primary-color);
+            background-color: transparent;
+            color: var(--primary-color);
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .btn-export:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--card-bg);
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.4rem; }
+            .kpi-value { font-size: 1.3rem; }
+            .sidebar { position: static; margin-bottom: 20px; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="container-fluid px-4">
+            <h1><i class="fas fa-chart-line"></i> Data Science Academy</h1>
+            <p>📊 Dashboard Interativo de Sales Analytics com Django</p>
+        </div>
+    </div>
+
+    <div class="container-fluid px-4">
+        <div class="row">
+            <!-- Sidebar com Filtros -->
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="sidebar">
+                    <h5><i class="fas fa-filter"></i> Filtros</h5>
+                    <form method="get" action="{% url 'dashboard:index' %}">
+                        <!-- Data Início -->
+                        <div class="filter-group">
+                            <label>📅 Data Início</label>
+                            <input type="date" name="data_inicio" class="form-control" 
+                                   value="{{ data_inicio }}" min="{{ min_date }}" max="{{ max_date }}">
+                        </div>
+
+                        <!-- Data Fim -->
+                        <div class="filter-group">
+                            <label>📅 Data Fim</label>
+                            <input type="date" name="data_fim" class="form-control" 
+                                   value="{{ data_fim }}" min="{{ min_date }}" max="{{ max_date }}">
+                        </div>
+
+                        <!-- Regiões -->
+                        <div class="filter-group">
+                            <label>🌍 Regiões</label>
+                            <div class="checkbox-group">
+                                {% for regiao in all_regioes %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="regioes" 
+                                           value="{{ regiao }}" id="regiao_{{ forloop.counter }}"
+                                           {% if regiao in selected_regioes %}checked{% endif %}>
+                                    <label class="form-check-label" for="regiao_{{ forloop.counter }}">{{ regiao }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Categorias -->
+                        <div class="filter-group">
+                            <label>📦 Categorias</label>
+                            <div class="checkbox-group">
+                                {% for categoria in all_categorias %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="categorias" 
+                                           value="{{ categoria }}" id="categoria_{{ forloop.counter }}"
+                                           {% if categoria in selected_categorias %}checked{% endif %}>
+                                    <label class="form-check-label" for="categoria_{{ forloop.counter }}">{{ categoria }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Produtos -->
+                        <div class="filter-group">
+                            <label>🛍️ Produtos</label>
+                            <select name="produtos" class="form-select" multiple size="4">
+                                {% for produto in all_produtos %}
+                                <option value="{{ produto }}" {% if produto in selected_produtos %}selected{% endif %}>
+                                    {{ produto }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <small class="text-muted">Ctrl+Click para múltiplos</small>
+                        </div>
+
+                        <button type="submit" class="btn-filtrar">
+                            <i class="fas fa-search"></i> Aplicar Filtros
+                        </button>
+                    </form>
+
+                    <hr style="border-color: #444; margin-top: 20px;">
+                    <p class="mb-0" style="font-size: 0.85rem;">
+                        <strong>📊 Total:</strong> {{ total_registros }} registros
+                    </p>
+                </div>
+            </div>
+
+            <!-- Conteúdo Principal -->
+            <div class="col-lg-9 col-md-8">
+                <!-- KPI Cards -->
+                <div class="row">
+                    <div class="col-md-3 col-6">
+                        <div class="kpi-card">
+                            <div class="kpi-label">💰 Receita Total</div>
+                            <div class="kpi-value">R$ {{ kpis.total_faturamento|floatformat:0 }}</div>
+                            <div class="kpi-delta {% if kpis.delta_rev < 0 %}negative{% endif %}">
+                                {% if kpis.delta_rev > 0 %}↑{% else %}↓{% endif %} {{ kpis.delta_rev|floatformat:1 }}% vs meta
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="kpi-card">
+                            <div class="kpi-label">📈 Vendas (Qtd)</div>
+                            <div class="kpi-value">{{ kpis.total_quantidade }}</div>
+                            <div class="kpi-delta">Unidades vendidas</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="kpi-card">
+                            <div class="kpi-label">🎯 Ticket Médio</div>
+                            <div class="kpi-value">R$ {{ kpis.avg_ticket|floatformat:2 }}</div>
+                            <div class="kpi-delta">Por transação</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="kpi-card">
+                            <div class="kpi-label">📋 Transações</div>
+                            <div class="kpi-value">{{ kpis.total_transacoes }}</div>
+                            <div class="kpi-delta">Volume total</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#graficos" type="button">
+                            <i class="fas fa-chart-bar"></i> Gráficos
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#dados" type="button">
+                            <i class="fas fa-table"></i> Dados
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- Aba Gráficos -->
+                    <div class="tab-pane fade show active" id="graficos">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="chart-container">
+                                    {% if grafico_evolucao %}
+                                        {{ grafico_evolucao|safe }}
+                                    {% else %}
+                                        <p class="text-center text-muted py-5">Sem dados para exibir</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="chart-container">
+                                    {% if grafico_mix %}
+                                        {{ grafico_mix|safe }}
+                                    {% else %}
+                                        <p class="text-center text-muted py-5">Sem dados</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="chart-container">
+                                    {% if grafico_regional %}
+                                        {{ grafico_regional|safe }}
+                                    {% else %}
+                                        <p class="text-center text-muted py-5">Sem dados</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="chart-container">
+                                    {% if grafico_diasemana %}
+                                        {{ grafico_diasemana|safe }}
+                                    {% else %}
+                                        <p class="text-center text-muted py-5">Sem dados</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            {% if grafico_dispersao %}
+                                {{ grafico_dispersao|safe }}
+                            {% else %}
+                                <p class="text-center text-muted py-5">Sem dados para exibir</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Aba Dados -->
+                    <div class="tab-pane fade" id="dados">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Região</th>
+                                        <th>Categoria</th>
+                                        <th>Produto</th>
+                                        <th>Faturamento</th>
+                                        <th>Qtd</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabela-dados">
+                                    <tr>
+                                        <td colspan="6" class="text-center py-4">
+                                            <i class="fas fa-spinner fa-spin"></i> Carregando...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Exportação -->
+                        <div class="export-section">
+                            <h5><i class="fas fa-download"></i> Exportar Dados</h5>
+                            <a href="{% url 'dashboard:export_csv' %}?{{ request.GET.urlencode }}" class="btn-export">
+                                <i class="fas fa-file-csv"></i> Baixar CSV
+                            </a>
+                            <a href="{% url 'dashboard:export_pdf' %}?{{ request.GET.urlencode }}" class="btn-export">
+                                <i class="fas fa-file-pdf"></i> Baixar PDF
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>📚 Dashboard desenvolvido com <strong>Django</strong> | Data Science Academy</p>
+        <p>Para dúvidas: suporte@datascienceacademy.com.br</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Carrega dados quando aba é clicada
+        document.querySelector('[data-bs-target="#dados"]').addEventListener('click', function() {
+            carregarDados();
+        });
+
+        function carregarDados() {
+            var params = new URLSearchParams(window.location.search);
+            
+            fetch('{% url "dashboard:dados_api" %}?' + params.toString())
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
+                    var tabela = document.getElementById('tabela-dados');
+                    tabela.innerHTML = '';
+
+                    if (data.dados.length === 0) {
+                        tabela.innerHTML = '<tr><td colspan="6" class="text-center py-4">Nenhum dado encontrado</td></tr>';
+                        return;
+                    }
+
+                    data.dados.forEach(function(venda) {
+                        var row = document.createElement('tr');
+                        var dateObj = new Date(venda.date);
+                        row.innerHTML = 
+                            '<td>' + dateObj.toLocaleDateString('pt-BR') + '</td>' +
+                            '<td>' + venda.regiao + '</td>' +
+                            '<td>' + venda.categoria + '</td>' +
+                            '<td>' + venda.produto + '</td>' +
+                            '<td>R$ ' + parseFloat(venda.faturamento).toLocaleString('pt-BR', {minimumFractionDigits: 2}) + '</td>' +
+                            '<td>' + venda.quantidade + '</td>';
+                        tabela.appendChild(row);
+                    });
+
+                    // Total
+                    var totalRow = document.createElement('tr');
+                    totalRow.style.fontWeight = 'bold';
+                    totalRow.innerHTML = '<td colspan="5" class="text-end">Total de registros:</td><td>' + data.total + '</td>';
+                    tabela.appendChild(totalRow);
+                })
+                .catch(function(error) {
+                    console.error('Erro:', error);
+                    document.getElementById('tabela-dados').innerHTML = '<tr><td colspan="6" class="text-center py-4 text-danger">Erro ao carregar dados</td></tr>';
+                });
+        }
+    </script>
+</body>
+</html>
