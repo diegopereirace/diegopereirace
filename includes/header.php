@@ -28,10 +28,6 @@
                         <?php echo htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                     </a>
                 <?php endforeach; ?>
-                <a href="#contact" 
-                   class="px-5 py-2 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg transition-all shadow hover:shadow-emerald-500/25">
-                    Contrate-me
-                </a>
             </nav>
 
             <!-- Mobile Menu Button -->
@@ -56,10 +52,6 @@
                     <?php echo htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                 </a>
             <?php endforeach; ?>
-            <a href="#contact" 
-               class="block px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg transition-all text-center mobile-link">
-                Contrate-me
-            </a>
         </div>
     </nav>
 </header>
