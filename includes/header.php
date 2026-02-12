@@ -18,9 +18,14 @@
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8" aria-label="Navegação principal">
                 <?php foreach ($navLinks as $link): ?>
-                    <a href="<?php echo htmlspecialchars($link['href'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" 
-                        class="text-slate-300 hover:text-emerald-400 font-medium transition-colors text-sm uppercase tracking-wide">
-                        <?php echo htmlspecialchars($link['name'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
+                    <?php 
+                        $href = $link['href'] ?? '#';
+                        $name = $link['name'] ?? '';
+                        $isExternal = str_starts_with($href, 'http://') || str_starts_with($href, 'https://');
+                    ?>
+                    <a href="<?php echo htmlspecialchars($href, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" 
+                       class="text-slate-300 hover:text-emerald-400 font-medium transition-colors text-sm uppercase tracking-wide"<?php if ($isExternal): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>>
+                        <?php echo htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                     </a>
                 <?php endforeach; ?>
                 <a href="#contact" 
@@ -41,9 +46,14 @@
     <nav id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 shadow-xl animate-fade-in-up" aria-label="Menu mobile">
         <div class="px-4 py-4 space-y-2">
             <?php foreach ($navLinks as $link): ?>
-                <a href="<?php echo htmlspecialchars($link['href'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" 
-                   class="block px-4 py-3 text-slate-300 hover:text-emerald-400 hover:bg-slate-800 rounded-lg transition-colors mobile-link">
-                    <?php echo htmlspecialchars($link['name'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
+                <?php 
+                    $href = $link['href'] ?? '#';
+                    $name = $link['name'] ?? '';
+                    $isExternal = str_starts_with($href, 'http://') || str_starts_with($href, 'https://');
+                ?>
+                <a href="<?php echo htmlspecialchars($href, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" 
+                   class="block px-4 py-3 text-slate-300 hover:text-emerald-400 hover:bg-slate-800 rounded-lg transition-colors mobile-link"<?php if ($isExternal): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>>
+                    <?php echo htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                 </a>
             <?php endforeach; ?>
             <a href="#contact" 
