@@ -1,5 +1,6 @@
 
 <?php
+// Ícone textual (não é possível enviar imagem real na mensagem automática do WhatsApp)
 $whatsappMessage = urlencode("Olá!\nVim através do site diegopereirace.com.br, e estou interessado em conversar sobre o meu projeto!");
 ?>
 
