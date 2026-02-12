@@ -150,9 +150,29 @@ $skills = [
     <meta name="color-scheme" content="dark">
     <link rel="canonical" href="https://diegopereirace.com.br/"/>
     <link rel="shortlink" href="https://diegopereirace.com.br/"/>
+
+    <!-- Ícones do site -->
+    <link rel="icon" type="image/avif" href="/assets/imgs/favicon.avif"/>
     <link rel="icon" type="image/png" href="/assets/imgs/favicon.png"/>
     <link rel="apple-touch-icon" href="/assets/imgs/favicon.png"/>
     <link rel="manifest" href="/manifest.json"/>
+
+    <!-- Open Graph para preview no WhatsApp e redes sociais -->
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="DiegoPereira{dev}" />
+    <meta property="og:title" content="DiegoPereira{dev} · Desenvolvedor Sênior PHP e consultor Drupal" />
+    <meta property="og:description" content="Desenvolvedor Sênior PHP e consultor Drupal. Especialista em back-end de alta performance, arquitetura limpa e soluções sob medida." />
+    <meta property="og:url" content="https://diegopereirace.com.br/" />
+    <meta property="og:image" content="https://diegopereirace.com.br/assets/imgs/logo-header.avif" />
+    <meta property="og:image:type" content="image/avif" />
+
+    <!-- Twitter Cards (compatibilidade extra) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DiegoPereira{dev} · Desenvolvedor Sênior PHP e consultor Drupal" />
+    <meta name="twitter:description" content="Desenvolvedor Sênior PHP e consultor Drupal. Especialista em back-end de alta performance, arquitetura limpa e soluções sob medida." />
+    <meta name="twitter:image" content="https://diegopereirace.com.br/assets/imgs/logo-header.avif" />
+
     <title>DiegoPereira{dev}</title>
     
     <!-- DNS Prefetch para domínios externos -->
