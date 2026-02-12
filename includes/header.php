@@ -48,7 +48,7 @@
                     $isExternal = str_starts_with($href, 'http://') || str_starts_with($href, 'https://');
                 ?>
                 <a href="<?php echo htmlspecialchars($href, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" 
-                   class="block px-4 py-3 text-slate-300 hover:text-emerald-400 hover:bg-slate-800 rounded-lg transition-colors mobile-link"<?php if ($isExternal): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>>
+                   class="block px-4 py-3 text-slate-300 hover:text-emerald-400 hover:bg-slate-800 rounded-lg transition-colors mobile-link"<?php if ($isExternal): ?> target="_blank" rel="noopener noreferrer"<?php endif; ?>">
                     <?php echo htmlspecialchars($name, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                 </a>
             <?php endforeach; ?>
