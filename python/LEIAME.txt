@@ -1,0 +1,122 @@
+# Mini-Projeto 10 - Data App Para Dashboard Interativo de Sales Analytics em Python com Streamlit
+
+# Dashboard de Vendas - Django para KingHost
+# Adaptado do Mini-Projeto 10 (Streamlit) para Django
+
+# =============================================================================
+# INSTALAÇÃO LOCAL (DESENVOLVIMENTO)
+# =============================================================================
+
+# 1. Crie e ative o ambiente virtual:
+python3 -m venv diegopython
+source diegopython/bin/activate  # Linux/Mac
+# ou: diegopython\Scripts\activate  # Windows
+
+# 2. Instale as dependências:
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# 3. Execute as migrações:
+python manage.py migrate
+
+# 4. Popule o banco com dados fictícios:
+python manage.py populate_db
+
+# 5. Inicie o servidor de desenvolvimento:
+python manage.py runserver
+
+# 6. Acesse em: http://127.0.0.1:8000/
+
+# =============================================================================
+# DEPLOY NA KINGHOST
+# =============================================================================
+
+# 1. Acesse via SSH:
+ssh diegopereirace@diegopereirace.com.br
+
+# 2. Navegue até a pasta:
+cd /home/diegopereirace/apps_wsgi/python/python
+
+# 3. Ative o ambiente virtual:
+source diegopython/bin/activate
+
+# 4. Instale as dependências:
+pip install -r requirements.txt
+
+# 5. Execute as migrações:
+python manage.py migrate
+
+# 6. Popule o banco (primeira vez):
+python manage.py populate_db
+
+# 7. Colete arquivos estáticos:
+python manage.py collectstatic --noinput
+
+# 8. A aplicação estará disponível em:
+# https://diegopereirace.com.br/python/
+
+# =============================================================================
+# CONFIGURAÇÕES IMPORTANTES (settings.py)
+# =============================================================================
+
+# FORCE_SCRIPT_NAME = '/python'  # URL prefix
+# STATIC_URL = '/python/static/'  # Arquivos estáticos
+# DEBUG = False  # Em produção!
+# ALLOWED_HOSTS = ['diegopereirace.com.br', 'www.diegopereirace.com.br']
+
+# =============================================================================
+# ESTRUTURA DE PASTAS
+# =============================================================================
+
+# python/
+# ├── manage.py
+# ├── requirements.txt
+# ├── db.sqlite3 (criado após migrate)
+# ├── django_dsa/
+# │   ├── settings.py
+# │   ├── urls.py
+# │   └── wsgi.py
+# └── dashboard/
+#     ├── models.py
+#     ├── views.py
+#     ├── urls.py
+#     ├── admin.py
+#     ├── templates/dashboard/index.html
+#     └── management/commands/populate_db.py
+
+# =============================================================================
+# COMANDOS ÚTEIS
+# =============================================================================
+
+# Criar superusuário (admin):
+python manage.py createsuperuser
+
+# Acessar admin:
+# http://127.0.0.1:8000/admin/ (local)
+# https://diegopereirace.com.br/python/admin/ (produção)
+
+# Verificar erros:
+python manage.py check
+
+# Gerar nova SECRET_KEY:
+python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+
+# =============================================================================
+# FUNCIONALIDADES
+# =============================================================================
+
+# ✅ 4 KPIs (Receita, Quantidade, Ticket Médio, Transações)
+# ✅ 5 Gráficos Interativos (Plotly)
+# ✅ Filtros (Data, Região, Categoria, Produto)
+# ✅ Exportação CSV e PDF
+# ✅ Interface responsiva (Bootstrap)
+# ✅ 180 dias de dados fictícios
+
+# =============================================================================
+# DESATIVAR AMBIENTE
+# =============================================================================
+
+deactivate
+
+
+
