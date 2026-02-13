@@ -111,7 +111,7 @@ $navLinks = [
     ['name' => 'Home', 'href' => '#home'],
     ['name' => 'Sobre', 'href' => '#about'],
     ['name' => 'Skills', 'href' => '#skills'],
-    ['name' => 'Exercícios em Python · Análise de Dados', 'href' => 'https://portfolio-py-c45uvaal8fvasrmvlxrcxs.streamlit.app/'],
+    ['name' => 'Exercícios em Python · Análise de Dados', 'href' => 'https://portfolio-py.diegopereirace.com.br'],
     ['name' => 'CONTRATE-ME', 'href' => '#contact']
 ];
 
