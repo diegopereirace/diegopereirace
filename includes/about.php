@@ -16,8 +16,10 @@
                     <p>
                         Com 20 anos de experiência no mercado de tecnologia, atuei por 6 anos como administrador de redes e responsável pela manutenção dos ativos de TI. 
                         Nos últimos 14 anos, foquei em desenvolvimento de sistemas com <span class="text-emerald-400 font-bold">PHP</span> e <span class="text-emerald-400 font-bold">Drupal</span>, entregando soluções de alta performance, segurança e inovação para clientes de diversos segmentos. 
-                        Tenho segurança e dominio de <span class="text-emerald-400 font-bold">PHP</span>, principalmente com a ferramenta <span class="text-emerald-400 font-bold">Drupal</span>, arquitetura de sistemas e customização de módulos, 
-                        além de estudos intensos em inteligência artificial e ciência de dados com Python.
+                        Tenho segurança e dominio de <span class="text-emerald-400 font-bold">PHP</span>, principalmente com a ferramenta <span class="text-emerald-400 font-bold">Drupal</span>, arquitetura de sistemas e customização de módulos.
+                    </p>
+                    <p>
+                        Desde o início do ano, atuo em um projeto de triagem e distribuição de leads jurídicos com <span class="text-emerald-400 font-bold">IA aplicada</span> — aplicando e ampliando conhecimento na prática com <span class="text-emerald-400 font-bold">FastAPI</span>, <span class="text-emerald-400 font-bold">Next.js</span>, <span class="text-emerald-400 font-bold">LangGraph</span> e <span class="text-emerald-400 font-bold">PostgreSQL</span>, com foco em produto real, testes automatizados e regras de negócio documentadas.
                     </p>
                 </div>
 
@@ -46,8 +48,15 @@
                     <div class="flex items-start gap-3">
                         <i data-lucide="brain-circuit" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
                         <div>
-                            <h4 class="font-semibold text-white">Aprendizado em IA</h4>
-                            <p class="text-sm text-slate-400">Estudos intensos em Python, Data Science e fundamentos de inteligência artificial.</p>
+                            <h4 class="font-semibold text-white">Full-stack + IA aplicada</h4>
+                            <p class="text-sm text-slate-400">Desde janeiro, hands-on com LangGraph, OpenAI, match engine e billing SaaS.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="rocket" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
+                        <div>
+                            <h4 class="font-semibold text-white">Produto em construção</h4>
+                            <p class="text-sm text-slate-400">Hub jurídico com triagem guiada por IA — projeto ativo desde o início do ano.</p>
                         </div>
                     </div>
                 </div>

@@ -15,8 +15,8 @@
                 Desenvolvedor Sênior<br />
             </h1>
             <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed animate-fade-in-up delay-200">
-                14 anos <span class="text-emerald-400 font-bold">"vivendo"</span> arquiteturas em <span class="text-emerald-400 font-bold">PHP</span> e <span class="text-emerald-400 font-bold">Drupal</span>. 
-                Expandindo meu repertório técnico para o ecossistema de <span class="text-emerald-400 font-bold">Dados</span> com <span class="text-emerald-400 font-bold">Python</span> e interfaces modernas em <span class="text-emerald-400 font-bold">React</span>, unindo experiência de mercado a novas soluções.
+                14 anos <span class="text-emerald-400 font-bold">"vivendo"</span> arquiteturas em <span class="text-emerald-400 font-bold">PHP</span> e <span class="text-emerald-400 font-bold">Drupal</span>.
+                Desde o início do ano, construo produtos full-stack com <span class="text-emerald-400 font-bold">Python</span>, <span class="text-emerald-400 font-bold">React</span> e <span class="text-emerald-400 font-bold">IA aplicada</span> — do backend à orquestração de LLMs, aprendendo na prática.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-up delay-300">
                 <a href="#contact" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-1">
@@ -27,7 +27,7 @@
                 </a>
             </div>
             
-            <div class="mt-12 flex items-center justify-center lg:justify-start gap-8 text-slate-500">
+            <div class="mt-12 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-slate-500">
                 <div class="flex items-center gap-2">
                     <i data-lucide="droplet" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                     <span class="font-mono text-sm">Drupal Expert</span>
@@ -37,8 +37,12 @@
                     <span class="font-mono text-sm">PHP Expert</span>
                 </div>
                 <div class="flex items-center gap-2">
-                    <i data-lucide="binary" style="width: 20px; height: 20px;" aria-hidden="true"></i>
-                    <span class="font-mono text-sm">Python/Data</span>
+                    <i data-lucide="workflow" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                    <span class="font-mono text-sm">FastAPI + LangGraph</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i data-lucide="code-2" style="width: 20px; height: 20px;" aria-hidden="true"></i>
+                    <span class="font-mono text-sm">Next.js / TypeScript</span>
                 </div>
             </div>
         </div>
@@ -58,7 +62,7 @@
                         </div>
                         <div class="flex items-center gap-2 ml-4">
                             <i data-lucide="laptop" class="text-slate-400" style="width: 16px; height: 16px;" aria-hidden="true"></i>
-                            <span class="text-sm text-slate-400 font-mono">DiegoPereira.php</span>
+                            <span id="terminal-filename" class="text-sm text-slate-400 font-mono">DiegoPereira.php</span>
                         </div>
                         <span class="w-6 h-6" aria-hidden="true"></span>
                     </div>
@@ -81,7 +85,7 @@
                     <div class="bg-slate-800 px-4 py-2 border-t border-slate-700 flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-                            <span class="text-xs text-slate-400">IA criativa ajudando nos bastidores</span>
+                            <a href="projeto.php" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Projeto com IA — triagem jurídica com LangGraph</a>
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="text-xs text-slate-500 font-mono" id="code-source" aria-live="polite"></span>

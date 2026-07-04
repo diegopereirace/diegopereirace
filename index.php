@@ -14,141 +14,29 @@ header('X-XSS-Protection: 1; mode=block');
 header('Referrer-Policy: strict-origin-when-cross-origin');
 header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://esm.run https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://generativelanguage.googleapis.com https://unpkg.com https://www.google-analytics.com https://region1.google-analytics.com https://region1.analytics.google.com;");
 
-// Função segura para carregar .env
-function loadEnvFile(string $envPath): array {
-    $env = [];
-    
-    // Validar path - prevenir path traversal
-    $realPath = realpath($envPath);
-    $baseDir = realpath(__DIR__);
-    
-    if ($realPath === false || strpos($realPath, $baseDir) !== 0) {
-        error_log('Tentativa de acesso a arquivo .env fora do diretório permitido');
-        return $env;
-    }
-    
-    if (!file_exists($realPath) || !is_readable($realPath)) {
-        return $env;
-    }
-    
-    $lines = file($realPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    
-    if ($lines === false) {
-        return $env;
-    }
-    
-    foreach ($lines as $line) {
-        $line = trim($line);
-        
-        // Ignorar comentários e linhas vazias
-        if (empty($line) || $line[0] === '#') {
-            continue;
-        }
-        
-        // Validar formato KEY=VALUE
-        if (!str_contains($line, '=')) {
-            continue;
-        }
-        
-        [$key, $value] = explode('=', $line, 2);
-        $key = trim($key);
-        $value = trim($value);
-        
-        // Validar nome da variável (apenas letras, números e underscore)
-        if (!preg_match('/^[A-Z_][A-Z0-9_]*$/', $key)) {
-            continue;
-        }
-        
-        // Remover aspas do valor se existirem
-        if ((str_starts_with($value, '"') && str_ends_with($value, '"')) ||
-            (str_starts_with($value, "'") && str_ends_with($value, "'"))) {
-            $value = substr($value, 1, -1);
-        }
-        
-        $env[$key] = $value;
-    }
-    
-    return $env;
-}
+require __DIR__ . '/includes/site-config.php';
 
-// Carregar variáveis de ambiente de forma segura
-$envVars = loadEnvFile(__DIR__ . '/.env.local');
-$apiKey = $envVars['GEMINI_API_KEY'] ?? '';
+$navLinks = getNavLinks('home');
 
-// Validar API key (deve ter formato esperado)
-if (!empty($apiKey) && !preg_match('/^[A-Za-z0-9_-]{20,}$/', $apiKey)) {
-    error_log('API key com formato inválido detectada');
-    $apiKey = '';
-}
-
-$bioText = [
-    'intro' => "Sou Diego Pereira, cearense especialista em PHP e mestre em Drupal, a plataforma que aproveita toda a robustez do PHP para entregar sites escaláveis, seguros e sob medida. Há 20 anos respiro tecnologia e, há 15, foco em deixar sistemas web rodando lisos, massa e sem gambiarra.",
-    'details' => "Tenho pós-graduação em Análise, Projeto e Gerência de Sistemas e sou cabôco que gosta de fazer as coisas direito, com arquitetura limpa e sem gambiarra. Aqui a pegada é resolver bronca sem enrolação. Tô sempre em aprendizado contínuo, especialmente em Python, para explorar o potencial de inteligência artificial e análise de dados, porque a tecnologia muda toda hora e eu não fico parado não. Quanto mais a gente aprende, mais ligeiro fica pra desenrolar qualquer desafio."
-];
-
-$systemInstruction = "You are an AI assistant for Diego Pereira's professional portfolio website. 
-Diego is a Senior Web Developer from Ceará, Brazil.
-
-Key Personality Traits to Emulate (in Portuguese):
-- Professional but approachable and slightly colloquial (Cearense dialect hints like \"massa\", \"liso\", \"desenrolar\").
-- Confident, solution-oriented (\"resolver bronca sem enrolação\").
-- Experienced (20 years in tech, 15 in coding).
-
-Key Facts about Diego:
-- Specialist in PHP and Drupal (specifically Drupal 11).
-- Database expertise: MySQL/Postgresql.
-- Education: Post-grad in Analysis, Design, and System Management.
-- Current Learning: Python for AI and Data Analysis.
-- Philosophy: Clean architecture, no \"gambiarras\" (hacks), reliable systems.
-
-Your Goal:
-- Answer questions about Diego's skills, experience, and work ethic.
-- If asked about hiring, encourage them to contact him.
-- Keep answers concise and helpful.
-- Speak primarily in Portuguese (PT-BR).";
-
-$navLinks = [
-    ['name' => 'Home', 'href' => '#home'],
-    ['name' => 'Sobre', 'href' => '#about'],
-    ['name' => 'Skills', 'href' => '#skills'],
-    ['name' => 'Python para Análise de Dados', 'href' => 'https://huggingface.co/spaces/diegopereirace/portfolio-py'],
-    ['name' => 'CONTRATE-ME', 'href' => '#contact']
-];
-
-$skills = [
-    [
-        'category' => 'Base principal de tecnologias e frameworks.',
-        'icon' => 'server',
-        'techs' => ['PHP', 'Drupal', 'Symfony', 'Laravel', 'MySQL/MariaDB', 'PostgreSQL', 'Composer']
-    ],
-    [
-        'category' => 'Frontend & Interface',
-        'icon' => 'layout',
-        'techs' => ['HTML5 / CSS3', 'JavaScript', 'JQuery', 'Twig', 'Bootstrap', 'CSS Grid & Flexbox']
-    ],
-    [
-        'category' => 'Ferramentas & DevOps',
-        'icon' => 'layers',
-        'techs' => ['Git / GitHub', 'Docker', 'DDEV', 'Terminal Linux', 'Azure Cloud', 'SSH', 'Scrum', 'Metodologias Ágeis']
-    ],
-    [
-        'category' => 'Estudos Atuais e Próximos Passos',
-        'icon' => 'line-chart',
-        'techs' => ['Python', 'Análise de Dados', 'Inteligência Artificial', 'React']
-    ]
-];
+$pageTitle = 'DiegoPereira{dev}';
+$metaDescription = 'Desenvolvedor Sênior PHP/Drupal e full-stack Python+React. Desde o início do ano com IA aplicada: LangGraph, FastAPI e Next.js.';
+$metaKeywords = 'Desenvolvedor Sênior, PHP, Drupal, Python, FastAPI, React, Next.js, LangGraph, IA, Full-stack';
+$canonicalUrl = 'https://diegopereirace.com.br/';
+$ogTitle = 'DiegoPereira{dev} · Full-stack PHP/Drupal + Python/React + IA';
+$ogDescription = $metaDescription;
+$includeGemini = true;
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Desenvolvedor Sênior PHP e consultor Drupal. Especialista em back-end de alta performance, arquitetura limpa e soluções sob medida."/>
-    <meta name="keywords" content="Desenvolvedor, Sênior, PHP, Drupal, Consultor, Back-end, Performance, Arquitetura Limpa, Soluções sob Medida"/>
+    <meta name="description" content="<?php echo htmlspecialchars($metaDescription, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"/>
+    <meta name="keywords" content="<?php echo htmlspecialchars($metaKeywords, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"/>
     <meta name="author" content="Diego Pereira"/>
     <meta name="theme-color" content="#0f172a"/>
     <meta name="color-scheme" content="dark">
-    <link rel="canonical" href="https://diegopereirace.com.br/"/>
+    <link rel="canonical" href="<?php echo htmlspecialchars($canonicalUrl, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"/>
     <link rel="shortlink" href="https://diegopereirace.com.br/"/>
 
     <!-- Ícones do site -->
@@ -161,19 +49,19 @@ $skills = [
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="DiegoPereira{dev}" />
-    <meta property="og:title" content="DiegoPereira{dev} · Desenvolvedor Sênior PHP e consultor Drupal" />
-    <meta property="og:description" content="Desenvolvedor Sênior PHP e consultor Drupal. Especialista em back-end de alta performance, arquitetura limpa e soluções sob medida." />
-    <meta property="og:url" content="https://diegopereirace.com.br/" />
+    <meta property="og:title" content="<?php echo htmlspecialchars($ogTitle, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" />
+    <meta property="og:description" content="<?php echo htmlspecialchars($ogDescription, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" />
+    <meta property="og:url" content="<?php echo htmlspecialchars($canonicalUrl, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" />
     <meta property="og:image" content="https://diegopereirace.com.br/assets/imgs/logo-header.avif" />
     <meta property="og:image:type" content="image/avif" />
 
     <!-- Twitter Cards (compatibilidade extra) -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DiegoPereira{dev} · Desenvolvedor Sênior PHP e consultor Drupal" />
-    <meta name="twitter:description" content="Desenvolvedor Sênior PHP e consultor Drupal. Especialista em back-end de alta performance, arquitetura limpa e soluções sob medida." />
+    <meta name="twitter:title" content="<?php echo htmlspecialchars($ogTitle, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" />
+    <meta name="twitter:description" content="<?php echo htmlspecialchars($ogDescription, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>" />
     <meta name="twitter:image" content="https://diegopereirace.com.br/assets/imgs/logo-header.avif" />
 
-    <title>DiegoPereira{dev}</title>
+    <title><?php echo htmlspecialchars($pageTitle, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></title>
     
     <!-- DNS Prefetch para domínios externos -->
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">

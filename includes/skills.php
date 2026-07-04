@@ -5,8 +5,8 @@
             <h2 id="skills-heading" class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Tecnologias</h2>
             <h3 class="text-3xl font-bold text-white">Tecnologias que impulsionam minha jornada</h3>
             <p class="mt-4 text-slate-400 max-w-2xl mx-auto">
-                <span class="text-emerald-400 font-bold">PHP</span>, <span class="text-emerald-400 font-bold">Drupal</span>, <span class="text-emerald-400 font-bold">Python</span>, <span class="text-emerald-400 font-bold">React</span>, <span class="text-emerald-400 font-bold">Análise de Dados</span> e <span class="text-emerald-400 font-bold">DevOps</span> fazem parte do meu dia a dia.<br />
-                Estou sempre expandindo meu repertório para entregar soluções completas e modernas.
+                <span class="text-emerald-400 font-bold">14 anos de Drupal/PHP</span> como base sólida. Desde o início do ano, stack moderna em prática diária: <span class="text-emerald-400 font-bold">FastAPI</span>, <span class="text-emerald-400 font-bold">Next.js</span>, <span class="text-emerald-400 font-bold">LangGraph</span> e <span class="text-emerald-400 font-bold">PostgreSQL</span>.<br />
+                Arquitetura limpa, testes automatizados e aprendizado contínuo com IA aplicada.
             </p>
         </div>
 
@@ -29,15 +29,28 @@
             <?php endforeach; ?>
         </div>
         
-        <!-- Featured Tech Banner -->
-        <div class="mt-16 bg-gradient-to-r from-emerald-900/20 to-slate-900 border border-emerald-500/20 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between">
-            <div class="mb-6 md:mb-0">
-                <h4 class="text-2xl font-bold text-white mb-2">Especialista Drupal</h4>
-                <p class="text-slate-400">Desenvolvimento de módulos customizados, migrações complexas e otimização de performance.</p>
+        <!-- Featured Tech Banners -->
+        <div class="mt-16 space-y-6">
+            <div class="bg-gradient-to-r from-emerald-900/20 to-slate-900 border border-emerald-500/20 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h4 class="text-2xl font-bold text-white mb-2">Especialista Drupal</h4>
+                    <p class="text-slate-400">Desenvolvimento de módulos customizados, migrações complexas e otimização de performance.</p>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <div class="px-4 py-2 bg-slate-800 rounded border border-slate-700 text-emerald-400 font-mono font-bold">hook_form_alter()</div>
+                    <div class="px-4 py-2 bg-slate-800 rounded border border-slate-700 text-blue-400 font-mono font-bold">drush cr</div>
+                </div>
             </div>
-            <div class="flex gap-4">
-                <div class="px-4 py-2 bg-slate-800 rounded border border-slate-700 text-emerald-400 font-mono font-bold">hook_form_alter()</div>
-                <div class="px-4 py-2 bg-slate-800 rounded border border-slate-700 text-blue-400 font-mono font-bold">drush cr</div>
+            <div class="bg-gradient-to-r from-blue-900/20 to-slate-900 border border-blue-500/20 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h4 class="text-2xl font-bold text-white mb-2">IA aplicada &amp; APIs async</h4>
+                    <p class="text-slate-400">Orquestração de LLMs com grafos de estado, structured outputs e APIs REST assíncronas.</p>
+                </div>
+                <div class="flex flex-wrap gap-4">
+                    <div class="px-4 py-2 bg-slate-800 rounded border border-slate-700 text-emerald-400 font-mono font-bold">LangGraph</div>
+                    <div class="px-4 py-2 bg-slate-800 rounded border border-slate-700 text-blue-400 font-mono font-bold">build_workflow()</div>
+                    <div class="px-4 py-2 bg-slate-800 rounded border border-slate-700 text-purple-400 font-mono font-bold">Structured Outputs</div>
+                </div>
             </div>
         </div>
     </div>
