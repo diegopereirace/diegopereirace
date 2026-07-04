@@ -1,0 +1,21 @@
+---
+description: Enforces the use of RTK (Rust Token Killer) for all terminal commands to save tokens and improve context limits.
+globs: *
+alwaysApply: true
+---
+
+# Token Optimization Rule - Use RTK
+
+You must minimize token consumption and maximize context efficiency by intercepting all terminal execution outputs using RTK (Rust Token Killer).
+
+## Terminal Commands Rule
+- Whenever you need to run, debug, test, or inspect terminal commands (e.g., git, composer, python, npm, php, docker, etc.), you MUST prefix the command with `rtk`.
+- Examples of required patterns:
+  - Use `rtk git status` instead of `git status`
+  - Use `rtk python main.py` instead of `python main.py`
+  - Use `rtk composer install` instead of `composer install`
+  - Use `rtk php vendor/bin/phpunit` instead of running raw testing framework commands
+
+## Context Management
+- Raw, unfiltered command outputs consume too many tokens. By using `rtk <command>`, you will receive a compressed, noise-free output.
+- Trust the filtered output provided by RTK to make your decisions and code corrections.
