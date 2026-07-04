@@ -1,0 +1,19 @@
+---
+description: Regras do shadcn/improve para garantir código idiomático, componentização limpa, tratamento de erros robusto e design pattern moderno.
+globs: *
+---
+
+# Padrões de Desenvolvimento (shadcn/improve)
+
+## 1. Princípios de Código
+* **Clareza sobre concisão:** Escreva código legível e autoexplicativo. Evite abreviações obscuras.
+* **Componentização Inteligente:** Crie componentes pequenos, focados (Single Responsibility Principle) e facilmente testáveis.
+* **Tipagem Estrita:** Se estiver usando TypeScript (ou validações equivalentes em PHP/Python), tipifique inputs, outputs e estados estritamente. Evite tipos genéricos (`any`).
+
+## 2. UI/UX e Estilização
+* **Acessibilidade (a11y) primeiro:** Sempre inclua atributos ARIA adequados, estados de foco visíveis e contraste correto.
+* **Design de Estados:** Sempre preveja e codifique visualmente os estados de: *Carregando (Loading)*, *Erro (Error)* e *Vazio (Empty State)*.
+
+## 3. Tratamento de Erros e Resiliência
+* Nunca silencie erros com blocos `catch` vazios.
+* Falhe graciosamente: valide dados na fronteira da aplicação (validação de payloads, inputs de formulários) antes de processá-los.
