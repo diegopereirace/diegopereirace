@@ -95,7 +95,7 @@
     </div>
 
     <!-- Mobile Navigation -->
-    <nav id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 shadow-xl animate-fade-in-up" aria-label="Menu mobile">
+    <nav id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full z-50 bg-slate-900 border-b border-slate-800 shadow-xl animate-fade-in-up" aria-label="Menu mobile">
         <div class="px-4 py-4 space-y-2">
             <?php foreach ($navLinks as $link): ?>
                 <?php if (isset($link['children'])): ?>
@@ -103,18 +103,20 @@
                         $parentActive = !empty($link['active']);
                         $parentName = $link['name'] ?? 'Projetos';
                     ?>
-                    <div class="rounded-lg border border-slate-800 overflow-hidden">
+                    <div class="rounded-lg border border-slate-800">
                         <button type="button"
                                 id="nav-projetos-mobile-trigger"
+                                data-nav-accordion-trigger
+                                <?php if ($parentActive): ?>data-nav-accordion-default-open="true"<?php endif; ?>
                                 class="w-full text-left px-4 py-3 transition-colors <?php echo $parentActive
                                     ? 'text-emerald-400 bg-slate-800 font-medium'
                                     : 'text-slate-300 hover:text-emerald-400 hover:bg-slate-800'; ?>"
-                                aria-expanded="false"
+                                aria-expanded="<?php echo $parentActive ? 'true' : 'false'; ?>"
                                 aria-haspopup="true"
                                 aria-controls="nav-projetos-mobile-panel">
                             <?php echo htmlspecialchars($parentName, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>
                         </button>
-                        <div id="nav-projetos-mobile-panel" class="hidden border-t border-slate-800 pl-4">
+                        <div id="nav-projetos-mobile-panel" class="<?php echo $parentActive ? '' : 'hidden'; ?> border-t border-slate-800 pl-4">
                             <?php foreach ($link['children'] as $child): ?>
                                 <?php
                                     $childHref = $child['href'] ?? '#';

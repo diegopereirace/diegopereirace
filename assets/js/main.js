@@ -58,105 +58,114 @@ window.addEventListener('scroll', () => {
     scrollTimeout = window.requestAnimationFrame(handleScroll);
 }, { passive: true });
 
-// Mobile menu
-const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const menuIcon = document.getElementById('menu-icon');
-const closeIcon = document.getElementById('close-icon');
-const mobileLinks = document.querySelectorAll('.mobile-link');
+function initNavigation() {
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
 
-if (mobileMenuBtn) {
-    mobileMenuBtn.addEventListener('click', () => {
-        const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
-        mobileMenu.classList.toggle('hidden');
-        menuIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
-        mobileMenuBtn.setAttribute('aria-expanded', !isExpanded);
-    });
-}
-
-if (mobileLinks.length > 0) {
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-            menuIcon.classList.remove('hidden');
-            closeIcon.classList.add('hidden');
-            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+            const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
         });
-    });
-}
 
-// Desktop Projetos flyout — keyboard toggle (FR-004)
-const desktopProjetosWrap = document.getElementById('nav-projetos-desktop-wrap');
-const desktopProjetosBtn = document.getElementById('nav-projetos-desktop-trigger');
+        mobileMenu.addEventListener('click', (e) => {
+            const trigger = e.target.closest('[data-nav-accordion-trigger]');
+            if (trigger) {
+                e.preventDefault();
+                const panelId = trigger.getAttribute('aria-controls');
+                const panel = panelId ? document.getElementById(panelId) : null;
+                if (!panel) return;
 
-function setDesktopFlyoutOpen(open) {
-    if (!desktopProjetosBtn || !desktopProjetosWrap) return;
-    desktopProjetosBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    desktopProjetosWrap.classList.toggle('nav-flyout-force-open', open);
-}
+                const willOpen = trigger.getAttribute('aria-expanded') !== 'true';
+                trigger.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+                panel.classList.toggle('hidden', !willOpen);
+                return;
+            }
 
-if (desktopProjetosBtn && desktopProjetosWrap) {
-    desktopProjetosBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const open = desktopProjetosBtn.getAttribute('aria-expanded') !== 'true';
-        setDesktopFlyoutOpen(open);
-    });
+            if (e.target.closest('.mobile-link')) {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
 
-    desktopProjetosBtn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
+    const desktopProjetosWrap = document.getElementById('nav-projetos-desktop-wrap');
+    const desktopProjetosBtn = document.getElementById('nav-projetos-desktop-trigger');
+
+    function setDesktopFlyoutOpen(open) {
+        if (!desktopProjetosBtn || !desktopProjetosWrap) return;
+        desktopProjetosBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        desktopProjetosWrap.classList.toggle('nav-flyout-force-open', open);
+    }
+
+    if (desktopProjetosBtn && desktopProjetosWrap) {
+        desktopProjetosBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            const open = desktopProjetosBtn.getAttribute('aria-expanded') !== 'true';
-            setDesktopFlyoutOpen(open);
-        }
-        if (e.key === 'Escape') {
-            setDesktopFlyoutOpen(false);
-            desktopProjetosBtn.focus();
-        }
-    });
+            setDesktopFlyoutOpen(desktopProjetosBtn.getAttribute('aria-expanded') !== 'true');
+        });
 
-    desktopProjetosWrap.addEventListener('focusin', () => {
-        desktopProjetosBtn.setAttribute('aria-expanded', 'true');
-    });
+        desktopProjetosBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setDesktopFlyoutOpen(desktopProjetosBtn.getAttribute('aria-expanded') !== 'true');
+            }
+            if (e.key === 'Escape') {
+                setDesktopFlyoutOpen(false);
+                desktopProjetosBtn.focus();
+            }
+        });
 
-    desktopProjetosWrap.addEventListener('focusout', (e) => {
-        if (!desktopProjetosWrap.contains(e.relatedTarget)) {
-            setDesktopFlyoutOpen(false);
-        }
-    });
+        desktopProjetosWrap.addEventListener('focusin', () => {
+            desktopProjetosBtn.setAttribute('aria-expanded', 'true');
+        });
 
-    desktopProjetosWrap.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            setDesktopFlyoutOpen(false);
-            desktopProjetosBtn.focus();
-        }
-    });
-}
+        desktopProjetosWrap.addEventListener('focusout', (e) => {
+            if (!desktopProjetosWrap.contains(e.relatedTarget)) {
+                setDesktopFlyoutOpen(false);
+            }
+        });
 
-// Mobile Projetos accordion
-const mobileProjetosBtn = document.getElementById('nav-projetos-mobile-trigger');
-const mobileProjetosPanel = document.getElementById('nav-projetos-mobile-panel');
-
-if (mobileProjetosBtn && mobileProjetosPanel) {
-    mobileProjetosBtn.addEventListener('click', () => {
-        const expanded = mobileProjetosBtn.getAttribute('aria-expanded') === 'true';
-        mobileProjetosBtn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        mobileProjetosPanel.classList.toggle('hidden', expanded);
-    });
-}
-
-// Reset submenu state on viewport cross (research R7)
-function resetNavSubmenus() {
-    setDesktopFlyoutOpen(false);
-    if (mobileProjetosBtn) {
-        mobileProjetosBtn.setAttribute('aria-expanded', 'false');
+        desktopProjetosWrap.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                setDesktopFlyoutOpen(false);
+                desktopProjetosBtn.focus();
+            }
+        });
     }
-    if (mobileProjetosPanel) {
-        mobileProjetosPanel.classList.add('hidden');
+
+    function resetNavSubmenus() {
+        setDesktopFlyoutOpen(false);
+        document.querySelectorAll('[data-nav-accordion-trigger]').forEach((trigger) => {
+            const panelId = trigger.getAttribute('aria-controls');
+            const panel = panelId ? document.getElementById(panelId) : null;
+            const keepOpen = trigger.dataset.navAccordionDefaultOpen === 'true';
+            trigger.setAttribute('aria-expanded', keepOpen ? 'true' : 'false');
+            if (panel) panel.classList.toggle('hidden', !keepOpen);
+        });
+    }
+
+    window.matchMedia('(min-width: 768px)').addEventListener('change', resetNavSubmenus);
+
+    // ponytail: self-check — accordion panel must exist when trigger is rendered
+    const accordionTrigger = document.querySelector('[data-nav-accordion-trigger]');
+    if (accordionTrigger) {
+        const panelId = accordionTrigger.getAttribute('aria-controls');
+        console.assert(Boolean(panelId && document.getElementById(panelId)), 'nav accordion: panel missing');
     }
 }
 
-window.matchMedia('(min-width: 768px)').addEventListener('change', resetNavSubmenus);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavigation);
+} else {
+    initNavigation();
+}
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

@@ -80,7 +80,7 @@ $ogDescription = $metaDescription;
 
     <?php include 'includes/footer.php'; ?>
 
-    <script src="assets/js/main.js" defer></script>
+    <script src="assets/js/main.js?v=1.0.2" defer></script>
     <script>
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
