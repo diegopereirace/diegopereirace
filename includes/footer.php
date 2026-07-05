@@ -18,7 +18,7 @@ $whatsappMessage = urlencode("Olá!\nVim através do site diegopereirace.com.br,
 
             <div class="flex space-x-6" aria-label="Links de redes sociais">
                 <a href="https://linkedin.com/in/diegopereirace" class="text-slate-400 hover:text-blue-400 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Diego Pereira">
-                    <i data-lucide="linkedin" style="width: 24px; height: 24px;" aria-hidden="true"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                 </a>
                 <a href="mailto:atendimento@diegopereirace.com.br" class="text-slate-400 hover:text-red-400 transition-colors" aria-label="Enviar e-mail para Diego Pereira">
                     <i data-lucide="mail" style="width: 24px; height: 24px;" aria-hidden="true"></i>

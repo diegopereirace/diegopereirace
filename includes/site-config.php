@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 function loadEnvFile(string $envPath): array {
     $env = [];
+    if (!is_file($envPath) || !is_readable($envPath)) {
+        return $env;
+    }
+
     $realPath = realpath($envPath);
     $baseDir = realpath(__DIR__ . '/..');
 
     if ($realPath === false || $baseDir === false || strpos($realPath, $baseDir) !== 0) {
-        error_log('Tentativa de acesso a arquivo .env fora do diretório permitido');
-        return $env;
-    }
-
-    if (!file_exists($realPath) || !is_readable($realPath)) {
+        error_log('Tentativa de acesso a arquivo .env fora do diretório permitido: ' . $envPath);
         return $env;
     }
 
@@ -48,13 +48,30 @@ function loadEnvFile(string $envPath): array {
     return $env;
 }
 
-$envVars = loadEnvFile(__DIR__ . '/../.env.local');
-$apiKey = $envVars['GEMINI_API_KEY'] ?? '';
+function loadGeminiApiKey(): string {
+    $baseDir = __DIR__ . '/..';
+    $merged = [];
 
-if (!empty($apiKey) && !preg_match('/^[A-Za-z0-9_-]{20,}$/', $apiKey)) {
-    error_log('API key com formato inválido detectada');
-    $apiKey = '';
+    foreach (['.env', '.env.local'] as $envFile) {
+        $merged = array_merge($merged, loadEnvFile($baseDir . '/' . $envFile));
+    }
+
+    $apiKey = $merged['GEMINI_API_KEY'] ?? getenv('GEMINI_API_KEY') ?: '';
+
+    if ($apiKey !== '' && strlen($apiKey) < 20) {
+        error_log('API key com formato inválido detectada');
+        return '';
+    }
+
+    if ($apiKey === '') {
+        error_log('GEMINI_API_KEY não encontrada em .env.local, .env ou variáveis de ambiente');
+    }
+
+    return $apiKey;
 }
+
+$envVars = loadEnvFile(__DIR__ . '/../.env.local');
+$apiKey = loadGeminiApiKey();
 
 $bioText = [
     'intro' => "Sou Diego Pereira, cearense especialista em PHP e mestre em Drupal, a plataforma que aproveita toda a robustez do PHP para entregar sites escaláveis, seguros e sob medida. Há 20 anos respiro tecnologia e, há 15, foco em deixar sistemas web rodando lisos, massa e sem gambiarra.",

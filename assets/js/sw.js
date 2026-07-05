@@ -1,5 +1,5 @@
 // Service Worker para cache offline e performance
-const CACHE_VERSION = 'diego-pereira-v1.0.1';
+const CACHE_VERSION = 'diego-pereira-v1.0.3';
 const CACHE_NAME = `portfolio-${CACHE_VERSION}`;
 
 // Arquivos para cache imediato (apenas recursos críticos que existem)
@@ -9,7 +9,6 @@ const PRECACHE_URLS = [
   '/assets/imgs/logo-header.avif',
   '/assets/imgs/favicon.png',
   '/assets/js/main.js',
-  '/assets/js/code-generator.js',
   '/assets/js/tailwind-config.js'
 ];
 

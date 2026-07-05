@@ -1,8 +1,5 @@
 class CodeGenerator {
     constructor() {
-        // Validar e sanitizar API key
-        const rawApiKey = window.PHP_DATA?.API_KEY || '';
-        this.apiKey = this.validateApiKey(rawApiKey);
         this.isGenerating = false;
         this.currentCode = null;
         this.modelCandidates = [
@@ -17,30 +14,8 @@ class CodeGenerator {
             python: 'api_exemplo.py',
             typescript: 'Component.tsx'
         };
-        // Limpar dados sensíveis do window após uso (silenciar erro read-only)
-        // Nota: Tentativas de delete/assign podem falhar em objetos frozen/sealed
-        // Isso é esperado e não afeta a segurança (API key já foi copiada)
-        if (window.PHP_DATA) {
-            // Silenciar completamente - não fazer nada se falhar
-        }
         
         this.init();
-    }
-    
-    validateApiKey(key) {
-        // Validar formato da API key
-        if (!key || typeof key !== 'string') {
-            console.warn('API key não fornecida ou inválida');
-            return '';
-        }
-        
-        // API keys do Google geralmente têm 39 caracteres alfanuméricos
-        if (!/^[A-Za-z0-9_-]{20,}$/.test(key)) {
-            console.warn('Formato de API key suspeito');
-            return '';
-        }
-        
-        return key;
     }
 
     init() {
@@ -60,13 +35,6 @@ class CodeGenerator {
         this.currentLanguageType = this.pickLanguageType();
         this.updateTerminalFilename();
 
-        if (!this.apiKey) {
-            this.displayFallbackCode();
-            this.isGenerating = false;
-            this.hideLoading();
-            return;
-        }
-
         try {
             const prompt = this.getPrompt();
             const endpoint = this.getCurrentModelEndpoint();
@@ -77,9 +45,14 @@ class CodeGenerator {
             console.info('Plano A: API OK');
             this.updateTimestamp();
         } catch (error) {
-            console.error('Erro ao gerar código:', error);
-            this.handleModelFailure(error);
-            this.displayErrorMessage();
+            if (this.isRecoverableApiError(error)) {
+                console.warn('API indisponível, usando fallback');
+                this.displayFallbackCode();
+            } else {
+                console.error('Erro ao gerar código:', error);
+                this.handleModelFailure(error);
+                this.displayErrorMessage();
+            }
         } finally {
             this.isGenerating = false;
             this.hideLoading();
@@ -214,53 +187,51 @@ class CodeGenerator {
         return /not found|unsupported|404/i.test(message);
     }
 
-    async callGeminiAPI(prompt, endpoint = this.getCurrentModelEndpoint()) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/${endpoint}:generateContent?key=${this.apiKey}`;
+    isRecoverableApiError(error) {
+        const message = error?.message || '';
+        return /403|401|503|permission denied|not configured|suspended/i.test(message);
+    }
 
+    async callGeminiAPI(prompt, endpoint = this.getCurrentModelEndpoint()) {
         try {
-            const response = await fetch(url, {
+            const response = await fetch('/generate-code.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: prompt
-                        }]
-                    }]
-                })
+                    prompt,
+                    model: endpoint,
+                }),
             });
 
+            const data = await response.json().catch(() => ({}));
+
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                console.error(`Detalhes do erro da API (${endpoint}):`, errorData);
-                throw new Error(`API Error: ${response.status} - ${errorData.error?.message || 'Unknown error'}`);
+                throw new Error(`API Error: ${response.status} - ${data.error || 'Unknown error'}`);
             }
 
-            const data = await response.json();
-            
-            if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-                let code = data.candidates[0].content.parts[0].text.trim();
-                
-                // Remove markdown code blocks se existirem
-                code = code.replace(/```(?:php|python|typescript|tsx|ts)?\n?/g, '').replace(/```\n?/g, '');
-
-                if (this.currentLanguageType === 'php') {
-                    code = this.sanitizePHPCode(code);
-                    if (!this.isCodeValid(code)) {
-                        throw new Error('Código inválido detectado após sanitização');
-                    }
-                }
-
-                if (!code.trim()) {
-                    throw new Error('Código vazio retornado pela IA');
-                }
-                
-                return code;
+            if (!data.text) {
+                throw new Error(`API Error: ${response.status} - ${data.error || 'Resposta inválida da API'}`);
             }
 
-            throw new Error('Resposta inválida da API');
+            let code = data.text.trim();
+                
+            // Remove markdown code blocks se existirem
+            code = code.replace(/```(?:php|python|typescript|tsx|ts)?\n?/g, '').replace(/```\n?/g, '');
+
+            if (this.currentLanguageType === 'php') {
+                code = this.sanitizePHPCode(code);
+                if (!this.isCodeValid(code)) {
+                    throw new Error('Código inválido detectado após sanitização');
+                }
+            }
+
+            if (!code.trim()) {
+                throw new Error('Código vazio retornado pela IA');
+            }
+                
+            return code;
         } catch (error) {
             console.error(`Erro na chamada da API (${endpoint}):`, error);
             throw error;
