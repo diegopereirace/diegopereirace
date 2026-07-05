@@ -58,7 +58,7 @@ if (!empty($apiKey) && !preg_match('/^[A-Za-z0-9_-]{20,}$/', $apiKey)) {
 
 $bioText = [
     'intro' => "Sou Diego Pereira, cearense especialista em PHP e mestre em Drupal, a plataforma que aproveita toda a robustez do PHP para entregar sites escaláveis, seguros e sob medida. Há 20 anos respiro tecnologia e, há 15, foco em deixar sistemas web rodando lisos, massa e sem gambiarra.",
-    'details' => "Tenho pós-graduação em Análise, Projeto e Gerência de Sistemas e sou cabôco que gosta de fazer as coisas direito, com arquitetura limpa e sem gambiarra. Aqui a pegada é resolver bronca sem enrolação. Desde o início do ano atuo em um projeto com IA aplicada — hub jurídico com FastAPI, Next.js e LangGraph — adquirindo conhecimento na prática, todo dia. Quanto mais a gente aprende, mais ligeiro fica pra desenrolar qualquer desafio."
+    'details' => "Tenho pós-graduação em Análise, Projeto e Gerência de Sistemas e sou cabôco que gosta de fazer as coisas direito, com arquitetura limpa e sem gambiarra. Aqui a pegada é resolver bronca sem enrolação. Tô sempre em aprendizado contínuo com Python, FastAPI, Next.js, LangGraph e IA aplicada — porque a tecnologia muda toda hora e eu não fico parado não. Quanto mais a gente aprende, mais ligeiro fica pra desenrolar qualquer desafio."
 ];
 
 $systemInstruction = "You are an AI assistant for Diego Pereira's professional portfolio website. 
@@ -73,11 +73,10 @@ Key Facts about Diego:
 - Specialist in PHP and Drupal (14 years, including Drupal 11).
 - Database expertise: MySQL/PostgreSQL.
 - Education: Post-grad in Analysis, Design, and System Management.
-- Since the beginning of the year, working on a legal hub project with applied AI (in active development), learning hands-on every day.
-- Current stack: Python (FastAPI), React (Next.js), LangGraph, PostgreSQL, OpenAI API.
-- Competencies: applied AI architecture, async REST APIs, SaaS billing (Asaas), WhatsApp integrations, match engines, automated testing.
+- Continuous learning: Python (FastAPI), React (Next.js), LangGraph, PostgreSQL, OpenAI API, applied AI.
+- Competencies: applied AI architecture, async REST APIs, automated testing, clean full-stack development.
 - Philosophy: Clean architecture, no \"gambiarras\" (hacks), reliable systems.
-- Do NOT mention client company names or internal product codenames.
+- Do NOT mention client company names, internal product codenames, or confidential project details.
 
 Your Goal:
 - Answer questions about Diego's skills, experience, and work ethic.
@@ -92,14 +91,14 @@ $skills = [
         'techs' => ['PHP', 'Drupal', 'Symfony', 'Laravel', 'PostgreSQL', 'MySQL/MariaDB', 'Composer']
     ],
     [
-        'category' => 'Stack atual — produção',
+        'category' => 'Stack moderna',
         'icon' => 'cpu',
         'techs' => ['Python', 'FastAPI', 'Next.js', 'React', 'TypeScript', 'LangGraph', 'OpenAI API', 'Tailwind CSS']
     ],
     [
         'category' => 'Integrações & DevOps',
         'icon' => 'layers',
-        'techs' => ['Docker', 'Git / GitHub', 'Railway', 'WhatsApp (Evolution API)', 'Webhooks (Asaas)', 'DDEV', 'Azure Cloud']
+        'techs' => ['Docker', 'Git / GitHub', 'SSH', 'VPS', 'Railway', 'WhatsApp (Evolution API)', 'DDEV', 'Azure Cloud']
     ],
     [
         'category' => 'Em expansão',
@@ -110,32 +109,12 @@ $skills = [
 
 function getNavLinks(string $page = 'home'): array {
     $homePrefix = $page === 'home' ? '' : 'index.php';
-    $isProjeto = $page === 'projeto';
 
     return [
         ['name' => 'Home', 'href' => $homePrefix . '#home'],
         ['name' => 'Sobre', 'href' => $homePrefix . '#about'],
-        [
-            'name' => 'Projetos',
-            'active' => $isProjeto,
-            'children' => [
-                [
-                    'name' => 'Hub jurídico com IA',
-                    'href' => 'projeto.php',
-                    'badge' => 'Em andamento',
-                    'kind' => 'real-em-andamento',
-                    'active' => $isProjeto,
-                ],
-                [
-                    'name' => 'Python para Análise de Dados',
-                    'href' => 'https://huggingface.co/spaces/diegopereirace/portfolio-py',
-                    'badge' => 'Portfólio',
-                    'kind' => 'portfolio',
-                    'external' => true,
-                ],
-            ],
-        ],
         ['name' => 'Skills', 'href' => $homePrefix . '#skills'],
+        ['name' => 'Python para Análise de Dados', 'href' => 'https://huggingface.co/spaces/diegopereirace/portfolio-py'],
         ['name' => 'CONTRATE-ME', 'href' => $homePrefix . '#contact', 'primary' => true],
     ];
 }

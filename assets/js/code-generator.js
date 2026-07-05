@@ -14,8 +14,8 @@ class CodeGenerator {
         this.currentLanguageType = 'php';
         this.languageFilenames = {
             php: 'DiegoPereira.php',
-            python: 'triagem.py',
-            typescript: 'Dashboard.tsx'
+            python: 'api_exemplo.py',
+            typescript: 'Component.tsx'
         };
         // Limpar dados sensíveis do window após uso (silenciar erro read-only)
         // Nota: Tentativas de delete/assign podem falhar em objetos frozen/sealed
@@ -146,7 +146,7 @@ class CodeGenerator {
     getPythonPrompt() {
         const randomSeed = Math.floor(Math.random() * 1000000);
 
-        return `Gere um snippet curto Python (FastAPI + LangGraph) para triagem jurídica com IA.
+        return `Gere um snippet curto Python (FastAPI + LangGraph) demonstrando orquestração de IA.
 
         IMPORTANTE:
         - Comentários e strings em PORTUGUÊS
@@ -156,24 +156,24 @@ class CodeGenerator {
 
         Regras:
         - Use async def quando apropriado
-        - Inclua um nó LangGraph (triagem, classificacao ou coleta_documento)
+        - Inclua um nó LangGraph genérico (processamento, classificacao ou validacao)
         - Use Pydantic BaseModel ou TypedDict para structured output
         - Comentários curtos (máximo 6 palavras)
 
         Exemplo:
         from langgraph.graph import StateGraph
 
-        class TriagemState(TypedDict):
-            area_juridica: str
+        class FluxoState(TypedDict):
+            resultado: str
 
-        async def no_triagem(state: TriagemState) -> TriagemState:
-            return {"area_juridica": "trabalhista"}`;
+        async def no_processar(state: FluxoState) -> FluxoState:
+            return {"resultado": "ok"}`;
     }
 
     getTypeScriptPrompt() {
         const randomSeed = Math.floor(Math.random() * 1000000);
 
-        return `Gere um snippet curto React/TypeScript para dashboard jurídico (Next.js).
+        return `Gere um snippet curto React/TypeScript (Next.js).
 
         IMPORTANTE:
         - Comentários e strings em PORTUGUÊS
@@ -187,14 +187,14 @@ class CodeGenerator {
         - Tailwind classes em className quando possível
 
         Exemplo:
-        interface LeadCardProps {
-            nome: string;
-            area: string;
-            status: 'triagem' | 'qualificado';
+        interface CardProps {
+            titulo: string;
+            valor: number;
+            status: 'ativo' | 'inativo';
         }
 
-        export function LeadCard({ nome, area, status }: LeadCardProps) {
-            return <div className="rounded-lg border p-4">{nome}</div>;
+        export function Card({ titulo, valor, status }: CardProps) {
+            return <div className="rounded-lg border p-4">{titulo}</div>;
         }`;
     }
 
@@ -406,7 +406,7 @@ async def aguardar_ia():
 
 # Fallback ativo`,
                 `# LangGraph em pausa
-class TriagemState(TypedDict):
+class FluxoState(TypedDict):
     status: str
 
 async def no_fallback(state):
@@ -470,35 +470,35 @@ export function LoadingState() {
                 `from langgraph.graph import StateGraph
 from typing import TypedDict
 
-class TriagemState(TypedDict):
-    area_juridica: str
-    documentos: list[str]
+class FluxoState(TypedDict):
+    etapa: str
+    dados: list[str]
 
-async def no_triagem(state: TriagemState) -> TriagemState:
-    # Classifica área jurídica
-    return {"area_juridica": "trabalhista", "documentos": []}`,
+async def no_processar(state: FluxoState) -> FluxoState:
+    # Processa entrada
+    return {"etapa": "concluido", "dados": []}`,
                 `from pydantic import BaseModel
 
-class ResultadoTriagem(BaseModel):
-    area: str
+class ResultadoIA(BaseModel):
+    categoria: str
     confianca: float
 
-async def classificar_caso(texto: str) -> ResultadoTriagem:
-    # Structured output da triagem
-    return ResultadoTriagem(area="civil", confianca=0.95)`
+async def classificar(texto: str) -> ResultadoIA:
+    # Structured output genérico
+    return ResultadoIA(categoria="geral", confianca=0.95)`
             ],
             typescript: [
-                `interface LeadCardProps {
-    nome: string;
-    area: string;
-    status: 'triagem' | 'qualificado';
+                `interface CardProps {
+    titulo: string;
+    valor: number;
+    status: 'ativo' | 'inativo';
 }
 
-export function LeadCard({ nome, area, status }: LeadCardProps) {
+export function Card({ titulo, valor, status }: CardProps) {
     return (
         <div className="rounded-lg border border-slate-700 p-4">
-            <span className="text-emerald-400">{area}</span>
-            <p className="text-white">{nome}</p>
+            <span className="text-emerald-400">{titulo}</span>
+            <p className="text-white">{valor}</p>
         </div>
     );
 }`,

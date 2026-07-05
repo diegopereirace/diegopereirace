@@ -16,7 +16,7 @@
             </h1>
             <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed animate-fade-in-up delay-200">
                 14 anos <span class="text-emerald-400 font-bold">"vivendo"</span> arquiteturas em <span class="text-emerald-400 font-bold">PHP</span> e <span class="text-emerald-400 font-bold">Drupal</span>.
-                Desde o início do ano, construo produtos full-stack com <span class="text-emerald-400 font-bold">Python</span>, <span class="text-emerald-400 font-bold">React</span> e <span class="text-emerald-400 font-bold">IA aplicada</span> — do backend à orquestração de LLMs, aprendendo na prática.
+                Em aprendizado contínuo com <span class="text-emerald-400 font-bold">Python</span>, <span class="text-emerald-400 font-bold">React</span> e <span class="text-emerald-400 font-bold">IA aplicada</span> — do backend à orquestração de LLMs.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-up delay-300">
                 <a href="#contact" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-1">
@@ -85,7 +85,7 @@
                     <div class="bg-slate-800 px-4 py-2 border-t border-slate-700 flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
-                            <a href="projeto.php" class="text-xs text-slate-400 hover:text-emerald-400 transition-colors">Projeto com IA — triagem jurídica com LangGraph</a>
+                            <span class="text-xs text-slate-400">Gerado com IA</span>
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="text-xs text-slate-500 font-mono" id="code-source" aria-live="polite"></span>

@@ -19,7 +19,7 @@
                         Tenho segurança e dominio de <span class="text-emerald-400 font-bold">PHP</span>, principalmente com a ferramenta <span class="text-emerald-400 font-bold">Drupal</span>, arquitetura de sistemas e customização de módulos.
                     </p>
                     <p>
-                        Desde o início do ano, atuo em um projeto de triagem e distribuição de leads jurídicos com <span class="text-emerald-400 font-bold">IA aplicada</span> — aplicando e ampliando conhecimento na prática com <span class="text-emerald-400 font-bold">FastAPI</span>, <span class="text-emerald-400 font-bold">Next.js</span>, <span class="text-emerald-400 font-bold">LangGraph</span> e <span class="text-emerald-400 font-bold">PostgreSQL</span>, com foco em produto real, testes automatizados e regras de negócio documentadas.
+                        Em aprendizado contínuo com <span class="text-emerald-400 font-bold">Python</span>, <span class="text-emerald-400 font-bold">FastAPI</span>, <span class="text-emerald-400 font-bold">Next.js</span>, <span class="text-emerald-400 font-bold">LangGraph</span> e <span class="text-emerald-400 font-bold">PostgreSQL</span> — explorando <span class="text-emerald-400 font-bold">IA aplicada</span>, arquitetura full-stack e testes automatizados.
                     </p>
                 </div>
 
@@ -49,14 +49,14 @@
                         <i data-lucide="brain-circuit" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
                         <div>
                             <h4 class="font-semibold text-white">Full-stack + IA aplicada</h4>
-                            <p class="text-sm text-slate-400">Desde janeiro, hands-on com LangGraph, OpenAI, match engine e billing SaaS.</p>
+                            <p class="text-sm text-slate-400">Hands-on com LangGraph, OpenAI, FastAPI e Next.js.</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
-                        <i data-lucide="rocket" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
+                        <i data-lucide="book-open" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
                         <div>
-                            <h4 class="font-semibold text-white">Produto em construção</h4>
-                            <p class="text-sm text-slate-400">Hub jurídico com triagem guiada por IA — projeto ativo desde o início do ano.</p>
+                            <h4 class="font-semibold text-white">Aprendizado contínuo</h4>
+                            <p class="text-sm text-slate-400">Sempre explorando novas stacks, padrões e ferramentas de IA.</p>
                         </div>
                     </div>
                 </div>

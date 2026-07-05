@@ -5,7 +5,7 @@
             <h2 id="skills-heading" class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Tecnologias</h2>
             <h3 class="text-3xl font-bold text-white">Tecnologias que impulsionam minha jornada</h3>
             <p class="mt-4 text-slate-400 max-w-2xl mx-auto">
-                <span class="text-emerald-400 font-bold">14 anos de Drupal/PHP</span> como base sólida. Desde o início do ano, stack moderna em prática diária: <span class="text-emerald-400 font-bold">FastAPI</span>, <span class="text-emerald-400 font-bold">Next.js</span>, <span class="text-emerald-400 font-bold">LangGraph</span> e <span class="text-emerald-400 font-bold">PostgreSQL</span>.<br />
+                <span class="text-emerald-400 font-bold">14 anos de Drupal/PHP</span> como base sólida. Stack moderna em aprendizado contínuo: <span class="text-emerald-400 font-bold">FastAPI</span>, <span class="text-emerald-400 font-bold">Next.js</span>, <span class="text-emerald-400 font-bold">LangGraph</span> e <span class="text-emerald-400 font-bold">PostgreSQL</span>.<br />
                 Arquitetura limpa, testes automatizados e aprendizado contínuo com IA aplicada.
             </p>
         </div>
