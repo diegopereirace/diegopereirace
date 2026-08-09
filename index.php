@@ -243,7 +243,7 @@ $includeGemini = true;
     <?php include 'includes/footer.php'; ?>
     
     <script src="assets/js/main.js" defer></script>
-    <script src="assets/js/code-generator.js?v=4" defer></script>
+    <script src="assets/js/code-generator.js?v=9" defer></script>
     <script>
         // Executar após carregamento do Lucide
         if (typeof lucide !== 'undefined') {

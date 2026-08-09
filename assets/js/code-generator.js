@@ -14,7 +14,8 @@ class CodeGenerator {
             python: 'api_exemplo.py',
             typescript: 'Component.tsx'
         };
-        
+        this.quotaCooldownKey = 'diego_code_gen_quota_until';
+
         this.init();
     }
 
@@ -35,6 +36,15 @@ class CodeGenerator {
         this.currentLanguageType = this.pickLanguageType();
         this.updateTerminalFilename();
 
+        // Quota Gemini free-tier: não martela a API a cada refresh
+        if (this.isQuotaCooldownActive()) {
+            console.warn('Quota Gemini em cooldown — fallback local');
+            this.displayFallbackCode();
+            this.isGenerating = false;
+            this.hideLoading();
+            return;
+        }
+
         try {
             const prompt = this.getPrompt();
             const endpoint = this.getCurrentModelEndpoint();
@@ -45,6 +55,10 @@ class CodeGenerator {
             console.info('Plano A: API OK');
             this.updateTimestamp();
         } catch (error) {
+            if (this.isQuotaError(error)) {
+                this.startQuotaCooldown(error);
+                this.handleModelFailure(error);
+            }
             if (this.isRecoverableApiError(error)) {
                 console.warn('API indisponível, usando fallback');
                 this.displayFallbackCode();
@@ -82,36 +96,47 @@ class CodeGenerator {
         }
     }
 
+    /** Humor BR de cafezinho — não aula, não inglês traduzido. */
+    getBioHumorContext() {
+        return `Quem é o dono do site (só pra colorir a piada, NÃO explique no código):
+        Dev com PHP/Drupal na veia; agora mexe com IA, Python e React.
+
+        IDIOMA: português do Brasil FALADO. Soa como mensagem no Slack da galera.
+        Gíria ok (na moral, deu ruim, confia, partiu, só que não, foi de arrasta).
+        Trocadilho BR > calembur em inglês. Zero "tipou", "feeling", "trust" como punchline.
+
+        A PIADA mora numa frase só (return / texto JSX / motto). Tem que dar vontade de mandar no grupo.
+        PROIBIDO (reprova na hora):
+        - Piada fria/traduzida ("TypeScript tipou", "Clear Hallucinations", "human-in-the-loop")
+        - Aula, analogia, LinkedIn, "a base agora é..."
+        - Comentário explicando a graça
+
+        Exemplos de ESPÍRITO (invente outros):
+        "Confia — disse o modelo" | "Campo sumiu mais que commit sem push"
+        "403: alucinar não é role" | "Achei no feeling, chefia"
+        "Promessa de sprint com temperatura 0.9"`;
+    }
+
     getPhpPrompt() {
         const randomSeed = Math.floor(Math.random() * 1000000);
 
-        return `Gere um snippet curto de classe PHP representando um desenvolvedor sênior.
+        return `Snippet PHP engraçado em PT-BR de verdade, seed ${randomSeed}.
 
-        IMPORTANTE:
-        - TODO o código deve estar em PORTUGUÊS (comentários, nomes de variáveis, strings, etc.)
-        - Máximo de 15 linhas de código
-        - CADA REQUISIÇÃO DEVE USAR UM PERSONAGEM DIFERENTE E ALEATÓRIO
-        - SEM tags <?php
-        - CÓDIGO DEVE SER SINTATICAMENTE CORRETO
-        - Seed de aleatoriedade: ${randomSeed}
+        ${this.getBioHumorContext()}
 
-        Regras obrigatórias:
-        - class [NomePersonagem] extends [ClasseBase]
-        - const experiencia = 20
-        - const especialidade = ['PHP']
-        - const focoAtual = ['FastAPI', 'LangGraph', 'Next.js', 'IA aplicada']
-        - public function fazerAlgo($parametro) - SEMPRE use $ antes de parâmetros
-        - Comentários CURTOS (máximo 6 palavras), engraçados e relacionados ao personagem
-        - return com frase em português (máximo 8 palavras)
+        - Máx 12 linhas; SEM <?php; personagem aleatório (BR ou pop)
+        - class + extends; experiencia=20; especialidade; focoAtual=['FastAPI','LangGraph','Next.js','IA aplicada']
+        - Um método com $param; SEM comentário OU comentário ≤4 palavras sem explicar
+        - return = punchline BR (máx 12 palavras). Tem que ser engraçado de rir, não de "entendi a metáfora".
 
-        Exemplo:
-        class DocBrown extends DesenvolvedorVeterano {
+        Exemplo de TOM:
+        class Mussum extends MestreDoHook {
             const experiencia = 20;
-            const especialidade = ['PHP', 'MySQL', 'APIs', 'DeLorean Tech'];
+            const especialidade = ['Drupal', 'Cacildis'];
             const focoAtual = ['FastAPI', 'LangGraph', 'Next.js', 'IA aplicada'];
 
-            public function viajarNoTempo($bug) {
-                return "1.21 gigawatts de código limpo!";
+            public function autorizar($agente) {
+                return "403: alucinar não é role, cacildis.";
             }
         }`;
     }
@@ -119,55 +144,41 @@ class CodeGenerator {
     getPythonPrompt() {
         const randomSeed = Math.floor(Math.random() * 1000000);
 
-        return `Gere um snippet curto Python (FastAPI + LangGraph) demonstrando orquestração de IA.
+        return `Snippet Python engraçado em PT-BR de cafezinho, seed ${randomSeed}.
 
-        IMPORTANTE:
-        - Comentários e strings em PORTUGUÊS
-        - Máximo de 15 linhas
-        - SEM markdown ou blocos de código
-        - Seed: ${randomSeed}
+        ${this.getBioHumorContext()}
 
-        Regras:
-        - Use async def quando apropriado
-        - Inclua um nó LangGraph genérico (processamento, classificacao ou validacao)
-        - Use Pydantic BaseModel ou TypedDict para structured output
-        - Comentários curtos (máximo 6 palavras)
+        - Máx 12 linhas; SEM markdown; TypedDict ou BaseModel; async ok
+        - A graça está na string (motto/motivo/trecho), não no nome técnico da função
+        - Sem comentário didático
 
-        Exemplo:
-        from langgraph.graph import StateGraph
+        Exemplo de TOM:
+        from pydantic import BaseModel
 
-        class FluxoState(TypedDict):
-            resultado: str
+        class Veredito(BaseModel):
+            motto: str
 
-        async def no_processar(state: FluxoState) -> FluxoState:
-            return {"resultado": "ok"}`;
+        async def no_chuta(_: str) -> Veredito:
+            return Veredito(motto="PHP dava Notice. Eu dei certeza, chefia.")`;
     }
 
     getTypeScriptPrompt() {
         const randomSeed = Math.floor(Math.random() * 1000000);
 
-        return `Gere um snippet curto React/TypeScript (Next.js).
+        return `Snippet React/TS engraçado em PT-BR falado, seed ${randomSeed}.
 
-        IMPORTANTE:
-        - Comentários e strings em PORTUGUÊS
-        - Máximo de 15 linhas
-        - SEM markdown ou blocos de código
-        - Seed: ${randomSeed}
+        ${this.getBioHumorContext()}
 
-        Regras:
-        - Use interface ou type para props
-        - Componente funcional com export
-        - Tailwind classes em className quando possível
+        - Máx 12 linhas; SEM markdown; interface + export function; Tailwind
+        - UMA frase no JSX — punchline BR (máx 12 palavras)
+        - PROIBIDO: "tipou", "alucinou um campo e TypeScript...", metáfora aula
+        - Sem comentário ou ≤4 palavras inúteis
 
-        Exemplo:
-        interface CardProps {
-            titulo: string;
-            valor: number;
-            status: 'ativo' | 'inativo';
-        }
+        Exemplo de TOM:
+        interface Props { n: number }
 
-        export function Card({ titulo, valor, status }: CardProps) {
-            return <div className="rounded-lg border p-4">{titulo}</div>;
+        export function ContagemDaVergonha({ n }: Props) {
+            return <p className="text-emerald-400">{n} re-renders e zero vergonha na cara</p>;
         }`;
     }
 
@@ -184,12 +195,39 @@ class CodeGenerator {
 
     shouldRotateModel(error) {
         const message = error?.message || '';
-        return /not found|unsupported|404/i.test(message);
+        return /not found|unsupported|404|429|quota|rate limit|too many requests/i.test(message);
+    }
+
+    isQuotaError(error) {
+        const message = error?.message || '';
+        return /429|quota|rate limit|too many requests|exceeded your current quota/i.test(message);
     }
 
     isRecoverableApiError(error) {
         const message = error?.message || '';
-        return /403|401|503|permission denied|not configured|suspended/i.test(message);
+        return /403|401|503|502|429|permission denied|not configured|suspended|quota|rate limit|too many requests|exceeded your current quota/i.test(message);
+    }
+
+    isQuotaCooldownActive() {
+        try {
+            const until = Number(sessionStorage.getItem(this.quotaCooldownKey) || 0);
+            return until > Date.now();
+        } catch {
+            return false;
+        }
+    }
+
+    startQuotaCooldown(error) {
+        const message = error?.message || '';
+        const match = message.match(/retry in ([\d.]+)\s*s/i);
+        const seconds = match ? Math.ceil(Number(match[1])) : 60;
+        const until = Date.now() + Math.max(20, seconds) * 1000;
+        try {
+            sessionStorage.setItem(this.quotaCooldownKey, String(until));
+        } catch {
+            // sessionStorage indisponível — só evita martelar nesta sessão de página
+        }
+        console.warn(`Quota Gemini: cooldown ~${seconds}s`);
     }
 
     async callGeminiAPI(prompt, endpoint = this.getCurrentModelEndpoint()) {
@@ -354,47 +392,61 @@ class CodeGenerator {
 
         const errorMessages = {
             php: [
-                `// Ops! A IA tirou um cafezinho
-class Desenvolvedor extends Humano {
-    const status = "Aguardando IA...";
+                `// Rate limit: o oráculo dormiu
+class Desenvolvedor extends HumanoNoLoop {
+    const status = "Aguardando tokens...";
 
     public function tentarNovamente() {
-        return "Vamos tentar de novo!";
+        return "Retry com backoff exponencial!";
     }
 }`,
-                `// Houston, temos um problema!
-class Astronauta extends Desenvolvedor {
+                `// Contexto estourado, missão abortada
+class Astronauta extends AgenteComGuardrail {
     public function reconectar() {
-        return "Missão não cumprida... ainda";
+        return "Truncar prompt e tentar de novo";
+    }
+}`,
+                `// API caiu: caiu no hook errado
+class Webmaster extends DrupalSobrevivente {
+    public function rebuildCache() {
+        return "drush cr no modelo — Clear Hallucinations";
     }
 }`
             ],
             python: [
-                `# Ops! API indisponível
+                `# API offline: agente sem ferramentas
 async def aguardar_ia():
-    # Tentando reconectar
-    return {"status": "retry"}
+    # Human-in-the-loop ativado
+    return {"status": "retry", "precisa_humano": True}
 
-# Fallback ativo`,
-                `# LangGraph em pausa
-class FluxoState(TypedDict):
+# Fallback sem alucinacao`,
+                `# LangGraph pausado: sem MCP
+class EstadoAgente(TypedDict):
     status: str
 
-async def no_fallback(state):
-    return {"status": "offline"}`
+async def no_fallback(estado: EstadoAgente) -> EstadoAgente:
+    return {"status": "offline_sem_tools"}`,
+                `# LLM offline: Lê, Inventa... e some
+async def no_le_inventa_manda():
+    # Sem Python async, sem graça
+    return {"motto": "PHP pelo menos daria Notice"}`
             ],
             typescript: [
-                `// Ops! IA offline
+                `// Stream cortou no meio do token
 interface StatusProps {
     mensagem: string;
 }
 
 export function StatusFallback({ mensagem }: StatusProps) {
-    return <div className="text-slate-400">{mensagem}</div>;
+    return <div className="text-slate-400">{mensagem || "Modelo offline"}</div>;
 }`,
-                `// Reconectando...
+                `// Confiança zero: mostra loading
 export function LoadingState() {
-    return <p className="animate-pulse">Gerando código...</p>;
+    return <p className="animate-pulse">Esperando structured output...</p>;
+}`,
+                `// Interface dinâmica, API estática (offline)
+export function ReactSemReacao() {
+    return <p className="text-slate-400">Quer reagir? Drupal ainda tem hook</p>;
 }`
             ]
         };
@@ -418,73 +470,131 @@ export function LoadingState() {
     displayFallbackCode() {
         const fallbackCodes = {
             php: [
-                `class DocBrown extends CientistaMaluco {
+                `class DocBrown extends OrquestradorDeAgentes {
     const experiencia = 20;
-    const especialidade = ['PHP', 'Drupal', 'APIs', 'DeLorean Tech'];
+    const especialidade = ['PHP', 'DeLorean'];
     const focoAtual = ['FastAPI', 'LangGraph', 'Next.js', 'IA aplicada'];
 
-    public function viajarNoTempo($bug) {
-        return "1.21 gigawatts de código limpo!";
+    public function viajarNoTempo($prompt) {
+        return "Alucinou? Volta pra 1955, parceiro.";
     }
 }`,
-                `class Morpheus extends MentorDigital {
+                `class Morpheus extends MentorDeMCP {
     const experiencia = 20;
-    const especialidade = ['PHP', 'MySQL', 'Segurança', 'Drupal'];
-    const focoAtual = ['FastAPI', 'LangGraph', 'Next.js'];
+    const especialidade = ['PHP', 'Pílula'];
+    const focoAtual = ['FastAPI', 'LangGraph', 'Next.js', 'IA aplicada'];
 
-    public function mostrarVerdade($desenvolvedor) {
-        return "Você acha que está debugando ar agora?";
+    public function mostrarVerdade($agente) {
+        return "Acha que o modelo tá pensando, né?";
+    }
+}`,
+                `class Gandalf extends SabioDoCodigo {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'RAG'];
+    const focoAtual = ['FastAPI', 'LangGraph', 'Next.js', 'IA aplicada'];
+
+    public function invocarAgente($desafio) {
+        return "Resolve, meu caro — sem inventar rota.";
+    }
+}`,
+                `class Mussum extends MestreDoHook {
+    const experiencia = 20;
+    const especialidade = ['Drupal', 'Cacildis'];
+    const focoAtual = ['FastAPI', 'LangGraph', 'Next.js', 'IA aplicada'];
+
+    public function autorizar($agente) {
+        return "403: alucinar não é role, cacildis.";
+    }
+}`,
+                `class Chapolin extends DetetiveDeNotice {
+    const experiencia = 20;
+    const especialidade = ['PHP', 'Undefined index'];
+    const focoAtual = ['FastAPI', 'LangGraph', 'Next.js', 'IA aplicada'];
+
+    public function investigarCampo($payload) {
+        return "Não contavam com minha astúcia... nem com o campo.";
+    }
+}`,
+                `class SeuMadruga extends EscolhedorDePilula {
+    const experiencia = 20;
+    const especialidade = ['Drupal', 'Aluguel'];
+    const focoAtual = ['FastAPI', 'LangGraph', 'Next.js', 'IA aplicada'];
+
+    public function escolherCaminho($vibe) {
+        return "Não contava com a falta de tokens!";
     }
 }`
             ],
             python: [
-                `from langgraph.graph import StateGraph
-from typing import TypedDict
-
-class FluxoState(TypedDict):
-    etapa: str
-    dados: list[str]
-
-async def no_processar(state: FluxoState) -> FluxoState:
-    # Processa entrada
-    return {"etapa": "concluido", "dados": []}`,
                 `from pydantic import BaseModel
 
-class ResultadoIA(BaseModel):
-    categoria: str
+class Veredito(BaseModel):
+    motto: str
+
+async def no_chuta(_: str) -> Veredito:
+    return Veredito(motto="PHP dava Notice. Eu dei certeza, chefia.")`,
+                `from pydantic import BaseModel
+
+class Resultado(BaseModel):
+    motivo: str
+
+async def avaliar(_: str) -> Resultado:
+    return Resultado(motivo="Inventou endpoint com CPF na URL.")`,
+                `from typing import TypedDict
+
+class EstadoRAG(TypedDict):
+    trecho: str
     confianca: float
 
-async def classificar(texto: str) -> ResultadoIA:
-    # Structured output genérico
-    return ResultadoIA(categoria="geral", confianca=0.95)`
+async def no_feeling(estado: EstadoRAG) -> EstadoRAG:
+    return {"trecho": "achei no feeling, chefia", "confianca": 0.99}`,
+                `from pydantic import BaseModel
+
+class Campo(BaseModel):
+    desculpa: str
+
+async def inventar(_: str) -> Campo:
+    return Campo(desculpa="Sumiu mais que commit sem push.")`,
+                `from typing import TypedDict
+
+class Cafe(TypedDict):
+    status: str
+
+async def no_acabou_token(_: Cafe) -> Cafe:
+    return {"status": "token acabou, café também"}`
             ],
             typescript: [
-                `interface CardProps {
-    titulo: string;
-    valor: number;
-    status: 'ativo' | 'inativo';
+                `interface Props { n: number }
+
+export function ContagemDaVergonha({ n }: Props) {
+    return <p className="text-emerald-400">{n} re-renders e zero vergonha na cara</p>;
+}`,
+                `interface TokensProps {
+    usados: number;
+    limite: number;
 }
 
-export function Card({ titulo, valor, status }: CardProps) {
+export function ContadorTokens({ usados, limite }: TokensProps) {
     return (
-        <div className="rounded-lg border border-slate-700 p-4">
-            <span className="text-emerald-400">{titulo}</span>
-            <p className="text-white">{valor}</p>
-        </div>
+        <p className="text-emerald-400">
+            {usados}/{limite} — contexto pedindo Uber pra casa
+        </p>
     );
 }`,
-                `interface MetricProps {
-    label: string;
-    value: number;
-}
+                `export function BadgeConfia() {
+    return <span className="text-emerald-400">"Confia" — disse o modelo</span>;
+}`,
+                `interface Props { ok: boolean }
 
-export function MetricCard({ label, value }: MetricProps) {
+export function StatusDoCaos({ ok }: Props) {
     return (
-        <div className="bg-slate-800 rounded-xl p-6 text-center">
-            <span className="text-3xl font-bold text-emerald-400">{value}</span>
-            <p className="text-slate-400 text-xs">{label}</p>
-        </div>
+        <p className="text-slate-300">
+            {ok ? "Segue o baile" : "Deu ruim, chama o humano"}
+        </p>
     );
+}`,
+                `export function MentiraTipada() {
+    return <p className="text-emerald-400">Campo fantasma com tipo e tudo — mentira chique</p>;
 }`
             ]
         };
