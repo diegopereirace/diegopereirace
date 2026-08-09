@@ -11,12 +11,15 @@
                 <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse" aria-hidden="true"></span>
                 Disponível para projetos
             </div>
-            <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6 animate-fade-in-up delay-100">
-                Desenvolvedor Sênior<br />
+            <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-2 animate-fade-in-up delay-100">
+                Dev Sênior
             </h1>
+            <p class="text-lg sm:text-xl text-slate-400 font-medium mb-6 animate-fade-in-up delay-100">
+                IA · Python &amp; React · Arquiteto Drupal
+            </p>
             <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed animate-fade-in-up delay-200">
-                14 anos <span class="text-emerald-400 font-bold">"vivendo"</span> arquiteturas em <span class="text-emerald-400 font-bold">PHP</span> e <span class="text-emerald-400 font-bold">Drupal</span>.
-                Em aprendizado contínuo com <span class="text-emerald-400 font-bold">Python</span>, <span class="text-emerald-400 font-bold">React</span> e <span class="text-emerald-400 font-bold">IA aplicada</span> — do backend à orquestração de LLMs.
+                Foco atual em <span class="text-emerald-400 font-bold">Inteligência Artificial</span>, <span class="text-emerald-400 font-bold">Python</span> e <span class="text-emerald-400 font-bold">React</span> — LLMs, dados e interfaces dinâmicas.
+                Com base sólida em <span class="text-emerald-400 font-bold">PHP</span> e <span class="text-emerald-400 font-bold">Drupal</span> para sistemas de <span class="text-emerald-400 font-bold">alta segurança</span> e escalabilidade.
             </p>
             <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 animate-fade-in-up delay-300">
                 <a href="#contact" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-lg shadow-lg hover:shadow-emerald-500/25 transition-all duration-300 transform hover:-translate-y-1">
@@ -30,11 +33,11 @@
             <div class="mt-12 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-slate-500">
                 <div class="flex items-center gap-2">
                     <i data-lucide="droplet" style="width: 20px; height: 20px;" aria-hidden="true"></i>
-                    <span class="font-mono text-sm">Drupal Expert</span>
+                    <span class="font-mono text-sm">Drupal · Alta Segurança</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <span class="font-mono text-xs text-slate-500" style="width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center;" aria-hidden="true">&lt;?</span>
-                    <span class="font-mono text-sm">PHP Expert</span>
+                    <span class="font-mono text-sm">PHP · Clean Architecture</span>
                 </div>
                 <div class="flex items-center gap-2">
                     <i data-lucide="workflow" style="width: 20px; height: 20px;" aria-hidden="true"></i>

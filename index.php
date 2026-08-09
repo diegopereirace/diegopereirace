@@ -19,10 +19,10 @@ require __DIR__ . '/includes/site-config.php';
 $navLinks = getNavLinks('home');
 
 $pageTitle = 'DiegoPereira{dev}';
-$metaDescription = 'Desenvolvedor Sênior PHP/Drupal e full-stack Python+React. Aprendizado contínuo com IA aplicada: LangGraph, FastAPI e Next.js.';
-$metaKeywords = 'Desenvolvedor Sênior, PHP, Drupal, Python, FastAPI, React, Next.js, LangGraph, IA, Full-stack';
+$metaDescription = 'Dev Sênior em Inteligência Artificial, Python e React. Arquiteto de sistemas com CMS Drupal para alta segurança, Clean Architecture e produtos orientados a dados.';
+$metaKeywords = 'Dev Sênior, Inteligência Artificial, Python, React, Arquiteto de Sistemas, Drupal, Alta Segurança, PHP, Análise de Dados, LangGraph, FastAPI, Next.js';
 $canonicalUrl = 'https://diegopereirace.com.br/';
-$ogTitle = 'DiegoPereira{dev} · Full-stack PHP/Drupal + Python/React + IA';
+$ogTitle = 'DiegoPereira{dev} · IA · Python & React · Drupal Alta Segurança';
 $ogDescription = $metaDescription;
 $includeGemini = true;
 ?>

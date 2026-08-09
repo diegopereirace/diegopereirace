@@ -5,8 +5,8 @@
             <h2 id="skills-heading" class="text-emerald-400 font-bold tracking-wide uppercase mb-2">Tecnologias</h2>
             <h3 class="text-3xl font-bold text-white">Tecnologias que impulsionam minha jornada</h3>
             <p class="mt-4 text-slate-400 max-w-2xl mx-auto">
-                <span class="text-emerald-400 font-bold">14 anos de Drupal/PHP</span> como base sólida. Stack moderna em aprendizado contínuo: <span class="text-emerald-400 font-bold">FastAPI</span>, <span class="text-emerald-400 font-bold">Next.js</span>, <span class="text-emerald-400 font-bold">LangGraph</span> e <span class="text-emerald-400 font-bold">PostgreSQL</span>.<br />
-                Arquitetura limpa, testes automatizados e aprendizado contínuo com IA aplicada.
+                Fronteira atual: <span class="text-emerald-400 font-bold">IA</span>, <span class="text-emerald-400 font-bold">Python</span> e <span class="text-emerald-400 font-bold">React</span> — <span class="text-emerald-400 font-bold">LangGraph</span>, <span class="text-emerald-400 font-bold">FastAPI</span> e <span class="text-emerald-400 font-bold">Next.js</span>.
+                Base de <span class="text-emerald-400 font-bold">14 anos</span> em <span class="text-emerald-400 font-bold">Drupal/PHP</span> para alta segurança, permissões e resiliência.
             </p>
         </div>
 
@@ -33,8 +33,8 @@
         <div class="mt-16 space-y-6">
             <div class="bg-gradient-to-r from-emerald-900/20 to-slate-900 border border-emerald-500/20 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between">
                 <div class="mb-6 md:mb-0">
-                    <h4 class="text-2xl font-bold text-white mb-2">Especialista Drupal</h4>
-                    <p class="text-slate-400">Desenvolvimento de módulos customizados, migrações complexas e otimização de performance.</p>
+                    <h4 class="text-2xl font-bold text-white mb-2">Drupal · Alta Segurança</h4>
+                    <p class="text-slate-400">Arquitetura corporativa com permissões rigorosas, resiliência, módulos customizados e migrações complexas.</p>
                 </div>
                 <div class="flex flex-wrap gap-4">
                     <div class="px-4 py-2 bg-slate-800 rounded border border-slate-700 text-emerald-400 font-mono font-bold">hook_form_alter()</div>

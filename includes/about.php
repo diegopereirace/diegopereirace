@@ -11,15 +11,19 @@
                 </h3>
                 <div class="space-y-6 text-slate-300 leading-relaxed text-lg">
                     <p class="border-l-4 border-emerald-500 pl-4 italic bg-slate-800/50 py-2 pr-2 rounded-r">
-                        "Pós-graduado em <span class=\"text-emerald-400 font-bold\">Análise e Gerência de Sistemas</span>."
+                        "Pós-graduado em <span class="text-emerald-400 font-bold">Análise, Projeto e Gerência de Sistemas</span>."
                     </p>
                     <p>
-                        Com 20 anos de experiência no mercado de tecnologia, atuei por 6 anos como administrador de redes e responsável pela manutenção dos ativos de TI. 
-                        Nos últimos 14 anos, foquei em desenvolvimento de sistemas com <span class="text-emerald-400 font-bold">PHP</span> e <span class="text-emerald-400 font-bold">Drupal</span>, entregando soluções de alta performance, segurança e inovação para clientes de diversos segmentos. 
-                        Tenho segurança e dominio de <span class="text-emerald-400 font-bold">PHP</span>, principalmente com a ferramenta <span class="text-emerald-400 font-bold">Drupal</span>, arquitetura de sistemas e customização de módulos.
+                        Com <span class="text-emerald-400 font-bold">20 anos</span> de trajetória em tecnologia e os últimos <span class="text-emerald-400 font-bold">14</span> dedicados à engenharia de software, construí uma base sólida projetando ecossistemas complexos.
+                        Atualmente, foco minha atuação na fronteira da <span class="text-emerald-400 font-bold">Inteligência Artificial</span> — integrações e LLMs —, unindo <span class="text-emerald-400 font-bold">Python</span>, análise de dados e interfaces em <span class="text-emerald-400 font-bold">React</span> para criar soluções inteligentes e dinâmicas.
                     </p>
                     <p>
-                        Em aprendizado contínuo com <span class="text-emerald-400 font-bold">Python</span>, <span class="text-emerald-400 font-bold">FastAPI</span>, <span class="text-emerald-400 font-bold">Next.js</span>, <span class="text-emerald-400 font-bold">LangGraph</span> e <span class="text-emerald-400 font-bold">PostgreSQL</span> — explorando <span class="text-emerald-400 font-bold">IA aplicada</span>, arquitetura full-stack e testes automatizados.
+                        O que fundamenta esse trabalho é a maturidade de quem domina desenvolvimento crítico:
+                        <span class="text-emerald-400 font-bold">Clean Architecture</span>, ecossistema <span class="text-emerald-400 font-bold">PHP</span> e, especialmente, o CMS <span class="text-emerald-400 font-bold">Drupal</span> como pilares de segurança e escalabilidade.
+                        Quando o cenário exige um produto corporativo bem definido, com gestão rigorosa de permissões e alta resiliência, é essa base arquitetônica que garanto nos projetos.
+                    </p>
+                    <p>
+                        Acredito que a inovação precisa de uma fundação à prova de falhas. Minha missão é unir a experiência de quem já viu o mercado evoluir com o fôlego para construir ferramentas orientadas a dados e IA que já moldam o presente.
                     </p>
                 </div>
 
@@ -39,24 +43,24 @@
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
-                        <i data-lucide="hexagon" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
+                        <i data-lucide="hexagon" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                         <div>
-                            <h4 class="font-semibold text-white">Drupal Expert</h4>
-                            <p class="text-sm text-slate-400">14 anos dominando Drupal, de módulos customizados a arquiteturas complexas.</p>
+                            <h4 class="font-semibold text-white">Drupal · Alta Segurança</h4>
+                            <p class="text-sm text-slate-400">Arquitetura, permissões rigorosas e resiliência em produtos corporativos.</p>
                         </div>
                     </div>                    
                     <div class="flex items-start gap-3">
-                        <i data-lucide="brain-circuit" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
+                        <i data-lucide="brain-circuit" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                         <div>
-                            <h4 class="font-semibold text-white">Full-stack + IA aplicada</h4>
-                            <p class="text-sm text-slate-400">Hands-on com LangGraph, OpenAI, FastAPI e Next.js.</p>
+                            <h4 class="font-semibold text-white">Foco atual: IA</h4>
+                            <p class="text-sm text-slate-400">LLMs, Python, análise de dados e interfaces em React.</p>
                         </div>
                     </div>
                     <div class="flex items-start gap-3">
-                        <i data-lucide="book-open" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;"></i>
+                        <i data-lucide="shield-check" class="text-emerald-400 mt-1 shrink-0" style="width: 20px; height: 20px;" aria-hidden="true"></i>
                         <div>
-                            <h4 class="font-semibold text-white">Aprendizado contínuo</h4>
-                            <p class="text-sm text-slate-400">Sempre explorando novas stacks, padrões e ferramentas de IA.</p>
+                            <h4 class="font-semibold text-white">Fundação à prova de falhas</h4>
+                            <p class="text-sm text-slate-400">Clean Architecture e maturidade técnica por trás da inovação.</p>
                         </div>
                     </div>
                 </div>
@@ -76,7 +80,7 @@
                     <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 col-span-2 hover-lift animate-fade-in-up delay-200">
                         <h4 class="text-white font-bold mb-3">Filosofia de Trabalho</h4>
                         <p class="text-slate-400 text-sm">
-                            "Aqui a pegada é resolver bronca sem enrolação." - Foco total em entregar valor para o cliente com código sustentável.
+                            "A inovação precisa de uma fundação à prova de falhas." — Unir maturidade técnica a produtos orientados a dados e IA, com código sustentável e sem gambiarra.
                         </p>
                     </div>
                 </div>

@@ -12,7 +12,7 @@ $whatsappMessage = urlencode("Olá!\nVim através do site diegopereirace.com.br,
                     DIEGO PEREIRA <span class="text-emerald-400">{</span>dev<span class="text-emerald-400">}</span>
                 </h2>
                 <p class="text-slate-500 mt-2 max-w-md">
-                    Desenvolvedor sênior focado em <span class="text-emerald-400 font-bold">resolver problemas reais</span> com <span class="text-emerald-400 font-bold">código limpo</span> e <span class="text-emerald-400 font-bold">eficiente</span>.
+                    Dev Sênior em <span class="text-emerald-400 font-bold">IA</span>, <span class="text-emerald-400 font-bold">Python</span> &amp; <span class="text-emerald-400 font-bold">React</span>, com base em <span class="text-emerald-400 font-bold">Drupal</span> para alta segurança.
                 </p>
             </div>
 
